@@ -1,4 +1,4 @@
-package configuration;
+package com.education.configuration;
 
 import com.education.repository.StudentRepository;
 import com.education.repository.StudentRepositoryImpl;
