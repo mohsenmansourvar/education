@@ -16,8 +16,10 @@ import java.util.Properties;
 @Configuration
 public class EducationConfiguration {
     @Bean
-    public StudentRepositoryImpl studentRepository(){
-        return new StudentRepositoryImpl();
+    public StudentRepositoryImpl studentRepository(SessionFactory sessionFactory){
+        StudentRepositoryImpl studentRepository = new StudentRepositoryImpl();
+        studentRepository.setSessionFactory(sessionFactory);
+        return studentRepository;
     }
 
     @Bean
