@@ -30,7 +30,7 @@ public class EducationConfiguration {
     public DriverManagerDataSource dataSource() {
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
         driverManagerDataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/accounting");
+        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/education");
         driverManagerDataSource.setUsername("root");
         driverManagerDataSource.setPassword("root");
         return driverManagerDataSource;
@@ -48,7 +48,7 @@ public class EducationConfiguration {
     public LocalSessionFactoryBean sessionFactory(DataSource dataSource, Properties properties) {
         LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
         localSessionFactoryBean.setDataSource(dataSource);
-        localSessionFactoryBean.setPackagesToScan("domain");
+        localSessionFactoryBean.setPackagesToScan("com.education.domain");
         localSessionFactoryBean.setHibernateProperties(properties);
         return localSessionFactoryBean;
     }
