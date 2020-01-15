@@ -33,6 +33,28 @@ public class StudentRepositoryImpl implements StudentRepository {
         session.delete(studentById);
     }
 
+    @Override
+    public void update(long id, Student newStudent) {
+        Session session = sessionFactory.getCurrentSession();
+        Student studentId = getById(id);
+        if (newStudent.getName() != null) {
+            studentId.setName(newStudent.getName());
+        }
+        if (newStudent.getLastName() != null) {
+            studentId.setLastName(newStudent.getLastName());
+        }
+        if (newStudent.getNationalCod() != null) {
+            studentId.setNationalCod(newStudent.getNationalCod());
+        }
+        if (newStudent.getAddress() != null) {
+            studentId.setAddress(newStudent.getAddress());
+        }
+        if (newStudent.getTelephone() != null) {
+            studentId.setTelephone(newStudent.getTelephone());
+        }
+        session.update(studentId);
+    }
+
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
