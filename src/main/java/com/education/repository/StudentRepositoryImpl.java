@@ -4,6 +4,7 @@ import com.education.domain.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
@@ -23,6 +24,13 @@ public class StudentRepositoryImpl implements StudentRepository {
         return session.createQuery("from Student where id = :id", Student.class)
                 .setParameter("id", id)
                 .uniqueResult();
+    }
+
+    @Override
+    public void delete(long id) {
+        Session session = sessionFactory.getCurrentSession();
+        Student studentById = getById(id);
+        session.delete(studentById);
     }
 
     public void setSessionFactory(SessionFactory sessionFactory) {

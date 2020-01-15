@@ -6,4 +6,6 @@ public interface StudentRepository {
     void save(Student student);
 
     Student getById(long id);
+
+    void delete(long id);
 }
