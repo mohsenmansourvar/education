@@ -9,9 +9,11 @@ import static org.junit.Assert.*;
 
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration("classpath*:spring.cfg.xml")
+@Transactional
 public class StudentServiceTest {
     @Autowired
     StudentService studentService;
@@ -34,5 +36,20 @@ public class StudentServiceTest {
         assertEquals("Istanbul", studentById.getAddress());
         assertEquals("0000", studentById.getTelephone());
         assertEquals("0000000000", studentById.getNationalCod());
+    }
+    @Test
+    public void delete(){
+        Student student = new Student();
+        student.setName("Liam");
+        student.setLastName("Mansourvar");
+        student.setAddress("Istanbul");
+        student.setTelephone("0000");
+        student.setNationalCod("0000000000");
+        studentService.save(student);
+        Long studentId = student.getId();
+        studentService.delete(studentId);
+        Student studentById = studentService.getById(studentId);
+
+        assertNull(studentById);
     }
 }
