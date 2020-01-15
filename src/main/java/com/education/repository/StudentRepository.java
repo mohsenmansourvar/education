@@ -8,4 +8,6 @@ public interface StudentRepository {
     Student getById(long id);
 
     void delete(long id);
+
+    void update(long id,Student newStudent);
 }
