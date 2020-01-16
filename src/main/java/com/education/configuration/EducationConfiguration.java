@@ -2,7 +2,10 @@ package com.education.configuration;
 
 import com.education.repository.StudentRepository;
 import com.education.repository.StudentRepositoryImpl;
+import com.education.repository.TeacherRepository;
+import com.education.repository.TeacherRepositoryImpl;
 import com.education.service.StudentServiceImpl;
+import com.education.service.TeacherServiceImpl;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,18 +21,33 @@ import java.util.Properties;
 @EnableTransactionManagement
 public class EducationConfiguration {
     @Bean
-    public StudentRepositoryImpl studentRepository(SessionFactory sessionFactory){
+    public StudentRepositoryImpl studentRepository(SessionFactory sessionFactory) {
         StudentRepositoryImpl studentRepository = new StudentRepositoryImpl();
         studentRepository.setSessionFactory(sessionFactory);
         return studentRepository;
     }
 
     @Bean
-    public StudentServiceImpl studentService(StudentRepository studentRepository){
+    public StudentServiceImpl studentService(StudentRepository studentRepository) {
         StudentServiceImpl studentService = new StudentServiceImpl();
         studentService.setStudentRepository(studentRepository);
         return studentService;
     }
+
+    @Bean
+    public TeacherRepositoryImpl teacherRepository(SessionFactory sessionFactory) {
+        TeacherRepositoryImpl teacherRepository = new TeacherRepositoryImpl();
+        teacherRepository.setSessionFactory(sessionFactory);
+        return teacherRepository;
+    }
+
+    @Bean
+    public TeacherServiceImpl teacherService(TeacherRepository teacherRepository) {
+        TeacherServiceImpl teacherService = new TeacherServiceImpl();
+        teacherService.setTeacherRepository(teacherRepository);
+        return teacherService;
+    }
+
     @Bean
     public DriverManagerDataSource dataSource() {
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
@@ -56,8 +74,9 @@ public class EducationConfiguration {
         localSessionFactoryBean.setHibernateProperties(properties);
         return localSessionFactoryBean;
     }
+
     @Bean
-    public HibernateTransactionManager transactionManager (DataSource dataSource, SessionFactory sessionFactory){
+    public HibernateTransactionManager transactionManager(DataSource dataSource, SessionFactory sessionFactory) {
         HibernateTransactionManager hibernateTransactionManager = new HibernateTransactionManager();
         hibernateTransactionManager.setDataSource(dataSource);
         hibernateTransactionManager.setSessionFactory(sessionFactory);
