@@ -16,6 +16,11 @@ public class TeacherServiceImpl implements TeacherService {
         return teacherRepository.getById(id);
     }
 
+    @Override
+    public void update(long id, Teacher newTeacher) {
+        teacherRepository.update(id,newTeacher);
+    }
+
     public void setTeacherRepository(TeacherRepository teacherRepository) {
         this.teacherRepository = teacherRepository;
     }

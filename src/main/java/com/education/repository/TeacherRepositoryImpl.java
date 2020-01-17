@@ -18,9 +18,34 @@ public class TeacherRepositoryImpl implements TeacherRepository {
     @Override
     public Teacher getById(long id) {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from Teacher where id= :id",Teacher.class)
-                .setParameter("id",id)
+        return session.createQuery("from Teacher where id= :id", Teacher.class)
+                .setParameter("id", id)
                 .uniqueResult();
+    }
+
+    @Override
+    public void update(long id, Teacher newTeacher) {
+        Session session = sessionFactory.getCurrentSession();
+        Teacher teacher = getById(id);
+        if (newTeacher.getName() != null) {
+            teacher.setName(newTeacher.getName());
+        }
+        if (newTeacher.getLastName() != null) {
+            teacher.setLastName(newTeacher.getLastName());
+        }
+        if (newTeacher.getNationalCod() != null) {
+            teacher.setNationalCod(newTeacher.getNationalCod());
+        }
+        if (newTeacher.getSpecialty() != null) {
+            teacher.setSpecialty(newTeacher.getSpecialty());
+        }
+        if (newTeacher.getAddress() != null) {
+            teacher.setAddress(newTeacher.getAddress());
+        }
+        if (newTeacher.getTelephone() != null) {
+            teacher.setTelephone(newTeacher.getTelephone());
+        }
+        session.update(teacher);
     }
 
     public void setSessionFactory(SessionFactory sessionFactory) {

@@ -6,4 +6,6 @@ public interface TeacherRepository {
     void save(Teacher teacher);
 
     Teacher getById(long id);
+
+    void update(long id, Teacher newTeacher);
 }
