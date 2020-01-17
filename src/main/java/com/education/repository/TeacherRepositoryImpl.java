@@ -48,6 +48,13 @@ public class TeacherRepositoryImpl implements TeacherRepository {
         session.update(teacher);
     }
 
+    @Override
+    public void delete(long id) {
+        Session session = sessionFactory.getCurrentSession();
+        Teacher teacher = getById(id);
+        session.delete(teacher);
+    }
+
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
