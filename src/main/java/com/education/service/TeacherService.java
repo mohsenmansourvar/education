@@ -8,4 +8,6 @@ public interface TeacherService {
     Teacher getById(long id);
 
     void update(long id, Teacher newTeacher);
+
+    void delete(long id);
 }

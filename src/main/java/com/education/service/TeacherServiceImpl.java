@@ -21,6 +21,11 @@ public class TeacherServiceImpl implements TeacherService {
         teacherRepository.update(id,newTeacher);
     }
 
+    @Override
+    public void delete(long id) {
+        teacherRepository.delete(id);
+    }
+
     public void setTeacherRepository(TeacherRepository teacherRepository) {
         this.teacherRepository = teacherRepository;
     }
