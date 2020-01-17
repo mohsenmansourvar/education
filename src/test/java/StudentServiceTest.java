@@ -79,4 +79,23 @@ public class StudentServiceTest {
         assertEquals("0000", studentById.getTelephone());
         assertEquals("0000000000", studentById.getNationalCod());
     }
+    @Test
+    public void getById(){
+        Student student = new Student();
+        student.setName("Mary");
+        student.setLastName("Ebrahimi");
+        student.setAddress("Istanbul");
+        student.setTelephone("1111");
+        student.setNationalCod("1111111111");
+        studentService.save(student);
+        Long studentId = student.getId();
+        Student studentById = studentService.getById(studentId);
+
+        assertNotNull(studentById);
+        assertEquals("Mary", studentById.getName());
+        assertEquals("Ebrahimi", studentById.getLastName());
+        assertEquals("Istanbul", studentById.getAddress());
+        assertEquals("1111", studentById.getTelephone());
+        assertEquals("1111111111", studentById.getNationalCod());
+    }
 }
