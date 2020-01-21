@@ -1,6 +1,7 @@
 package com.education.configuration;
 
 import com.education.repository.*;
+import com.education.service.ClassServiceImpl;
 import com.education.service.StudentServiceImpl;
 import com.education.service.SubjectServiceImpl;
 import com.education.service.TeacherServiceImpl;
@@ -59,6 +60,21 @@ public class EducationConfiguration {
         subjectService.setSubjectRepository(subjectRepository);
         return subjectService;
     }
+
+    @Bean
+    public ClassRepositoryImpl classRepository(SessionFactory sessionFactory) {
+        ClassRepositoryImpl classRepository = new ClassRepositoryImpl();
+        classRepository.setSessionFactory(sessionFactory);
+        return classRepository;
+    }
+
+    @Bean
+    public ClassServiceImpl classService(ClassRepository classRepository) {
+        ClassServiceImpl classService = new ClassServiceImpl();
+        classService.setClassRepository(classRepository);
+        return classService;
+    }
+
 
     @Bean
     public DriverManagerDataSource dataSource() {
