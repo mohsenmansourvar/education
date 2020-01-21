@@ -16,6 +16,11 @@ public class ClassServiceImpl implements ClassService {
         return classRepository.getById(id);
     }
 
+    @Override
+    public void delete(long id) {
+        classRepository.delete(id);
+    }
+
     public void setClassRepository(ClassRepository classRepository) {
         this.classRepository = classRepository;
     }

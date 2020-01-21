@@ -6,4 +6,6 @@ public interface ClassService {
     void save(Class room);
 
     Class getById(long id);
+
+    void delete(long id);
 }
