@@ -2,8 +2,8 @@ package com.education.service;
 
 import com.education.domain.Student;
 import com.education.repository.StudentRepository;
-import com.education.repository.StudentRepositoryImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
@@ -29,6 +29,11 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void update(long id, Student newStudent) {
-        studentRepository.update(id,newStudent);
+        studentRepository.update(id, newStudent);
+    }
+
+    @Override
+    public List<Student> getAllStudents() {
+        return studentRepository.getAllStudent();
     }
 }

@@ -5,6 +5,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Transactional
 public class StudentRepositoryImpl implements StudentRepository {
     private SessionFactory sessionFactory;
@@ -51,6 +53,13 @@ public class StudentRepositoryImpl implements StudentRepository {
             studentId.setTelephone(newStudent.getTelephone());
         }
         session.update(studentId);
+    }
+
+    @Override
+    public List<Student> getAllStudent() {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Student ", Student.class)
+                .list();
     }
 
     public void setSessionFactory(SessionFactory sessionFactory) {
