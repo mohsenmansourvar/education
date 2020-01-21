@@ -2,6 +2,8 @@ package com.education.service;
 
 import com.education.domain.Class;
 
+import java.util.List;
+
 public interface ClassService {
     void save(Class room);
 
@@ -10,4 +12,6 @@ public interface ClassService {
     void delete(long id);
 
     void update(long id, Class newRoom);
+
+    List<Class> getAllRooms();
 }
