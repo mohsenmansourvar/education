@@ -2,9 +2,17 @@ package com.education.service;
 
 import com.education.domain.Subject;
 import com.education.repository.SubjectRepository;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 public class SubjectServiceImpl implements SubjectService {
     private SubjectRepository subjectRepository;
+
+    @Override
+    public List<Subject> getAllSubjects() {
+        return subjectRepository.getAllSubjects();
+    }
 
     @Override
     public void save(Subject subject) {
