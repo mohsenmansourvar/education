@@ -8,4 +8,6 @@ public interface ClassRepository {
     Class getById(long id);
 
     void delete(long id);
+
+    void update(long id, Class newRoom);
 }

@@ -58,4 +58,24 @@ public class ClassServiceTest {
 
         assertNull(roomById);
     }
+
+    @Test
+    public void update() {
+        Class room = new Class();
+        room.setRoomNumber("111");
+        room.setCapacity(20);
+        classService.save(room);
+        Long roomId = room.getId();
+
+        Class newroom = new Class();
+        newroom.setRoomNumber("231");
+
+        classService.update(roomId, newroom);
+
+        Class roomById = classService.getById(roomId);
+
+        assertNotNull(roomById);
+        assertEquals("231", roomById.getRoomNumber());
+        assertEquals(20, roomById.getCapacity());
+    }
 }
