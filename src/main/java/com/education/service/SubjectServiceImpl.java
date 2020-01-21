@@ -21,6 +21,11 @@ public class SubjectServiceImpl implements SubjectService {
         subjectRepository.update(id,newSubject);
     }
 
+    @Override
+    public void delete(long id) {
+        subjectRepository.delete(id);
+    }
+
     public void setSubjectRepository(SubjectRepository subjectRepository) {
         this.subjectRepository = subjectRepository;
     }

@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -44,8 +43,9 @@ public class SubjectServiceTest {
         assertEquals("English", subjectById.getName());
         assertEquals(2, subjectById.getUnitNumber());
     }
+
     @Test
-    public void update(){
+    public void update() {
         Subject subject = new Subject();
         subject.setName("Math");
         subject.setUnitNumber(2);
@@ -55,12 +55,27 @@ public class SubjectServiceTest {
         Subject newSubject = new Subject();
         newSubject.setUnitNumber(3);
 
-        subjectService.update(subjectId,newSubject);
+        subjectService.update(subjectId, newSubject);
 
         Subject subjectById = subjectService.getById(subjectId);
 
         assertNotNull(subjectById);
-        assertEquals("Math",subjectById.getName());
-        assertEquals(3,subjectById.getUnitNumber());
+        assertEquals("Math", subjectById.getName());
+        assertEquals(3, subjectById.getUnitNumber());
+    }
+
+    @Test
+    public void delete() {
+        Subject subject = new Subject();
+        subject.setName("Math");
+        subject.setUnitNumber(2);
+        subjectService.save(subject);
+        Long subjectId = subject.getId();
+
+        subjectService.delete(subjectId);
+
+        Subject subjectById = subjectService.getById(subjectId);
+
+        assertNull(subjectById);
     }
 }
