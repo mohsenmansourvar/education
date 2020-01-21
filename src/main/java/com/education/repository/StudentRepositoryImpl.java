@@ -3,8 +3,6 @@ package com.education.repository;
 import com.education.domain.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
@@ -43,8 +41,8 @@ public class StudentRepositoryImpl implements StudentRepository {
         if (newStudent.getLastName() != null) {
             studentId.setLastName(newStudent.getLastName());
         }
-        if (newStudent.getNationalCod() != null) {
-            studentId.setNationalCod(newStudent.getNationalCod());
+        if (newStudent.getNationalCode() != null) {
+            studentId.setNationalCode(newStudent.getNationalCode());
         }
         if (newStudent.getAddress() != null) {
             studentId.setAddress(newStudent.getAddress());

@@ -21,7 +21,7 @@ public class StudentServiceTest {
         student.setLastName("Mansourvar");
         student.setAddress("Istanbul");
         student.setTelephone("0000");
-        student.setNationalCod("0000000000");
+        student.setNationalCode("0000000000");
         studentService.save(student);
         Long studentId = student.getId();
         Student studentById = studentService.getById(studentId);
@@ -31,7 +31,7 @@ public class StudentServiceTest {
         assertEquals("Mansourvar", studentById.getLastName());
         assertEquals("Istanbul", studentById.getAddress());
         assertEquals("0000", studentById.getTelephone());
-        assertEquals("0000000000", studentById.getNationalCod());
+        assertEquals("0000000000", studentById.getNationalCode());
     }
 
     @Test
@@ -41,7 +41,7 @@ public class StudentServiceTest {
         student.setLastName("Mansourvar");
         student.setAddress("Istanbul");
         student.setTelephone("0000");
-        student.setNationalCod("0000000000");
+        student.setNationalCode("0000000000");
         studentService.save(student);
         Long studentId = student.getId();
         studentService.delete(studentId);
@@ -57,7 +57,7 @@ public class StudentServiceTest {
         student.setLastName("Mansourvar");
         student.setAddress("Istanbul");
         student.setTelephone("0000");
-        student.setNationalCod("0000000000");
+        student.setNationalCode("0000000000");
         studentService.save(student);
         Long studentId = student.getId();
 
@@ -73,7 +73,7 @@ public class StudentServiceTest {
         assertEquals("Ebrahimi", studentById.getLastName());
         assertEquals("Istanbul", studentById.getAddress());
         assertEquals("0000", studentById.getTelephone());
-        assertEquals("0000000000", studentById.getNationalCod());
+        assertEquals("0000000000", studentById.getNationalCode());
     }
 
     @Test
@@ -83,7 +83,7 @@ public class StudentServiceTest {
         student.setLastName("Ebrahimi");
         student.setAddress("Istanbul");
         student.setTelephone("1111");
-        student.setNationalCod("1111111111");
+        student.setNationalCode("1111111111");
         studentService.save(student);
         Long studentId = student.getId();
         Student studentById = studentService.getById(studentId);
@@ -93,6 +93,6 @@ public class StudentServiceTest {
         assertEquals("Ebrahimi", studentById.getLastName());
         assertEquals("Istanbul", studentById.getAddress());
         assertEquals("1111", studentById.getTelephone());
-        assertEquals("1111111111", studentById.getNationalCod());
+        assertEquals("1111111111", studentById.getNationalCode());
     }
 }
