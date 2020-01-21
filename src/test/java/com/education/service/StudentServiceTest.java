@@ -1,22 +1,18 @@
+package com.education.service;
+
 import com.education.domain.Student;
-import com.education.repository.StudentRepository;
-import com.education.service.StudentService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import static org.junit.Assert.*;
-
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-@RunWith(SpringRunner.class)
-@ContextConfiguration("classpath*:spring.cfg.xml")
+import static org.junit.jupiter.api.Assertions.*;
+
+@SpringBootTest
 @Transactional
 public class StudentServiceTest {
     @Autowired
-    StudentService studentService;
+    private StudentService studentService;
 
     @Test
     public void save() {
@@ -79,8 +75,9 @@ public class StudentServiceTest {
         assertEquals("0000", studentById.getTelephone());
         assertEquals("0000000000", studentById.getNationalCod());
     }
+
     @Test
-    public void getById(){
+    public void getById() {
         Student student = new Student();
         student.setName("Mary");
         student.setLastName("Ebrahimi");

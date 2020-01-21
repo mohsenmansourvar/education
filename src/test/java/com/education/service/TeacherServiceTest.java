@@ -1,18 +1,15 @@
-import com.education.domain.Student;
+package com.education.service;
+
 import com.education.domain.Teacher;
 import com.education.service.TeacherService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.Assert.*;
-
+import static org.junit.jupiter.api.Assertions.*;
+@SpringBootTest
 @Transactional
-@RunWith(SpringRunner.class)
-@ContextConfiguration("classpath*:spring.cfg.xml")
 public class TeacherServiceTest {
     @Autowired
     private TeacherService teacherService;

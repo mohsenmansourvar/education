@@ -1,10 +1,8 @@
 package com.education.configuration;
 
-import com.education.repository.StudentRepository;
-import com.education.repository.StudentRepositoryImpl;
-import com.education.repository.TeacherRepository;
-import com.education.repository.TeacherRepositoryImpl;
+import com.education.repository.*;
 import com.education.service.StudentServiceImpl;
+import com.education.service.SubjectServiceImpl;
 import com.education.service.TeacherServiceImpl;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
@@ -46,6 +44,20 @@ public class EducationConfiguration {
         TeacherServiceImpl teacherService = new TeacherServiceImpl();
         teacherService.setTeacherRepository(teacherRepository);
         return teacherService;
+    }
+
+    @Bean
+    public SubjectRepositoryImpl subjectRepository(SessionFactory sessionFactory) {
+        SubjectRepositoryImpl subjectRepository = new SubjectRepositoryImpl();
+        subjectRepository.setSessionFactory(sessionFactory);
+        return subjectRepository;
+    }
+
+    @Bean
+    public SubjectServiceImpl subjectService(SubjectRepository subjectRepository) {
+        SubjectServiceImpl subjectService = new SubjectServiceImpl();
+        subjectService.setSubjectRepository(subjectRepository);
+        return subjectService;
     }
 
     @Bean
