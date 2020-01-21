@@ -26,4 +26,11 @@ public class ClassRepositoryImpl implements ClassRepository {
                 .setParameter("id", id)
                 .uniqueResult();
     }
+
+    @Override
+    public void delete(long id) {
+        Session session = sessionFactory.getCurrentSession();
+        Class room = getById(id);
+        session.delete(room);
+    }
 }
