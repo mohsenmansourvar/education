@@ -5,6 +5,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Transactional
 public class TeacherRepositoryImpl implements TeacherRepository {
     private SessionFactory sessionFactory;
@@ -53,6 +55,14 @@ public class TeacherRepositoryImpl implements TeacherRepository {
         Session session = sessionFactory.getCurrentSession();
         Teacher teacher = getById(id);
         session.delete(teacher);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Teacher> getAllTeachers() {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Teacher", Teacher.class)
+                .list();
     }
 
     public void setSessionFactory(SessionFactory sessionFactory) {

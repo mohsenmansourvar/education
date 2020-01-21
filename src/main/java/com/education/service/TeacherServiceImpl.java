@@ -3,6 +3,8 @@ package com.education.service;
 import com.education.domain.Teacher;
 import com.education.repository.TeacherRepository;
 
+import java.util.List;
+
 public class TeacherServiceImpl implements TeacherService {
     private TeacherRepository teacherRepository;
 
@@ -24,6 +26,11 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public void delete(long id) {
         teacherRepository.delete(id);
+    }
+
+    @Override
+    public List<Teacher> getAllTeachers() {
+        return teacherRepository.getAllTeachers();
     }
 
     public void setTeacherRepository(TeacherRepository teacherRepository) {
