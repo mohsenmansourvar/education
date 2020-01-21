@@ -21,6 +21,19 @@ public class SubjectRepositoryImpl implements SubjectRepository {
                 .uniqueResult();
     }
 
+    @Override
+    public void update(long id, Subject newSubject) {
+        Session session = sessionFactory.getCurrentSession();
+        Subject subject = getById(id);
+        if (newSubject.getName() != null) {
+            subject.setName(newSubject.getName());
+        }
+        if (newSubject.getUnitNumber() != 0) {
+            subject.setUnitNumber(newSubject.getUnitNumber());
+        }
+        session.update(subject);
+    }
+
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
