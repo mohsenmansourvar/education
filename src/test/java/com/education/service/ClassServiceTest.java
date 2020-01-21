@@ -29,4 +29,18 @@ public class ClassServiceTest {
         assertEquals("125", roomById.getRoomNumber());
         assertEquals(45, roomById.getCapacity());
     }
+    @Test
+    public void getById(){
+        Class room = new Class();
+        room.setRoomNumber("123");
+        room.setCapacity(12);
+        classService.save(room);
+        Long roomId = room.getId();
+
+        Class roomById = classService.getById(roomId);
+
+        assertNotNull(roomById);
+        assertEquals("123", roomById.getRoomNumber());
+        assertEquals(12, roomById.getCapacity());
+    }
 }
