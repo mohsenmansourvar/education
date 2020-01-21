@@ -3,6 +3,8 @@ package com.education.service;
 import com.education.domain.Class;
 import com.education.repository.ClassRepository;
 
+import java.util.List;
+
 public class ClassServiceImpl implements ClassService {
     private ClassRepository classRepository;
 
@@ -24,6 +26,11 @@ public class ClassServiceImpl implements ClassService {
     @Override
     public void update(long id, Class newRoom) {
         classRepository.update(id,newRoom);
+    }
+
+    @Override
+    public List<Class> getAllRooms() {
+        return classRepository.getAllRooms();
     }
 
     public void setClassRepository(ClassRepository classRepository) {
