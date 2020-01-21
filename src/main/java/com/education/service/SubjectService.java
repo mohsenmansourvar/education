@@ -8,4 +8,6 @@ public interface SubjectService {
     Subject getById(long id);
 
     void update(long id, Subject newSubject);
+
+    void delete(long id);
 }

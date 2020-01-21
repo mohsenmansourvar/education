@@ -3,6 +3,7 @@ package com.education.repository;
 import com.education.domain.Subject;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.transaction.annotation.Transactional;
 
 public class SubjectRepositoryImpl implements SubjectRepository {
     private SessionFactory sessionFactory;
@@ -13,6 +14,7 @@ public class SubjectRepositoryImpl implements SubjectRepository {
         session.save(subject);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Subject getById(long id) {
         Session session = sessionFactory.getCurrentSession();
@@ -32,6 +34,13 @@ public class SubjectRepositoryImpl implements SubjectRepository {
             subject.setUnitNumber(newSubject.getUnitNumber());
         }
         session.update(subject);
+    }
+
+    @Override
+    public void delete(long id) {
+        Session session = sessionFactory.getCurrentSession();
+        Subject subject = getById(id);
+        session.delete(subject);
     }
 
     public void setSessionFactory(SessionFactory sessionFactory) {
