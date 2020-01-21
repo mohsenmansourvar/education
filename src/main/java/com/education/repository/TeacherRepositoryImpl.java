@@ -33,8 +33,8 @@ public class TeacherRepositoryImpl implements TeacherRepository {
         if (newTeacher.getLastName() != null) {
             teacher.setLastName(newTeacher.getLastName());
         }
-        if (newTeacher.getNationalCod() != null) {
-            teacher.setNationalCod(newTeacher.getNationalCod());
+        if (newTeacher.getNationalCode() != null) {
+            teacher.setNationalCode(newTeacher.getNationalCode());
         }
         if (newTeacher.getSpecialty() != null) {
             teacher.setSpecialty(newTeacher.getSpecialty());

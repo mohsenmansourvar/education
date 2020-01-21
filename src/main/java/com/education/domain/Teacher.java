@@ -9,7 +9,7 @@ public class Teacher {
     private Long id;
     private String name;
     private String lastName;
-    private String nationalCod;
+    private String nationalCode;
     private String address;
     private String telephone;
     private String Specialty;
@@ -40,12 +40,12 @@ public class Teacher {
         this.lastName = lastName;
     }
 
-    public String getNationalCod() {
-        return nationalCod;
+    public String getNationalCode() {
+        return nationalCode;
     }
 
-    public void setNationalCod(String nationalCod) {
-        this.nationalCod = nationalCod;
+    public void setNationalCode(String nationalCod) {
+        this.nationalCode = nationalCod;
     }
 
     public String getAddress() {
