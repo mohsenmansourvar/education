@@ -2,6 +2,8 @@ package com.education.repository;
 
 import com.education.domain.Teacher;
 
+import java.util.List;
+
 public interface TeacherRepository {
     void save(Teacher teacher);
 
@@ -10,4 +12,6 @@ public interface TeacherRepository {
     void update(long id, Teacher newTeacher);
 
     void delete(long id);
+
+    List<Teacher> getAllTeachers();
 }

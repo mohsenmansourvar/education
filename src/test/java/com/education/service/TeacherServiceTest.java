@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @Transactional
@@ -102,5 +104,30 @@ public class TeacherServiceTest {
         Teacher teacherById = teacherService.getById(teacherId);
 
         assertNull(teacherById);
+    }
+    @Test
+    public void getAllTeachers(){
+        Teacher teacher = new Teacher();
+        teacher.setName("Reza");
+        teacher.setLastName("Ebrahimi");
+        teacher.setNationalCode("0000000000");
+        teacher.setAddress("Berlin");
+        teacher.setTelephone("0049");
+        teacher.setSpecialty("Programming");
+        teacherService.save(teacher);
+
+        Teacher teacher1 = new Teacher();
+        teacher1.setName("Mary");
+        teacher1.setLastName("Ebrahimi");
+        teacher1.setNationalCode("1111111111");
+        teacher1.setAddress("Istanbul");
+        teacher1.setTelephone("0090");
+        teacher1.setSpecialty("English");
+        teacherService.save(teacher1);
+
+        List<Teacher> allTeachers = teacherService.getAllTeachers();
+
+        assertNotNull(allTeachers);
+        assertEquals(2,allTeachers.size());
     }
 }
