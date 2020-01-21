@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -78,4 +80,23 @@ public class SubjectServiceTest {
 
         assertNull(subjectById);
     }
+
+    @Test
+    public void GetAllSubjects() {
+        Subject subject = new Subject();
+        subject.setName("Math");
+        subject.setUnitNumber(3);
+        subjectService.save(subject);
+
+        Subject subject1 = new Subject();
+        subject1.setName("English");
+        subject1.setUnitNumber(2);
+        subjectService.save(subject1);
+
+        List<Subject> allSubjects = subjectService.getAllSubjects();
+
+        assertEquals(2, allSubjects.size());
+    }
+
+
 }

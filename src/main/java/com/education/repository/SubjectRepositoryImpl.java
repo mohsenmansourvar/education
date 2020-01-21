@@ -5,6 +5,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 public class SubjectRepositoryImpl implements SubjectRepository {
     private SessionFactory sessionFactory;
 
@@ -41,6 +43,14 @@ public class SubjectRepositoryImpl implements SubjectRepository {
         Session session = sessionFactory.getCurrentSession();
         Subject subject = getById(id);
         session.delete(subject);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Subject> getAllSubjects() {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Subject",Subject.class)
+                .list();
     }
 
     public void setSessionFactory(SessionFactory sessionFactory) {
