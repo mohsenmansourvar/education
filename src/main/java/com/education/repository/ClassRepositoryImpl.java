@@ -33,4 +33,17 @@ public class ClassRepositoryImpl implements ClassRepository {
         Class room = getById(id);
         session.delete(room);
     }
+
+    @Override
+    public void update(long id, Class newRoom) {
+        Session session = sessionFactory.getCurrentSession();
+        Class room = getById(id);
+        if (newRoom.getRoomNumber() != null) {
+            room.setRoomNumber(newRoom.getRoomNumber());
+        }
+        if (newRoom.getCapacity() != 0) {
+            room.setCapacity(newRoom.getCapacity());
+        }
+        session.update(room);
+    }
 }
