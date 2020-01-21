@@ -16,6 +16,11 @@ public class SubjectServiceImpl implements SubjectService {
         return subjectRepository.getById(id);
     }
 
+    @Override
+    public void update(long id, Subject newSubject) {
+        subjectRepository.update(id,newSubject);
+    }
+
     public void setSubjectRepository(SubjectRepository subjectRepository) {
         this.subjectRepository = subjectRepository;
     }
