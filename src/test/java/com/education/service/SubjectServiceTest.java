@@ -29,4 +29,19 @@ public class SubjectServiceTest {
         assertEquals("Math", subjectById.getName());
         assertEquals(3, subjectById.getUnitNumber());
     }
+
+    @Test
+    public void getById() {
+        Subject subject = new Subject();
+        subject.setName("English");
+        subject.setUnitNumber(2);
+        subjectService.save(subject);
+        Long subjectId = subject.getId();
+
+        Subject subjectById = subjectService.getById(subjectId);
+
+        assertNotNull(subjectById);
+        assertEquals("English", subjectById.getName());
+        assertEquals(2, subjectById.getUnitNumber());
+    }
 }
