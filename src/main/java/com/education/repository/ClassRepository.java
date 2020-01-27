@@ -11,7 +11,7 @@ public interface ClassRepository {
 
     void delete(long id);
 
-    void update(long id, Class newRoom);
+    void update(long id, Class newClass);
 
     List<Class> getAllRooms();
 }
