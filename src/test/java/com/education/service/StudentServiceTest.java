@@ -19,7 +19,7 @@ public class StudentServiceTest {
     @Test
     public void save() {
         Student student = new Student();
-        student.setName("Liam");
+        student.setFirstName("Liam");
         student.setLastName("Mansourvar");
         student.setAddress("Istanbul");
         student.setTelephone("0000");
@@ -29,7 +29,7 @@ public class StudentServiceTest {
         Student studentById = studentService.getById(studentId);
 
         assertNotNull(studentById);
-        assertEquals("Liam", studentById.getName());
+        assertEquals("Liam", studentById.getFirstName());
         assertEquals("Mansourvar", studentById.getLastName());
         assertEquals("Istanbul", studentById.getAddress());
         assertEquals("0000", studentById.getTelephone());
@@ -39,7 +39,7 @@ public class StudentServiceTest {
     @Test
     public void delete() {
         Student student = new Student();
-        student.setName("Liam");
+        student.setFirstName("Liam");
         student.setLastName("Mansourvar");
         student.setAddress("Istanbul");
         student.setTelephone("0000");
@@ -55,7 +55,7 @@ public class StudentServiceTest {
     @Test
     public void update() {
         Student student = new Student();
-        student.setName("Liam");
+        student.setFirstName("Liam");
         student.setLastName("Mansourvar");
         student.setAddress("Istanbul");
         student.setTelephone("0000");
@@ -64,14 +64,14 @@ public class StudentServiceTest {
         Long studentId = student.getId();
 
         Student newStudent = new Student();
-        newStudent.setName("Mary");
+        newStudent.setFirstName("Mary");
         newStudent.setLastName("Ebrahimi");
 
         studentService.update(studentId, newStudent);
         Student studentById = studentService.getById(studentId);
 
         assertNotNull(studentById);
-        assertEquals("Mary", studentById.getName());
+        assertEquals("Mary", studentById.getFirstName());
         assertEquals("Ebrahimi", studentById.getLastName());
         assertEquals("Istanbul", studentById.getAddress());
         assertEquals("0000", studentById.getTelephone());
@@ -81,7 +81,7 @@ public class StudentServiceTest {
     @Test
     public void getById() {
         Student student = new Student();
-        student.setName("Mary");
+        student.setFirstName("Mary");
         student.setLastName("Ebrahimi");
         student.setAddress("Istanbul");
         student.setTelephone("1111");
@@ -91,7 +91,7 @@ public class StudentServiceTest {
         Student studentById = studentService.getById(studentId);
 
         assertNotNull(studentById);
-        assertEquals("Mary", studentById.getName());
+        assertEquals("Mary", studentById.getFirstName());
         assertEquals("Ebrahimi", studentById.getLastName());
         assertEquals("Istanbul", studentById.getAddress());
         assertEquals("1111", studentById.getTelephone());
@@ -101,7 +101,7 @@ public class StudentServiceTest {
     @Test
     public void getAllStudents() {
         Student student = new Student();
-        student.setName("Mary");
+        student.setFirstName("Mary");
         student.setLastName("Ebrahimi");
         student.setAddress("Istanbul");
         student.setTelephone("1111");
@@ -109,7 +109,7 @@ public class StudentServiceTest {
         studentService.save(student);
 
         Student student1 = new Student();
-        student1.setName("Liam");
+        student1.setFirstName("Liam");
         student1.setLastName("Mansourvar");
         student1.setAddress("Istanbul");
         student1.setTelephone("0000");
