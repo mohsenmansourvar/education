@@ -18,7 +18,7 @@ public class TeacherServiceTest {
     @Test
     public void save() {
         Teacher teacher = new Teacher();
-        teacher.setName("Reza");
+        teacher.setFirstName("Reza");
         teacher.setLastName("Ebrahimi");
         teacher.setNationalCode("0000000000");
         teacher.setAddress("Berlin");
@@ -29,7 +29,7 @@ public class TeacherServiceTest {
         Teacher teacherById = teacherService.getById(teacherId);
 
         assertNotNull(teacherById);
-        assertEquals("Reza", teacherById.getName());
+        assertEquals("Reza", teacherById.getFirstName());
         assertEquals("Ebrahimi", teacherById.getLastName());
         assertEquals("0000000000", teacherById.getNationalCode());
         assertEquals("Berlin", teacherById.getAddress());
@@ -39,7 +39,7 @@ public class TeacherServiceTest {
     @Test
     public void getById() {
         Teacher teacher = new Teacher();
-        teacher.setName("Reza");
+        teacher.setFirstName("Reza");
         teacher.setLastName("Ebrahimi");
         teacher.setNationalCode("0000000000");
         teacher.setAddress("Berlin");
@@ -51,7 +51,7 @@ public class TeacherServiceTest {
         Teacher teacherById = teacherService.getById(teacherId);
 
         assertNotNull(teacherById);
-        assertEquals("Reza", teacherById.getName());
+        assertEquals("Reza", teacherById.getFirstName());
         assertEquals("Ebrahimi", teacherById.getLastName());
         assertEquals("0000000000", teacherById.getNationalCode());
         assertEquals("Berlin", teacherById.getAddress());
@@ -62,7 +62,7 @@ public class TeacherServiceTest {
     @Test
     public void update() {
         Teacher teacher = new Teacher();
-        teacher.setName("Reza");
+        teacher.setFirstName("Reza");
         teacher.setLastName("Ebrahimi");
         teacher.setNationalCode("0000000000");
         teacher.setAddress("Berlin");
@@ -79,7 +79,7 @@ public class TeacherServiceTest {
         Teacher teacherById = teacherService.getById(teacherId);
 
         assertNotNull(teacherById);
-        assertEquals("Reza", teacherById.getName());
+        assertEquals("Reza", teacherById.getFirstName());
         assertEquals("Ebrahimi", teacherById.getLastName());
         assertEquals("1111111111", teacherById.getNationalCode());
         assertEquals("Berlin", teacherById.getAddress());
@@ -90,7 +90,7 @@ public class TeacherServiceTest {
     @Test
     public void delete() {
         Teacher teacher = new Teacher();
-        teacher.setName("Reza");
+        teacher.setFirstName("Reza");
         teacher.setLastName("Ebrahimi");
         teacher.setNationalCode("0000000000");
         teacher.setAddress("Berlin");
@@ -108,7 +108,7 @@ public class TeacherServiceTest {
     @Test
     public void getAllTeachers(){
         Teacher teacher = new Teacher();
-        teacher.setName("Reza");
+        teacher.setFirstName("Reza");
         teacher.setLastName("Ebrahimi");
         teacher.setNationalCode("0000000000");
         teacher.setAddress("Berlin");
@@ -117,7 +117,7 @@ public class TeacherServiceTest {
         teacherService.save(teacher);
 
         Teacher teacher1 = new Teacher();
-        teacher1.setName("Mary");
+        teacher1.setFirstName("Mary");
         teacher1.setLastName("Ebrahimi");
         teacher1.setNationalCode("1111111111");
         teacher1.setAddress("Istanbul");
