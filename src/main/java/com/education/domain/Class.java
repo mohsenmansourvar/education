@@ -10,7 +10,7 @@ public class Class {
     @Id
     @GeneratedValue
     private Long id;
-    private String roomNumber;
+    private String classNumber;
     private int capacity;
     @ManyToOne
     private Student student;
@@ -25,12 +25,12 @@ public class Class {
         this.id = id;
     }
 
-    public String getRoomNumber() {
-        return roomNumber;
+    public String getClassNumber() {
+        return classNumber;
     }
 
-    public void setRoomNumber(String roomNumber) {
-        this.roomNumber = roomNumber;
+    public void setClassNumber(String roomNumber) {
+        this.classNumber = roomNumber;
     }
 
     public int getCapacity() {
