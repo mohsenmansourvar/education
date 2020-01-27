@@ -9,8 +9,8 @@ public class ClassServiceImpl implements ClassService {
     private ClassRepository classRepository;
 
     @Override
-    public void save(Class room) {
-        classRepository.save(room);
+    public void save(Class aClass) {
+        classRepository.save(aClass);
     }
 
     @Override

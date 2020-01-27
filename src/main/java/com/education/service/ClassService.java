@@ -5,7 +5,7 @@ import com.education.domain.Class;
 import java.util.List;
 
 public interface ClassService {
-    void save(Class room);
+    void save(Class aClass);
 
     Class getById(long id);
 

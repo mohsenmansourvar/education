@@ -40,8 +40,8 @@ public class ClassRepositoryImpl implements ClassRepository {
     public void update(long id, Class newRoom) {
         Session session = sessionFactory.getCurrentSession();
         Class room = getById(id);
-        if (newRoom.getRoomNumber() != null) {
-            room.setRoomNumber(newRoom.getRoomNumber());
+        if (newRoom.getClassNumber() != null) {
+            room.setClassNumber(newRoom.getClassNumber());
         }
         if (newRoom.getCapacity() != 0) {
             room.setCapacity(newRoom.getCapacity());

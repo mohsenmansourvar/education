@@ -19,7 +19,7 @@ public class ClassServiceTest {
     @Test
     public void save() {
         Class room = new Class();
-        room.setRoomNumber("125");
+        room.setClassNumber("125");
         room.setCapacity(45);
         classService.save(room);
         Long roomId = room.getId();
@@ -27,14 +27,14 @@ public class ClassServiceTest {
         Class roomById = classService.getById(roomId);
 
         assertNotNull(roomById);
-        assertEquals("125", roomById.getRoomNumber());
+        assertEquals("125", roomById.getClassNumber());
         assertEquals(45, roomById.getCapacity());
     }
 
     @Test
     public void getById() {
         Class room = new Class();
-        room.setRoomNumber("123");
+        room.setClassNumber("123");
         room.setCapacity(12);
         classService.save(room);
         Long roomId = room.getId();
@@ -42,14 +42,14 @@ public class ClassServiceTest {
         Class roomById = classService.getById(roomId);
 
         assertNotNull(roomById);
-        assertEquals("123", roomById.getRoomNumber());
+        assertEquals("123", roomById.getClassNumber());
         assertEquals(12, roomById.getCapacity());
     }
 
     @Test
     public void delete() {
         Class room = new Class();
-        room.setRoomNumber("111");
+        room.setClassNumber("111");
         room.setCapacity(20);
         classService.save(room);
         Long roomId = room.getId();
@@ -64,31 +64,31 @@ public class ClassServiceTest {
     @Test
     public void update() {
         Class room = new Class();
-        room.setRoomNumber("111");
+        room.setClassNumber("111");
         room.setCapacity(20);
         classService.save(room);
         Long roomId = room.getId();
 
         Class newroom = new Class();
-        newroom.setRoomNumber("231");
+        newroom.setClassNumber("231");
 
         classService.update(roomId, newroom);
 
         Class roomById = classService.getById(roomId);
 
         assertNotNull(roomById);
-        assertEquals("231", roomById.getRoomNumber());
+        assertEquals("231", roomById.getClassNumber());
         assertEquals(20, roomById.getCapacity());
     }
     @Test
     public void getAllRooms(){
         Class room = new Class();
-        room.setRoomNumber("111");
+        room.setClassNumber("111");
         room.setCapacity(20);
         classService.save(room);
 
         Class room1 = new Class();
-        room1.setRoomNumber("222");
+        room1.setClassNumber("222");
         room1.setCapacity(30);
         classService.save(room1);
 
