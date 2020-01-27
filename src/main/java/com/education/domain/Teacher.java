@@ -12,7 +12,7 @@ public class Teacher {
     private String nationalCode;
     private String address;
     private String telephone;
-    private String Specialty;
+    private String specialty;
     @ManyToOne
     private Student student;
 
@@ -65,11 +65,11 @@ public class Teacher {
     }
 
     public String getSpecialty() {
-        return Specialty;
+        return specialty;
     }
 
     public void setSpecialty(String specialty) {
-        Specialty = specialty;
+        this.specialty = specialty;
     }
 
     public Student getStudent() {
