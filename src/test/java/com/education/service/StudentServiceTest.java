@@ -24,6 +24,7 @@ public class StudentServiceTest {
         student.setAddress("Istanbul");
         student.setTelephone("0000");
         student.setNationalCode("0000000000");
+        student.setStudentNumber("123");
         studentService.save(student);
         Long studentId = student.getId();
         Student studentById = studentService.getById(studentId);
@@ -34,6 +35,7 @@ public class StudentServiceTest {
         assertEquals("Istanbul", studentById.getAddress());
         assertEquals("0000", studentById.getTelephone());
         assertEquals("0000000000", studentById.getNationalCode());
+        assertEquals("123",studentById.getStudentNumber());
     }
 
     @Test
@@ -44,6 +46,7 @@ public class StudentServiceTest {
         student.setAddress("Istanbul");
         student.setTelephone("0000");
         student.setNationalCode("0000000000");
+        student.setStudentNumber("111");
         studentService.save(student);
         Long studentId = student.getId();
         studentService.delete(studentId);
@@ -60,6 +63,7 @@ public class StudentServiceTest {
         student.setAddress("Istanbul");
         student.setTelephone("0000");
         student.setNationalCode("0000000000");
+        student.setStudentNumber("123");
         studentService.save(student);
         Long studentId = student.getId();
 
@@ -76,6 +80,7 @@ public class StudentServiceTest {
         assertEquals("Istanbul", studentById.getAddress());
         assertEquals("0000", studentById.getTelephone());
         assertEquals("0000000000", studentById.getNationalCode());
+        assertEquals("123",studentById.getStudentNumber());
     }
 
     @Test
@@ -86,6 +91,7 @@ public class StudentServiceTest {
         student.setAddress("Istanbul");
         student.setTelephone("1111");
         student.setNationalCode("1111111111");
+        student.setStudentNumber("123");
         studentService.save(student);
         Long studentId = student.getId();
         Student studentById = studentService.getById(studentId);
@@ -96,6 +102,7 @@ public class StudentServiceTest {
         assertEquals("Istanbul", studentById.getAddress());
         assertEquals("1111", studentById.getTelephone());
         assertEquals("1111111111", studentById.getNationalCode());
+        assertEquals("123",studentById.getStudentNumber());
     }
 
     @Test
@@ -106,6 +113,7 @@ public class StudentServiceTest {
         student.setAddress("Istanbul");
         student.setTelephone("1111");
         student.setNationalCode("1111111111");
+        student.setStudentNumber("123");
         studentService.save(student);
 
         Student student1 = new Student();
@@ -114,6 +122,7 @@ public class StudentServiceTest {
         student1.setAddress("Istanbul");
         student1.setTelephone("0000");
         student1.setNationalCode("0000000000");
+        student1.setStudentNumber("321");
         studentService.save(student1);
 
         List<Student> allStudents = studentService.getAllStudents();
