@@ -12,6 +12,7 @@ public class Student {
     private String firstName;
     private String lastName;
     private String nationalCode;
+    private String studentNumber;
     private String address;
     private String telephone;
 
@@ -61,5 +62,13 @@ public class Student {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    public String getStudentNumber() {
+        return studentNumber;
+    }
+
+    public void setStudentNumber(String studentNumber) {
+        this.studentNumber = studentNumber;
     }
 }
