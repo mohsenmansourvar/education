@@ -8,6 +8,7 @@ import java.util.List;
 public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
 
+
     @Override
     public void save(Student student) {
         studentRepository.save(student);

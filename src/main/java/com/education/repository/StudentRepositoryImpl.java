@@ -37,8 +37,8 @@ public class StudentRepositoryImpl implements StudentRepository {
     public void update(long id, Student newStudent) {
         Session session = sessionFactory.getCurrentSession();
         Student studentId = getById(id);
-        if (newStudent.getName() != null) {
-            studentId.setName(newStudent.getName());
+        if (newStudent.getFirstName() != null) {
+            studentId.setFirstName(newStudent.getFirstName());
         }
         if (newStudent.getLastName() != null) {
             studentId.setLastName(newStudent.getLastName());
