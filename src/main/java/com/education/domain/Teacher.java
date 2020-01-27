@@ -13,7 +13,7 @@ public class Teacher {
     private String address;
     private String telephone;
     private String specialty;
-    @ManyToOne
+    @ManyToMany
     private Student student;
 
     public Long getId() {
