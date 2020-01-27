@@ -29,8 +29,8 @@ public class TeacherRepositoryImpl implements TeacherRepository {
     public void update(long id, Teacher newTeacher) {
         Session session = sessionFactory.getCurrentSession();
         Teacher teacher = getById(id);
-        if (newTeacher.getName() != null) {
-            teacher.setName(newTeacher.getName());
+        if (newTeacher.getFirstName() != null) {
+            teacher.setFirstName(newTeacher.getFirstName());
         }
         if (newTeacher.getLastName() != null) {
             teacher.setLastName(newTeacher.getLastName());
