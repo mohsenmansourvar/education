@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class TimeTable {
@@ -12,7 +13,7 @@ public class TimeTable {
     private Long id;
     @Temporal(TemporalType.TIMESTAMP)
     private LocalTime from;
-    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.TIMESTAMP)
     private LocalTime to;
     @Temporal(TemporalType.DATE)
     private LocalDate date;
@@ -77,5 +78,25 @@ public class TimeTable {
 
     public void setStudents(List<Student> students) {
         this.students = students;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TimeTable)) return false;
+        TimeTable timeTable = (TimeTable) o;
+        return Objects.equals(from, timeTable.from) &&
+                Objects.equals(to, timeTable.to) &&
+                Objects.equals(date, timeTable.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(from, to, date);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }
