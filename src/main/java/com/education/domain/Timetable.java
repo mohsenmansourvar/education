@@ -2,20 +2,18 @@ package com.education.domain;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class TimeTable {
+public class Timetable {
     @Id
     @GeneratedValue
     private Long id;
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalTime from;
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalTime to;
-    @Temporal(TemporalType.DATE)
+    private LocalTime start;
+    private LocalTime end;
     private LocalDate date;
     @ManyToOne
     private Subject subject;
@@ -32,20 +30,20 @@ public class TimeTable {
         this.id = id;
     }
 
-    public LocalTime getFrom() {
-        return from;
+    public LocalTime getStart() {
+        return start;
     }
 
-    public void setFrom(LocalTime from) {
-        this.from = from;
+    public void setStart(LocalTime start) {
+        this.start = start;
     }
 
-    public LocalTime getTo() {
-        return to;
+    public LocalTime getEnd() {
+        return end;
     }
 
-    public void setTo(LocalTime to) {
-        this.to = to;
+    public void setEnd(LocalTime end) {
+        this.end = end;
     }
 
     public LocalDate getDate() {
@@ -83,20 +81,25 @@ public class TimeTable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof TimeTable)) return false;
-        TimeTable timeTable = (TimeTable) o;
-        return Objects.equals(from, timeTable.from) &&
-                Objects.equals(to, timeTable.to) &&
+        if (!(o instanceof Timetable)) return false;
+        Timetable timeTable = (Timetable) o;
+        return Objects.equals(start, timeTable.start) &&
+                Objects.equals(end, timeTable.end) &&
                 Objects.equals(date, timeTable.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(from, to, date);
+        return Objects.hash(start, end, date);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return "Timetable{" +
+                "id=" + id +
+                ", from=" + start +
+                ", to=" + end +
+                ", date=" + date +
+                '}';
     }
 }
