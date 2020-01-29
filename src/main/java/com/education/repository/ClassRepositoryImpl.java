@@ -6,7 +6,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+@Transactional
 public class ClassRepositoryImpl implements ClassRepository {
     private SessionFactory sessionFactory;
 
@@ -15,9 +15,9 @@ public class ClassRepositoryImpl implements ClassRepository {
     }
 
     @Override
-    public void save(Class room) {
+    public void save(Class aClass) {
         Session session = sessionFactory.getCurrentSession();
-        session.save(room);
+        session.save(aClass);
     }
 
     @Override
