@@ -9,9 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -36,6 +34,7 @@ public class TimeTableServiceTest {
         assertEquals(expectedEnd, timeTableById.getEnd());
         assertEquals(LocalDate.now(), timeTableById.getDate());
     }
+
     @Test
     public void getById() {
         Timetable timeTable = new Timetable();
@@ -53,8 +52,9 @@ public class TimeTableServiceTest {
         assertEquals(expectedEnd, timeTableById.getEnd());
         assertEquals(LocalDate.now(), timeTableById.getDate());
     }
+
     @Test
-    public void delete (){
+    public void delete() {
         Timetable timeTable = new Timetable();
         timeTable.setStart(LocalTime.of(10, 0));
         timeTable.setEnd(LocalTime.of(11, 30));
@@ -67,5 +67,29 @@ public class TimeTableServiceTest {
         Timetable timeTableById = timeTableService.getById(timeTableId);
 
         assertNull(timeTableById);
+    }
+
+    @Test
+    public void update() {
+        Timetable timeTable1 = new Timetable();
+        timeTable1.setStart(LocalTime.of(7, 0));
+        timeTable1.setEnd(LocalTime.of(8, 30));
+        timeTable1.setDate(LocalDate.now());
+        timeTableService.save(timeTable1);
+        Long timeTableId = timeTable1.getId();
+
+        Timetable timetable2 = new Timetable();
+        timetable2.setEnd(LocalTime.of(8, 45));
+
+        timeTableService.update(timeTableId, timetable2);
+
+        Timetable timetableById = timeTableService.getById(timeTableId);
+
+        LocalTime expectedStart = LocalTime.of(7, 0);
+        LocalTime expectedEnd = LocalTime.of(8, 45);
+        assertNotNull(timetableById);
+        assertEquals(expectedStart, timetableById.getStart());
+        assertEquals(expectedEnd, timetableById.getEnd());
+        assertEquals(LocalDate.now(), timetableById.getDate());
     }
 }
