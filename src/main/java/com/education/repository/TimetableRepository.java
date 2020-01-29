@@ -6,4 +6,6 @@ public interface TimetableRepository {
     void save(Timetable timeTable);
 
     Timetable getById(long id);
+
+    void delete (long id);
 }

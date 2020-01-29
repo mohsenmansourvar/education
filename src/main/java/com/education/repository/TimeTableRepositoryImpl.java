@@ -14,6 +14,7 @@ public class TimeTableRepositoryImpl implements TimetableRepository {
         Session session = sessionFactory.getCurrentSession();
         session.save(timeTable);
     }
+
     @Transactional(readOnly = true)
     @Override
     public Timetable getById(long id) {
@@ -21,6 +22,13 @@ public class TimeTableRepositoryImpl implements TimetableRepository {
         return session.createQuery("from Timetable where id= :id", Timetable.class)
                 .setParameter("id", id)
                 .uniqueResult();
+    }
+
+    @Override
+    public void delete(long id) {
+        Session session = sessionFactory.getCurrentSession();
+        Timetable timetable = getById(id);
+        session.delete(timetable);
     }
 
     public void setSessionFactory(SessionFactory sessionFactory) {
