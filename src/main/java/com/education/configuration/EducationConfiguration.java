@@ -1,10 +1,7 @@
 package com.education.configuration;
 
 import com.education.repository.*;
-import com.education.service.ClassServiceImpl;
-import com.education.service.StudentServiceImpl;
-import com.education.service.SubjectServiceImpl;
-import com.education.service.TeacherServiceImpl;
+import com.education.service.*;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -75,6 +72,20 @@ public class EducationConfiguration {
         return classService;
     }
 
+    @Bean
+    public TimeTableRepositoryImpl timeTableRepository(SessionFactory sessionFactory) {
+        TimeTableRepositoryImpl timeTableRepository = new TimeTableRepositoryImpl();
+        timeTableRepository.setSessionFactory(sessionFactory);
+        return timeTableRepository;
+    }
+
+    @Bean
+    public TimeTableServiceImpl timeTableService(TimetableRepository timeTableRepository) {
+        TimeTableServiceImpl timeTableService = new TimeTableServiceImpl();
+        timeTableService.setTimeTableRepository(timeTableRepository);
+        return timeTableService;
+
+    }
 
     @Bean
     public DriverManagerDataSource dataSource() {
