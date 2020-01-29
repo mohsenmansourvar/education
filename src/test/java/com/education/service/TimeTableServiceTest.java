@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -91,5 +92,25 @@ public class TimeTableServiceTest {
         assertEquals(expectedStart, timetableById.getStart());
         assertEquals(expectedEnd, timetableById.getEnd());
         assertEquals(LocalDate.now(), timetableById.getDate());
+    }
+
+    @Test
+    public void getAllTimetables() {
+        Timetable timeTable1 = new Timetable();
+        timeTable1.setStart(LocalTime.of(7, 0));
+        timeTable1.setEnd(LocalTime.of(8, 30));
+        timeTable1.setDate(LocalDate.now());
+        timeTableService.save(timeTable1);
+
+        Timetable timetable2 = new Timetable();
+        timetable2.setStart(LocalTime.of(10, 0));
+        timetable2.setEnd(LocalTime.of(11, 30));
+        timetable2.setDate(LocalDate.now());
+        timeTableService.save(timetable2);
+
+        List<Timetable> allTimetables = timeTableService.getAllTimetables();
+
+        assertNotNull(allTimetables);
+        assertEquals(2, allTimetables.size());
     }
 }
