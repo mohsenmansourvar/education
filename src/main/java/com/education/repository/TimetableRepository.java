@@ -8,4 +8,6 @@ public interface TimetableRepository {
     Timetable getById(long id);
 
     void delete (long id);
+
+    void update(long id , Timetable newTimetable);
 }

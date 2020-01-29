@@ -21,6 +21,11 @@ public class TimeTableServiceImpl implements TimeTableService {
         timeTableRepository.delete(id);
     }
 
+    @Override
+    public void update(long id, Timetable newTimetable) {
+        timeTableRepository.update(id,newTimetable);
+    }
+
     public void setTimeTableRepository(TimetableRepository timeTableRepository) {
         this.timeTableRepository = timeTableRepository;
     }
