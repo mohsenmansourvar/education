@@ -11,6 +11,7 @@ import java.time.LocalTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootTest
 @Transactional
@@ -51,5 +52,20 @@ public class TimeTableServiceTest {
         assertEquals(expectedStart, timeTableById.getStart());
         assertEquals(expectedEnd, timeTableById.getEnd());
         assertEquals(LocalDate.now(), timeTableById.getDate());
+    }
+    @Test
+    public void delete (){
+        Timetable timeTable = new Timetable();
+        timeTable.setStart(LocalTime.of(10, 0));
+        timeTable.setEnd(LocalTime.of(11, 30));
+        timeTable.setDate(LocalDate.now());
+        timeTableService.save(timeTable);
+        Long timeTableId = timeTable.getId();
+
+        timeTableService.delete(timeTableId);
+
+        Timetable timeTableById = timeTableService.getById(timeTableId);
+
+        assertNull(timeTableById);
     }
 }
