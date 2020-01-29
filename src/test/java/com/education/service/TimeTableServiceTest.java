@@ -35,4 +35,21 @@ public class TimeTableServiceTest {
         assertEquals(expectedEnd, timeTableById.getEnd());
         assertEquals(LocalDate.now(), timeTableById.getDate());
     }
+    @Test
+    public void getById() {
+        Timetable timeTable = new Timetable();
+        timeTable.setStart(LocalTime.of(9, 0));
+        timeTable.setEnd(LocalTime.of(10, 30));
+        timeTable.setDate(LocalDate.now());
+        timeTableService.save(timeTable);
+        Long timeTableId = timeTable.getId();
+
+        Timetable timeTableById = timeTableService.getById(timeTableId);
+        LocalTime expectedStart = LocalTime.of(9, 0);
+        LocalTime expectedEnd = LocalTime.of(10, 30);
+        assertNotNull(timeTableById);
+        assertEquals(expectedStart, timeTableById.getStart());
+        assertEquals(expectedEnd, timeTableById.getEnd());
+        assertEquals(LocalDate.now(), timeTableById.getDate());
+    }
 }
