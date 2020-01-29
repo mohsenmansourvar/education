@@ -1,6 +1,8 @@
 package com.education.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Teacher {
@@ -14,7 +16,7 @@ public class Teacher {
     private String telephone;
     private String specialty;
     @ManyToMany
-    private Student student;
+    private List<Student> students = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -72,11 +74,11 @@ public class Teacher {
         this.specialty = specialty;
     }
 
-    public Student getStudent() {
-        return student;
+    public List<Student> getStudents() {
+        return students;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 }
