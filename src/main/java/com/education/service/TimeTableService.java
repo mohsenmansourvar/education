@@ -2,6 +2,8 @@ package com.education.service;
 
 import com.education.domain.Timetable;
 
+import java.util.List;
+
 public interface TimeTableService {
     void save(Timetable timeTable);
 
@@ -10,4 +12,6 @@ public interface TimeTableService {
     void delete(long id);
 
     void update(long id, Timetable newTimetable);
+
+    List<Timetable> getAllTimetables();
 }

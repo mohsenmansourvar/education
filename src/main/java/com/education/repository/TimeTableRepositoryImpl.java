@@ -5,6 +5,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Transactional
 public class TimeTableRepositoryImpl implements TimetableRepository {
     private SessionFactory sessionFactory;
@@ -54,6 +56,13 @@ public class TimeTableRepositoryImpl implements TimetableRepository {
             timetable.setTeacher(newTimetable.getTeacher());
         }
         session.update(timetable);
+    }
+
+    @Override
+    public List<Timetable> getAllTimetables() {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Timetable ", Timetable.class)
+                .list();
     }
 
     public void setSessionFactory(SessionFactory sessionFactory) {
