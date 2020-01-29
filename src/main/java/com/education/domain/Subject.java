@@ -1,9 +1,8 @@
 package com.education.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Subject {
@@ -12,8 +11,8 @@ public class Subject {
     private Long id;
     private String name;
     private int unitNumber;
-    @ManyToOne
-    private Student student;
+    @ManyToMany
+    private List<Student> students = new ArrayList<>();
     @ManyToOne
     private Teacher teacher;
 
@@ -41,12 +40,12 @@ public class Subject {
         this.unitNumber = unitNumber;
     }
 
-    public Student getStudent() {
-        return student;
+    public List<Student> getStudents() {
+        return students;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 
     public Teacher getTeacher() {
