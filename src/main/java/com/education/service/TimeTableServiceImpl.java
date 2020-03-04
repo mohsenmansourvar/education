@@ -25,13 +25,19 @@ public class TimeTableServiceImpl implements TimeTableService {
 
     @Override
     public void update(long id, Timetable newTimetable) {
-        timeTableRepository.update(id,newTimetable);
+        timeTableRepository.update(id, newTimetable);
     }
 
     @Override
     public List<Timetable> getAllTimetables() {
         return timeTableRepository.getAllTimetables();
     }
+
+    @Override
+    public List<Timetable> getTimetablesByTeacherId(long teacherId) {
+        return timeTableRepository.getTimetablesByTeacherId(teacherId);
+    }
+
 
     public void setTimeTableRepository(TimetableRepository timeTableRepository) {
         this.timeTableRepository = timeTableRepository;
