@@ -14,4 +14,8 @@ public interface TimeTableService {
     void update(long id, Timetable newTimetable);
 
     List<Timetable> getAllTimetables();
+
+    List<Timetable> getTimetablesByTeacherId(long teacherId);
+
+
 }

@@ -1,5 +1,6 @@
 package com.education.service;
 
+import com.education.domain.Teacher;
 import com.education.domain.Timetable;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TimeTableServiceTest {
     @Autowired
     private TimeTableService timeTableService;
+    @Autowired
+    private TeacherService teacherService;
 
     @Test
     public void save() {
@@ -112,5 +115,81 @@ public class TimeTableServiceTest {
 
         assertNotNull(allTimetables);
         assertEquals(2, allTimetables.size());
+    }
+
+    @Test
+    /*
+    1- create an object of Teacher class --> teacher:Teacher
+    2- set the parameters of teacher
+    3- save this teacher
+    4- create an object of timeTable class --> timeTable1:TimeTable
+    5- set the parameters of timeTable1
+    6- set the teacher in the timeTable1
+    7- save this timeTable1
+    8- create an object of timeTable class --> timeTable2: TimeTable
+    9- set the parameter of timeTable2
+    10- set the teacher in the timeTable2
+    11 - save this timeTable2
+    12- get an Id of teacher --> teacherId
+    13- get timeTables by teacherId--> timeTables:List<TimeTable>
+
+    Asserts :
+    14-get the first timeTable of timeTables -->t1:TimeTable
+    15- if t1 getStart  = 7 ?
+    15- if t1 getEnd = 8:30 ?
+    17- if t1 getDate = 6 ?
+
+    18- get the second timeTable of timeTables -->t2:TimeTable
+    15- if t1 getStart  = 8 ?
+    15- if t1 getEnd = 89:30 ?
+    17- if t1 getDate = 6 ?
+
+    */
+    public void getTimeTablesByTeacherId() {
+        Teacher teacher = new Teacher();
+        teacher.setFirstName("Reza");
+        teacher.setLastName("Ebrahimi");
+        teacher.setNationalCode("00000000000");
+        teacher.setSpecialty("Java Programmer");
+        teacher.setAddress("Berlin");
+        teacher.setTelephone("0049");
+        teacherService.save(teacher);
+        Long teacherId = teacher.getId();
+
+
+        Timetable timeTable1 = new Timetable();
+        timeTable1.setStart(LocalTime.of(7, 0));
+        timeTable1.setEnd(LocalTime.of(8, 30));
+        timeTable1.setDate(LocalDate.now());
+
+        Timetable timetable2 = new Timetable();
+        timetable2.setStart(LocalTime.of(10, 0));
+        timetable2.setEnd(LocalTime.of(11, 30));
+        timetable2.setDate(LocalDate.now());
+
+        timetable2.setTeacher(teacher);
+        timeTableService.save(timetable2);
+
+        timeTable1.setTeacher(teacher);
+        timeTableService.save(timeTable1);
+
+        List<Timetable> timetableByTeacherId = timeTableService.getTimetableByTeacherId(teacherId);
+
+        Timetable t1 = timetableByTeacherId.get(0);
+        Timetable t2 = timetableByTeacherId.get(1);
+
+        LocalTime expectedStartTimeT1 = LocalTime.of(7, 0);
+        LocalTime expectedEndTimeT1 = LocalTime.of(8, 30);
+
+        LocalTime expectedStartTimeT2 = LocalTime.of(10, 0);
+        LocalTime expectedEndTimeT2 = LocalTime.of(11, 30);
+
+        assertEquals(expectedStartTimeT1, t1.getStart());
+        assertEquals(expectedEndTimeT1, t1.getEnd());
+        assertEquals(LocalDate.now(), t1.getDate());
+        assertEquals(expectedStartTimeT2, t2.getStart());
+        assertEquals(expectedEndTimeT2, t2.getEnd());
+        assertEquals(LocalDate.now(), t2.getDate());
+        assertEquals(2,timetableByTeacherId.size());
     }
 }
