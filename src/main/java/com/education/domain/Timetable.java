@@ -1,11 +1,15 @@
 package com.education.domain;
 
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.Objects;
 
+@EqualsAndHashCode
+@ToString
 @Entity
 public class Timetable {
     @Id
@@ -75,30 +79,5 @@ public class Timetable {
 
     public void setStudents(List<Student> students) {
         this.students = students;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Timetable)) return false;
-        Timetable timeTable = (Timetable) o;
-        return Objects.equals(start, timeTable.start) &&
-                Objects.equals(end, timeTable.end) &&
-                Objects.equals(date, timeTable.date);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(start, end, date);
-    }
-
-    @Override
-    public String toString() {
-        return "Timetable{" +
-                "id=" + id +
-                ", from=" + start +
-                ", to=" + end +
-                ", date=" + date +
-                '}';
     }
 }
