@@ -161,22 +161,33 @@ public class TimeTableServiceTest {
         timeTable1.setStart(LocalTime.of(7, 0));
         timeTable1.setEnd(LocalTime.of(8, 30));
         timeTable1.setDate(LocalDate.now());
+        timeTable1.setTeacher(teacher);
+        timeTableService.save(timeTable1);
+
 
         Timetable timetable2 = new Timetable();
         timetable2.setStart(LocalTime.of(10, 0));
         timetable2.setEnd(LocalTime.of(11, 30));
         timetable2.setDate(LocalDate.now());
-
         timetable2.setTeacher(teacher);
         timeTableService.save(timetable2);
 
-        timeTable1.setTeacher(teacher);
-        timeTableService.save(timeTable1);
 
-        List<Timetable> timetableByTeacherId = timeTableService.getTimetableByTeacherId(teacherId);
 
-        Timetable t1 = timetableByTeacherId.get(0);
-        Timetable t2 = timetableByTeacherId.get(1);
+        Timetable timetable3 = new Timetable();
+        timetable3.setStart(LocalTime.of(9, 0));
+        timetable3.setEnd(LocalTime.of(10, 30));
+        timetable3.setDate(LocalDate.now());
+
+        timetable3.setTeacher(teacher);
+        timeTableService.save(timetable3);
+
+
+        List<Timetable> timetablesByTeacherId = timeTableService.getTimetablesByTeacherId(teacherId);
+
+        Timetable t1 = timetablesByTeacherId.get(0);
+        Timetable t2 = timetablesByTeacherId.get(1);
+        Timetable t3 = timetablesByTeacherId.get(2);
 
         LocalTime expectedStartTimeT1 = LocalTime.of(7, 0);
         LocalTime expectedEndTimeT1 = LocalTime.of(8, 30);
@@ -184,12 +195,19 @@ public class TimeTableServiceTest {
         LocalTime expectedStartTimeT2 = LocalTime.of(10, 0);
         LocalTime expectedEndTimeT2 = LocalTime.of(11, 30);
 
+        LocalTime expectedStartTimeT3 = LocalTime.of(9, 0);
+        LocalTime expectedEndTimeT3 = LocalTime.of(10, 30);
+
         assertEquals(expectedStartTimeT1, t1.getStart());
         assertEquals(expectedEndTimeT1, t1.getEnd());
         assertEquals(LocalDate.now(), t1.getDate());
         assertEquals(expectedStartTimeT2, t2.getStart());
         assertEquals(expectedEndTimeT2, t2.getEnd());
         assertEquals(LocalDate.now(), t2.getDate());
-        assertEquals(2,timetableByTeacherId.size());
+        assertEquals(expectedStartTimeT3, t3.getStart());
+        assertEquals(expectedEndTimeT3, t3.getEnd());
+        assertEquals(LocalDate.now(), t3.getDate());
+
+        assertEquals(3,timetablesByTeacherId.size());
     }
 }
