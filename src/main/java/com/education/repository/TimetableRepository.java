@@ -16,4 +16,6 @@ public interface TimetableRepository {
     List<Timetable> getAllTimetables();
 
     List<Timetable> getTimetablesByTeacherId(long teacherId);
+
+    List<Timetable> getTimetablesByStudentId(long studentId);
 }

@@ -1,5 +1,6 @@
 package com.education.service;
 
+import com.education.domain.Student;
 import com.education.domain.Timetable;
 import com.education.repository.TimetableRepository;
 
@@ -36,6 +37,11 @@ public class TimeTableServiceImpl implements TimeTableService {
     @Override
     public List<Timetable> getTimetablesByTeacherId(long teacherId) {
         return timeTableRepository.getTimetablesByTeacherId(teacherId);
+    }
+
+    @Override
+    public List<Timetable> getTimetablesByStudentId(long studentId) {
+        return timeTableRepository.getTimetablesByStudentId(studentId);
     }
 
 
