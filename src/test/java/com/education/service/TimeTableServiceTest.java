@@ -1,5 +1,6 @@
 package com.education.service;
 
+import com.education.domain.Student;
 import com.education.domain.Teacher;
 import com.education.domain.Timetable;
 import org.junit.jupiter.api.Test;
@@ -20,6 +21,8 @@ public class TimeTableServiceTest {
     private TimeTableService timeTableService;
     @Autowired
     private TeacherService teacherService;
+    @Autowired
+    private StudentService studentService;
 
     @Test
     public void save() {
@@ -173,7 +176,6 @@ public class TimeTableServiceTest {
         timeTableService.save(timetable2);
 
 
-
         Timetable timetable3 = new Timetable();
         timetable3.setStart(LocalTime.of(9, 0));
         timetable3.setEnd(LocalTime.of(10, 30));
@@ -208,6 +210,70 @@ public class TimeTableServiceTest {
         assertEquals(expectedEndTimeT3, t3.getEnd());
         assertEquals(LocalDate.now(), t3.getDate());
 
-        assertEquals(3,timetablesByTeacherId.size());
+        assertEquals(3, timetablesByTeacherId.size());
+    }
+
+    @Test
+    public void getTimetableByStudentId() {
+        Student student = new Student();
+        student.setFirstName("Mohsen");
+        student.setLastName("Mansourvar");
+        student.setNationalCode("1111111111");
+        student.setStudentNumber("111");
+        student.setAddress("Adelaide");
+        student.setTelephone("0061");
+        studentService.save(student);
+        Long studentId = student.getId();
+
+        Timetable timeTable1 = new Timetable();
+        timeTable1.setStart(LocalTime.of(7, 0));
+        timeTable1.setEnd(LocalTime.of(8, 30));
+        timeTable1.setDate(LocalDate.now());
+        timeTable1.setStudent(student);
+        timeTableService.save(timeTable1);
+
+
+        Timetable timetable2 = new Timetable();
+        timetable2.setStart(LocalTime.of(10, 0));
+        timetable2.setEnd(LocalTime.of(11, 30));
+        timetable2.setDate(LocalDate.now());
+        timetable2.setStudent(student);
+        timeTableService.save(timetable2);
+
+
+        Timetable timetable3 = new Timetable();
+        timetable3.setStart(LocalTime.of(9, 0));
+        timetable3.setEnd(LocalTime.of(10, 30));
+        timetable3.setDate(LocalDate.now());
+        timetable3.setStudent(student);
+        timeTableService.save(timetable3);
+
+        List<Timetable> timetablesByStudentId = timeTableService.getTimetablesByStudentId(studentId);
+
+        Timetable t1 = timetablesByStudentId.get(0);
+        Timetable t2 = timetablesByStudentId.get(1);
+        Timetable t3 = timetablesByStudentId.get(2);
+
+
+        LocalTime expectedStartTimeT1 = LocalTime.of(7, 0);
+        LocalTime expectedEndTimeT1 = LocalTime.of(8, 30);
+
+        LocalTime expectedStartTimeT2 = LocalTime.of(10, 0);
+        LocalTime expectedEndTimeT2 = LocalTime.of(11, 30);
+
+        LocalTime expectedStartTimeT3 = LocalTime.of(9, 0);
+        LocalTime expectedEndTimeT3 = LocalTime.of(10, 30);
+
+        assertNotNull(timetablesByStudentId);
+        assertEquals(expectedStartTimeT1, t1.getStart());
+        assertEquals(expectedEndTimeT1, t1.getEnd());
+        assertEquals(LocalDate.now(), t1.getDate());
+        assertEquals(expectedStartTimeT2, t2.getStart());
+        assertEquals(expectedEndTimeT2, t2.getEnd());
+        assertEquals(LocalDate.now(), t2.getDate());
+        assertEquals(expectedStartTimeT3, t3.getStart());
+        assertEquals(expectedEndTimeT3, t3.getEnd());
+        assertEquals(LocalDate.now(), t3.getDate());
+        assertEquals(3, timetablesByStudentId.size());
     }
 }

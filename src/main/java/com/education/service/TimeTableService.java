@@ -1,5 +1,6 @@
 package com.education.service;
 
+import com.education.domain.Student;
 import com.education.domain.Timetable;
 
 import java.util.List;
@@ -16,6 +17,8 @@ public interface TimeTableService {
     List<Timetable> getAllTimetables();
 
     List<Timetable> getTimetablesByTeacherId(long teacherId);
+
+    List<Timetable> getTimetablesByStudentId(long studentId);
 
 
 }

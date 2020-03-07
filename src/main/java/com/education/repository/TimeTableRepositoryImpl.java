@@ -74,6 +74,15 @@ public class TimeTableRepositoryImpl implements TimetableRepository {
                 .list();
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public List<Timetable> getTimetablesByStudentId(long studentId) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Timetable ti where ti.student.id = :id", Timetable.class)
+                .setParameter("id", studentId)
+                .list();
+    }
+
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
