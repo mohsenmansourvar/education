@@ -20,5 +20,7 @@ public interface TimeTableService {
 
     List<Timetable> getTimetablesByStudentId(long studentId);
 
+    List<Timetable> getTimetablesByTeacherIds(List<Long> ids);
+
 
 }

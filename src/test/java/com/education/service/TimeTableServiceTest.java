@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @Transactional
 public class TimeTableServiceTest {
+
     @Autowired
     private TimeTableService timeTableService;
     @Autowired
@@ -275,5 +277,94 @@ public class TimeTableServiceTest {
         assertEquals(expectedEndTimeT3, t3.getEnd());
         assertEquals(LocalDate.now(), t3.getDate());
         assertEquals(3, timetablesByStudentId.size());
+    }
+
+    @Test
+    public void getTimetablesByTeacherIds() {
+        Teacher teacher1 = new Teacher();
+        teacher1.setFirstName("Reza");
+        teacher1.setLastName("Ebrahimi");
+        teacher1.setNationalCode("0000000000");
+        teacher1.setAddress("Berlin");
+        teacher1.setTelephone("0041");
+        teacher1.setSpecialty("programmer");
+        teacherService.save(teacher1);
+        Long teacher1Id = teacher1.getId();
+
+        Teacher teacher2 = new Teacher();
+        teacher2.setFirstName("Mary");
+        teacher2.setLastName("Ebrahimi");
+        teacher2.setNationalCode("1111111111");
+        teacher2.setAddress("Adelaide");
+        teacher2.setTelephone("0069");
+        teacher2.setSpecialty("Teacher");
+        teacherService.save(teacher2);
+        Long teacher2Id = teacher2.getId();
+
+
+        Timetable timeTable1 = new Timetable();
+        timeTable1.setStart(LocalTime.of(7, 0));
+        timeTable1.setEnd(LocalTime.of(8, 30));
+        timeTable1.setDate(LocalDate.now());
+        timeTable1.setTeacher(teacher1);
+        timeTableService.save(timeTable1);
+
+        Timetable timetable2 = new Timetable();
+        timetable2.setStart(LocalTime.of(9, 0));
+        timetable2.setEnd(LocalTime.of(10, 30));
+        timetable2.setDate(LocalDate.now());
+        timetable2.setTeacher(teacher1);
+        timeTableService.save(timetable2);
+
+        Timetable timetable3 = new Timetable();
+        timetable3.setStart(LocalTime.of(11, 0));
+        timetable3.setEnd(LocalTime.of(12, 30));
+        timetable3.setDate(LocalDate.now());
+        timetable3.setTeacher(teacher2);
+        timeTableService.save(timetable3);
+
+        Timetable timetable4 = new Timetable();
+        timetable4.setStart(LocalTime.of(1, 0));
+        timetable4.setEnd(LocalTime.of(2, 30));
+        timetable4.setDate(LocalDate.now());
+        timetable4.setTeacher(teacher2);
+        timeTableService.save(timetable4);
+
+
+        List<Long> ids = new ArrayList<>();
+        ids.add(teacher1Id);
+        ids.add(teacher2Id);
+
+        List<Timetable> timetablesByTeacherIds = timeTableService.getTimetablesByTeacherIds(ids);
+        Timetable t1 = timetablesByTeacherIds.get(0);
+        Timetable t2 = timetablesByTeacherIds.get(1);
+        Timetable t3 = timetablesByTeacherIds.get(2);
+        Timetable t4 = timetablesByTeacherIds.get(3);
+
+        LocalTime expectedStartTimeT1 = LocalTime.of(7, 0);
+        LocalTime expectedEndTimeT1 = LocalTime.of(8, 30);
+        LocalTime expectedStartTimeT2 = LocalTime.of(9, 0);
+        LocalTime expectedEndTimeT2 = LocalTime.of(10, 30);
+        LocalTime expectedStartTimeT3 = LocalTime.of(11, 0);
+        LocalTime expectedEndTimeT3 = LocalTime.of(12, 30);
+        LocalTime expectedStartTimeT4 = LocalTime.of(1, 0);
+        LocalTime expectedEndTimeT4 = LocalTime.of(2, 30);
+
+        assertEquals(expectedEndTimeT1,t1.getEnd());
+        assertEquals(expectedStartTimeT1,t1.getStart());
+        assertEquals(LocalDate.now(),t1.getDate());
+        assertEquals(expectedStartTimeT2,t2.getStart());
+        assertEquals(expectedEndTimeT2,t2.getEnd());
+        assertEquals(LocalDate.now(),t2.getDate());
+        assertEquals(expectedStartTimeT3,t3.getStart());
+        assertEquals(expectedEndTimeT3,t3.getEnd());
+        assertEquals(LocalDate.now(),t3.getDate());
+        assertEquals(expectedStartTimeT4,t4.getStart());
+        assertEquals(expectedEndTimeT4,t4.getEnd());
+        assertEquals(LocalDate.now(),t4.getDate());
+        assertEquals(teacher1Id,t1.getTeacher().getId());
+        assertEquals(teacher1Id,t2.getTeacher().getId());
+        assertEquals(teacher2Id, t3.getTeacher().getId());
+        assertEquals(teacher2Id, t4.getTeacher().getId());
     }
 }

@@ -44,6 +44,10 @@ public class TimeTableServiceImpl implements TimeTableService {
         return timeTableRepository.getTimetablesByStudentId(studentId);
     }
 
+    @Override
+    public List<Timetable> getTimetablesByTeacherIds(List<Long> ids) {
+        return timeTableRepository.getTimetablesByTeacherIds(ids);
+    }
 
     public void setTimeTableRepository(TimetableRepository timeTableRepository) {
         this.timeTableRepository = timeTableRepository;
