@@ -47,6 +47,9 @@ public class TimeTableServiceImpl implements TimeTableService {
 
     @Override
     public List<Timetable> getTimetablesByTeacherIds(List<Long> ids) {
+        if (ids == null) {
+            throw new IllegalArgumentException("Ids cannot be null");
+        }
         return timeTableRepository.getTimetablesByTeacherIds(ids);
     }
 
