@@ -5,6 +5,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Transactional
@@ -89,6 +91,16 @@ public class TimeTableRepositoryImpl implements TimetableRepository {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("from Timetable ti where ti.teacher.id in (:ids)", Timetable.class)
                 .setParameter("ids", ids)
+                .list();
+    }
+
+    @Override
+    public List<Timetable> getTimetablesByTimeAndDate(LocalTime start, LocalTime end, LocalDate date) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Timetable ti where ti.start >= :start And ti.end<= :end And ti.date = :date ", Timetable.class)
+                .setParameter("start", start)
+                .setParameter("end", end)
+                .setParameter("date", date)
                 .list();
     }
 
