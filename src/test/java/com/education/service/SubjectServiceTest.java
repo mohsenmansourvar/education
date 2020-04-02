@@ -82,7 +82,7 @@ public class SubjectServiceTest {
     }
 
     @Test
-    public void GetAllSubjects() {
+    public void getAllSubjects() {
         Subject subject = new Subject();
         subject.setName("Math");
         subject.setUnitNumber(3);
@@ -97,6 +97,4 @@ public class SubjectServiceTest {
 
         assertEquals(2, allSubjects.size());
     }
-
-
 }
