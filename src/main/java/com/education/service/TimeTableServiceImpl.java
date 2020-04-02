@@ -4,6 +4,8 @@ import com.education.domain.Student;
 import com.education.domain.Timetable;
 import com.education.repository.TimetableRepository;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 public class TimeTableServiceImpl implements TimeTableService {
@@ -47,6 +49,11 @@ public class TimeTableServiceImpl implements TimeTableService {
     @Override
     public List<Timetable> getTimetablesByTeacherIds(List<Long> ids) {
         return timeTableRepository.getTimetablesByTeacherIds(ids);
+    }
+
+    @Override
+    public List<Timetable> getTimetablesByTimeAndDate(LocalTime start, LocalTime end, LocalDate date) {
+        return timeTableRepository.getTimetablesByTimeAndDate(start,end,date);
     }
 
     public void setTimeTableRepository(TimetableRepository timeTableRepository) {

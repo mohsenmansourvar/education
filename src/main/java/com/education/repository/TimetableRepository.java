@@ -2,6 +2,8 @@ package com.education.repository;
 
 import com.education.domain.Timetable;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 public interface TimetableRepository {
@@ -20,4 +22,6 @@ public interface TimetableRepository {
     List<Timetable> getTimetablesByStudentId(long studentId);
 
     List<Timetable> getTimetablesByTeacherIds(List<Long> ids);
+
+    List <Timetable> getTimetablesByTimeAndDate(LocalTime start, LocalTime end, LocalDate date);
 }

@@ -350,21 +350,81 @@ public class TimeTableServiceTest {
         LocalTime expectedStartTimeT4 = LocalTime.of(1, 0);
         LocalTime expectedEndTimeT4 = LocalTime.of(2, 30);
 
-        assertEquals(expectedEndTimeT1,t1.getEnd());
-        assertEquals(expectedStartTimeT1,t1.getStart());
-        assertEquals(LocalDate.now(),t1.getDate());
-        assertEquals(expectedStartTimeT2,t2.getStart());
-        assertEquals(expectedEndTimeT2,t2.getEnd());
-        assertEquals(LocalDate.now(),t2.getDate());
-        assertEquals(expectedStartTimeT3,t3.getStart());
-        assertEquals(expectedEndTimeT3,t3.getEnd());
-        assertEquals(LocalDate.now(),t3.getDate());
-        assertEquals(expectedStartTimeT4,t4.getStart());
-        assertEquals(expectedEndTimeT4,t4.getEnd());
-        assertEquals(LocalDate.now(),t4.getDate());
-        assertEquals(teacher1Id,t1.getTeacher().getId());
-        assertEquals(teacher1Id,t2.getTeacher().getId());
+        assertEquals(expectedEndTimeT1, t1.getEnd());
+        assertEquals(expectedStartTimeT1, t1.getStart());
+        assertEquals(LocalDate.now(), t1.getDate());
+        assertEquals(expectedStartTimeT2, t2.getStart());
+        assertEquals(expectedEndTimeT2, t2.getEnd());
+        assertEquals(LocalDate.now(), t2.getDate());
+        assertEquals(expectedStartTimeT3, t3.getStart());
+        assertEquals(expectedEndTimeT3, t3.getEnd());
+        assertEquals(LocalDate.now(), t3.getDate());
+        assertEquals(expectedStartTimeT4, t4.getStart());
+        assertEquals(expectedEndTimeT4, t4.getEnd());
+        assertEquals(LocalDate.now(), t4.getDate());
+        assertEquals(teacher1Id, t1.getTeacher().getId());
+        assertEquals(teacher1Id, t2.getTeacher().getId());
         assertEquals(teacher2Id, t3.getTeacher().getId());
         assertEquals(teacher2Id, t4.getTeacher().getId());
     }
+
+    @Test
+    public void getTimetablesByTimeAndDate() {
+        Timetable timeTable1 = new Timetable();
+        timeTable1.setStart(LocalTime.of(7, 0));
+        timeTable1.setEnd(LocalTime.of(8, 30));
+        timeTable1.setDate(LocalDate.now());
+        timeTableService.save(timeTable1);
+
+        Timetable timetable2 = new Timetable();
+        timetable2.setStart(LocalTime.of(9, 0));
+        timetable2.setEnd(LocalTime.of(10, 30));
+        timetable2.setDate(LocalDate.now());
+        timeTableService.save(timetable2);
+
+        Timetable timetable3 = new Timetable();
+        timetable3.setStart(LocalTime.of(11, 0));
+        timetable3.setEnd(LocalTime.of(12, 30));
+        timetable3.setDate(LocalDate.now());
+        timeTableService.save(timetable3);
+
+        Timetable timetable4 = new Timetable();
+        timetable4.setStart(LocalTime.of(13, 0));
+        timetable4.setEnd(LocalTime.of(14, 30));
+        timetable4.setDate(LocalDate.now());
+        timeTableService.save(timetable4);
+
+        LocalTime expectedStartTimeT1 = LocalTime.of(7, 0);
+        LocalTime expectedEndTimeT1 = LocalTime.of(8, 30);
+        LocalTime expectedStartTimeT2 = LocalTime.of(9, 0);
+        LocalTime expectedEndTimeT2 = LocalTime.of(10, 30);
+        LocalTime expectedStartTimeT3 = LocalTime.of(11, 0);
+        LocalTime expectedEndTimeT3 = LocalTime.of(12, 30);
+        LocalTime expectedStartTimeT4 = LocalTime.of(13, 0);
+        LocalTime expectedEndTimeT4 = LocalTime.of(14, 30);
+
+        List<Timetable> timetablesByTimeAndDate = timeTableService.getTimetablesByTimeAndDate(expectedStartTimeT2, expectedEndTimeT3, LocalDate.now());
+        Timetable t2 = timetablesByTimeAndDate.get(0);
+        Timetable t3 = timetablesByTimeAndDate.get(1);
+
+
+        assertEquals(expectedStartTimeT2, t2.getStart());
+        assertEquals(expectedEndTimeT2, t2.getEnd());
+        assertEquals(expectedStartTimeT3, t3.getStart());
+        assertEquals(expectedEndTimeT3, t3.getEnd());
+    }
 }
+/*
+
+t1 = 7 - 8
+t2 = 8 - 9
+t3 = 9 - 10
+t4 = 10 - 11
+
+s = 8
+e = 10
+timetable.start >= s
+timetable.end <= e
+
+
+* */
