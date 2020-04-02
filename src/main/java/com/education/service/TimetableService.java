@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
-public interface TimeTableService {
+public interface TimetableService {
     void save(Timetable timeTable);
 
     Timetable getById(long id);

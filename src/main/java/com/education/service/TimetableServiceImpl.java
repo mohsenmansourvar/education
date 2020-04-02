@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-public class TimeTableServiceImpl implements TimeTableService {
+public class TimetableServiceImpl implements TimetableService {
     private TimetableRepository timeTableRepository;
 
     @Override
