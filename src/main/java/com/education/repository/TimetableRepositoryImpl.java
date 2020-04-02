@@ -10,7 +10,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 @Transactional
-public class TimeTableRepositoryImpl implements TimetableRepository {
+public class TimetableRepositoryImpl implements TimetableRepository {
     private SessionFactory sessionFactory;
 
     @Override

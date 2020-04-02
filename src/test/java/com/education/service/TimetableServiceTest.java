@@ -17,10 +17,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
-public class TimeTableServiceTest {
+public class TimetableServiceTest {
 
     @Autowired
-    private TimeTableService timeTableService;
+    private TimetableService timeTableService;
     @Autowired
     private TeacherService teacherService;
     @Autowired
