@@ -1,6 +1,5 @@
 package com.education.service;
 
-import com.education.domain.Student;
 import com.education.domain.Timetable;
 import com.education.repository.TimetableRepository;
 
@@ -53,7 +52,7 @@ public class TimeTableServiceImpl implements TimeTableService {
 
     @Override
     public List<Timetable> getTimetablesByTimeAndDate(LocalTime start, LocalTime end, LocalDate date) {
-        return timeTableRepository.getTimetablesByTimeAndDate(start,end,date);
+        return timeTableRepository.getTimetablesByTimeAndDate(start, end, date);
     }
 
     public void setTimeTableRepository(TimetableRepository timeTableRepository) {
