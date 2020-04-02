@@ -1,9 +1,17 @@
 package com.education.domain;
 
-import javax.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import java.util.ArrayList;
 import java.util.List;
 
+@EqualsAndHashCode
+@ToString
 @Entity
 public class Teacher {
     @Id
