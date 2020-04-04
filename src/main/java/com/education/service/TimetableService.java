@@ -1,10 +1,8 @@
 package com.education.service;
 
-import com.education.domain.Student;
 import com.education.domain.Timetable;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -25,5 +23,7 @@ public interface TimetableService {
 
     List<Timetable> getTimetablesByTeacherIds(List<Long> ids);
 
-    List <Timetable> getTimetablesByTimeAndDate(LocalTime start,LocalTime end,LocalDate date);
+    List<Timetable> getTimetablesByTimeAndDate(LocalTime start, LocalTime end, LocalDate date);
+
+    List<Timetable> getTimetablesByDate(LocalDate date);
 }

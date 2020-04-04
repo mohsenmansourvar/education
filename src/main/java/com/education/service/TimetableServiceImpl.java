@@ -58,6 +58,11 @@ public class TimetableServiceImpl implements TimetableService {
         return timeTableRepository.getTimetablesByTimeAndDate(start, end, date);
     }
 
+    @Override
+    public List<Timetable> getTimetablesByDate(LocalDate date) {
+        return timeTableRepository.getTimetablesByDate(date);
+    }
+
     public void setTimeTableRepository(TimetableRepository timeTableRepository) {
         this.timeTableRepository = timeTableRepository;
     }

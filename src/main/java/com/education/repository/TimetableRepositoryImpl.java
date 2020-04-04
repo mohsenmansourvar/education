@@ -104,6 +104,14 @@ public class TimetableRepositoryImpl implements TimetableRepository {
                 .list();
     }
 
+    @Override
+    public List<Timetable> getTimetablesByDate(LocalDate date) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Timetable where date = :date", Timetable.class)
+                .setParameter("date", date)
+                .list();
+    }
+
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
