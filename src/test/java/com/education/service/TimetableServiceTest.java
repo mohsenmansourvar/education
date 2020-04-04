@@ -367,6 +367,20 @@ public class TimetableServiceTest {
         assertEquals(teacher2Id, t3.getTeacher().getId());
         assertEquals(teacher2Id, t4.getTeacher().getId());
     }
+/*
+
+t1 = 7 - 8
+t2 = 8 - 9
+t3 = 9 - 10
+t4 = 10 - 11
+
+s = 8
+e = 10
+timetable.start >= s
+timetable.end <= e
+
+
+* */
 
     @Test
     public void getTimetablesByTimeAndDate() {
@@ -413,18 +427,32 @@ public class TimetableServiceTest {
         assertEquals(expectedStartTimeT3, t3.getStart());
         assertEquals(expectedEndTimeT3, t3.getEnd());
     }
+
+    @Test
+    public void getTimetableByDate() {
+        Timetable timetable1 = new Timetable();
+        timetable1.setStart(LocalTime.of(7, 0));
+        timetable1.setEnd(LocalTime.of(8, 30));
+        timetable1.setDate(LocalDate.now());
+        timeTableService.save(timetable1);
+
+        Timetable timetable2 = new Timetable();
+        timetable2.setStart(LocalTime.of(9, 0));
+        timetable2.setEnd(LocalTime.of(10, 30));
+        timetable2.setDate(LocalDate.now());
+        timeTableService.save(timetable2);
+
+        Timetable timetable3 = new Timetable();
+        timetable3.setStart(LocalTime.of(11, 0));
+        timetable3.setEnd(LocalTime.of(12, 30));
+        timetable3.setDate(LocalDate.now());
+        timeTableService.save(timetable3);
+
+        List<Timetable> timetableByDate = timeTableService.getTimetablesByDate(LocalDate.now());
+
+        assertNotNull(timetableByDate);
+        assertEquals(LocalDate.now(), timetable1.getDate());
+        assertEquals(LocalDate.now(), timetable2.getDate());
+        assertEquals(LocalDate.now(), timetable3.getDate());
+    }
 }
-/*
-
-t1 = 7 - 8
-t2 = 8 - 9
-t3 = 9 - 10
-t4 = 10 - 11
-
-s = 8
-e = 10
-timetable.start >= s
-timetable.end <= e
-
-
-* */
