@@ -24,6 +24,8 @@ public class Timetable {
     private Teacher teacher;
     @ManyToMany
     private List<Student> students;
+    @ManyToOne
+    private Student student;
 
 
     public Long getId() {
@@ -80,5 +82,13 @@ public class Timetable {
 
     public void setStudents(List<Student> students) {
         this.students = students;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 }
