@@ -455,4 +455,33 @@ timetable.end <= e
         assertEquals(LocalDate.now(), timetable2.getDate());
         assertEquals(LocalDate.now(), timetable3.getDate());
     }
+
+    @Test
+    public void getTimetablesByWrongTeacherIds() {
+        Teacher teacher1 = new Teacher();
+        teacher1.setFirstName("Reza");
+        teacher1.setLastName("Ebrahimi");
+        teacher1.setNationalCode("00000000000");
+        teacher1.setSpecialty("Java Programmer");
+        teacher1.setAddress("Berlin");
+        teacher1.setTelephone("0049");
+        teacherService.save(teacher1);
+
+        Timetable timetable1 = new Timetable();
+        timetable1.setStart(LocalTime.of(7, 0));
+        timetable1.setEnd(LocalTime.of(8, 30));
+        timetable1.setDate(LocalDate.now());
+        timetable1.setTeacher(teacher1);
+        timeTableService.save(timetable1);
+
+        List<Long> ids = new ArrayList<>();
+        ids.add(-1L);
+        ids.add(-2L);
+
+        List<Timetable> timetablesByTeacherIds = timeTableService.getTimetablesByTeacherIds(ids);
+
+        assertNotNull(timetablesByTeacherIds);
+        assertTrue(timetablesByTeacherIds.isEmpty());
+        assertEquals(0, timetablesByTeacherIds.size());
+    }
 }
