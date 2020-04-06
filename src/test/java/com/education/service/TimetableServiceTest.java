@@ -483,7 +483,5 @@ timetable.end <= e
         assertNotNull(timetablesByTeacherIds);
         assertTrue(timetablesByTeacherIds.isEmpty());
         assertEquals(0, timetablesByTeacherIds.size());
-
-
     }
 }
