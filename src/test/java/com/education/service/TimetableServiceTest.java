@@ -484,4 +484,63 @@ timetable.end <= e
         assertTrue(timetablesByTeacherIds.isEmpty());
         assertEquals(0, timetablesByTeacherIds.size());
     }
+
+    @Test
+    public void getTimetablesWithoutTeacher() {
+        Teacher teacher1 = new Teacher();
+        teacher1.setFirstName("Reza");
+        teacher1.setLastName("Ebrahimi");
+        teacher1.setNationalCode("0000000000");
+        teacher1.setAddress("Berlin");
+        teacher1.setTelephone("0041");
+        teacher1.setSpecialty("programmer");
+        teacherService.save(teacher1);
+        Long teacher1Id = teacher1.getId();
+
+
+        Teacher teacher2 = new Teacher();
+        teacher2.setFirstName("Mary");
+        teacher2.setLastName("Ebrahimi");
+        teacher2.setNationalCode("1111111111");
+        teacher2.setAddress("Adelaide");
+        teacher2.setTelephone("0069");
+        teacher2.setSpecialty("Teacher");
+        teacherService.save(teacher2);
+        Long teacher2Id = teacher2.getId();
+
+
+        Timetable timeTable1 = new Timetable();
+        timeTable1.setStart(LocalTime.of(7, 0));
+        timeTable1.setEnd(LocalTime.of(8, 30));
+        timeTable1.setDate(LocalDate.now());
+        timeTable1.setTeacher(teacher1);
+        timeTableService.save(timeTable1);
+
+        Timetable timetable2 = new Timetable();
+        timetable2.setStart(LocalTime.of(9, 0));
+        timetable2.setEnd(LocalTime.of(10, 30));
+        timetable2.setDate(LocalDate.now());
+        timetable2.setTeacher(teacher1);
+        timeTableService.save(timetable2);
+
+        Timetable timetable3 = new Timetable();
+        timetable3.setStart(LocalTime.of(11, 0));
+        timetable3.setEnd(LocalTime.of(12, 30));
+        timetable3.setDate(LocalDate.now());
+        timeTableService.save(timetable3);
+
+        Timetable timetable4 = new Timetable();
+        timetable4.setStart(LocalTime.of(1, 0));
+        timetable4.setEnd(LocalTime.of(2, 30));
+        timetable4.setDate(LocalDate.now());
+        timeTableService.save(timetable4);
+
+
+
+        List<Timetable> timetablesWithoutTeacher = timeTableService.getTimetablesWithoutTeacher();
+        Timetable t3 = timetablesWithoutTeacher.get(0);
+        Timetable t4 = timetablesWithoutTeacher.get(1);
+
+        assertEquals(2, timetablesWithoutTeacher.size());
+    }
 }

@@ -5,6 +5,7 @@ import com.education.repository.TimetableRepository;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TimetableServiceImpl implements TimetableService {
@@ -62,6 +63,23 @@ public class TimetableServiceImpl implements TimetableService {
     public List<Timetable> getTimetablesByDate(LocalDate date) {
         return timeTableRepository.getTimetablesByDate(date);
     }
+
+    /*
+    1- accept one parameter --> ids:List<Long>
+    2- read all Timetable --> allTimetables:List<Timetable>
+    3- creat List of Timetable -->timetablesWithoutTeacher:List<Timetable> -- > value= null
+    4- loop in the allTimetables
+      4-1 get one timetable of timetables --> timetable:Timetable
+      4-2 if in the timetable teacher didnt set / 1 =/,
+       4-2-1 put in the  timetablesWithTeacher
+    5- return timetablesWithTeacher
+
+    */
+    @Override
+    public List<Timetable> getTimetablesWithoutTeacher() {
+        return  timeTableRepository.getTimetablesWithoutTeacher();
+    }
+
 
     public void setTimeTableRepository(TimetableRepository timeTableRepository) {
         this.timeTableRepository = timeTableRepository;

@@ -26,4 +26,6 @@ public interface TimetableService {
     List<Timetable> getTimetablesByTimeAndDate(LocalTime start, LocalTime end, LocalDate date);
 
     List<Timetable> getTimetablesByDate(LocalDate date);
+
+    List<Timetable> getTimetablesWithoutTeacher();
 }
