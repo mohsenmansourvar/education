@@ -112,6 +112,13 @@ public class TimetableRepositoryImpl implements TimetableRepository {
                 .list();
     }
 
+    @Override
+    public List<Timetable> getTimetablesWithoutTeacher() {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Timetable where teacher is null ", Timetable.class)
+                .list();
+    }
+
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }

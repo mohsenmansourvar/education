@@ -23,9 +23,11 @@ public interface TimetableRepository {
 
     List<Timetable> getTimetablesByTeacherIds(List<Long> ids);
 
-    List <Timetable> getTimetablesByTimeAndDate(LocalTime start, LocalTime end, LocalDate date);
+    List<Timetable> getTimetablesByTimeAndDate(LocalTime start, LocalTime end, LocalDate date);
 
-    List <Timetable> getTimetablesByDate(LocalDate date);
+    List<Timetable> getTimetablesByDate(LocalDate date);
+
+    List<Timetable> getTimetablesWithoutTeacher();
 
 
 }
