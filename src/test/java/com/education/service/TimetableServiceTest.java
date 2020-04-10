@@ -536,11 +536,34 @@ timetable.end <= e
         timeTableService.save(timetable4);
 
 
-
         List<Timetable> timetablesWithoutTeacher = timeTableService.getTimetablesWithoutTeacher();
         Timetable t3 = timetablesWithoutTeacher.get(0);
         Timetable t4 = timetablesWithoutTeacher.get(1);
 
         assertEquals(2, timetablesWithoutTeacher.size());
+    }
+
+    @Test
+    public void getTimetableWithWrongStudentId() {
+        Student student = new Student();
+        student.setFirstName("Mohsen");
+        student.setLastName("Mansourvar");
+        student.setStudentNumber("001");
+        student.setNationalCode("1111111111");
+        student.setAddress("Adelaide");
+        student.setTelephone("1111");
+        studentService.save(student);
+
+        Timetable timeTable1 = new Timetable();
+        timeTable1.setStart(LocalTime.of(7, 0));
+        timeTable1.setEnd(LocalTime.of(8, 30));
+        timeTable1.setDate(LocalDate.now());
+        timeTable1.setStudent(student);
+        timeTableService.save(timeTable1);
+
+        List<Timetable> timetablesByStudentId = timeTableService.getTimetablesByStudentId(-1L);
+
+        assertEquals(0, timetablesByStudentId.size());
+        assertTrue(timetablesByStudentId.isEmpty());
     }
 }
