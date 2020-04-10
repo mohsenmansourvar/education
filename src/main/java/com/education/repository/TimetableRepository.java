@@ -29,5 +29,5 @@ public interface TimetableRepository {
 
     List<Timetable> getTimetablesWithoutTeacher();
 
-
+    List<Timetable> getTimetableWithoutStudent();
 }

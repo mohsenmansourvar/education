@@ -495,8 +495,6 @@ timetable.end <= e
         teacher1.setTelephone("0041");
         teacher1.setSpecialty("programmer");
         teacherService.save(teacher1);
-        Long teacher1Id = teacher1.getId();
-
 
         Teacher teacher2 = new Teacher();
         teacher2.setFirstName("Mary");
@@ -506,8 +504,6 @@ timetable.end <= e
         teacher2.setTelephone("0069");
         teacher2.setSpecialty("Teacher");
         teacherService.save(teacher2);
-        Long teacher2Id = teacher2.getId();
-
 
         Timetable timeTable1 = new Timetable();
         timeTable1.setStart(LocalTime.of(7, 0));
@@ -537,8 +533,6 @@ timetable.end <= e
 
 
         List<Timetable> timetablesWithoutTeacher = timeTableService.getTimetablesWithoutTeacher();
-        Timetable t3 = timetablesWithoutTeacher.get(0);
-        Timetable t4 = timetablesWithoutTeacher.get(1);
 
         assertEquals(2, timetablesWithoutTeacher.size());
     }
@@ -589,5 +583,56 @@ timetable.end <= e
 
         assertTrue(timetablesByTeacherId.isEmpty());
         assertEquals(0, timetablesByTeacherId.size());
+    }
+
+    @Test
+    public void getTimetableWithoutStudent() {
+        Student student1 = new Student();
+        student1.setFirstName("Mohsen");
+        student1.setLastName("Mansourvar");
+        student1.setStudentNumber("001");
+        student1.setNationalCode("1111111111");
+        student1.setAddress("Adelaide");
+        student1.setTelephone("1111");
+        studentService.save(student1);
+
+        Student student2 = new Student();
+        student2.setFirstName("Liam");
+        student2.setLastName("Mansourvar");
+        student2.setStudentNumber("000");
+        student2.setNationalCode("000000000");
+        student2.setAddress("Adelaide");
+        student2.setTelephone("0000");
+        studentService.save(student2);
+
+        Timetable timeTable1 = new Timetable();
+        timeTable1.setStart(LocalTime.of(7, 0));
+        timeTable1.setEnd(LocalTime.of(8, 30));
+        timeTable1.setDate(LocalDate.now());
+        timeTable1.setStudent(student1);
+        timeTableService.save(timeTable1);
+
+        Timetable timetable2 = new Timetable();
+        timetable2.setStart(LocalTime.of(9, 0));
+        timetable2.setEnd(LocalTime.of(10, 30));
+        timetable2.setDate(LocalDate.now());
+        timeTableService.save(timetable2);
+
+        Timetable timetable3 = new Timetable();
+        timetable3.setStart(LocalTime.of(11, 0));
+        timetable3.setEnd(LocalTime.of(12, 30));
+        timetable3.setDate(LocalDate.now());
+        timeTableService.save(timetable3);
+
+        Timetable timetable4 = new Timetable();
+        timetable4.setStart(LocalTime.of(1, 0));
+        timetable4.setEnd(LocalTime.of(2, 30));
+        timetable4.setDate(LocalDate.now());
+        timetable4.setStudent(student2);
+        timeTableService.save(timetable4);
+
+        List<Timetable> timetableWithoutStudent = timeTableService.getTimetableWithoutStudent();
+
+        assertEquals(2, timetableWithoutStudent.size());
     }
 }

@@ -80,6 +80,11 @@ public class TimetableServiceImpl implements TimetableService {
         return  timeTableRepository.getTimetablesWithoutTeacher();
     }
 
+    @Override
+    public List<Timetable> getTimetableWithoutStudent() {
+        return timeTableRepository.getTimetableWithoutStudent();
+    }
+
 
     public void setTimeTableRepository(TimetableRepository timeTableRepository) {
         this.timeTableRepository = timeTableRepository;

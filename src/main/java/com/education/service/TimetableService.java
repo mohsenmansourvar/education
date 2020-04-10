@@ -28,4 +28,6 @@ public interface TimetableService {
     List<Timetable> getTimetablesByDate(LocalDate date);
 
     List<Timetable> getTimetablesWithoutTeacher();
+
+    List<Timetable> getTimetableWithoutStudent();
 }
