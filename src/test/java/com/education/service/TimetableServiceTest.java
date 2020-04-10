@@ -566,4 +566,28 @@ timetable.end <= e
         assertEquals(0, timetablesByStudentId.size());
         assertTrue(timetablesByStudentId.isEmpty());
     }
+
+    @Test
+    public void getTimetableWithWrongTeacherId() {
+        Teacher teacher = new Teacher();
+        teacher.setFirstName("Reza");
+        teacher.setLastName("Ebrahimi");
+        teacher.setNationalCode("0000000000");
+        teacher.setAddress("Berlin");
+        teacher.setTelephone("0041");
+        teacher.setSpecialty("programmer");
+        teacherService.save(teacher);
+
+        Timetable timetable = new Timetable();
+        timetable.setStart(LocalTime.of(7, 0));
+        timetable.setEnd(LocalTime.of(8, 30));
+        timetable.setDate(LocalDate.now());
+        timetable.setTeacher(teacher);
+        timeTableService.save(timetable);
+
+        List<Timetable> timetablesByTeacherId = timeTableService.getTimetablesByTeacherId(-1L);
+
+        assertTrue(timetablesByTeacherId.isEmpty());
+        assertEquals(0, timetablesByTeacherId.size());
+    }
 }
