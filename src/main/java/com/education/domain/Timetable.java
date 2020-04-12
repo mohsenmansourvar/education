@@ -24,7 +24,7 @@ public class Timetable {
     private Teacher teacher;
     @ManyToMany
     private List<Student> students;
-    @ManyToOne
+    @OneToOne
     private Student student;
 
 
