@@ -30,4 +30,7 @@ public interface TimetableService {
     List<Timetable> getTimetablesWithoutTeacher();
 
     List<Timetable> getTimetableWithoutStudent();
+
+    void addStudentToTimetable(long timetableId, long studentId);
+
 }
