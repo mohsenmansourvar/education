@@ -6,6 +6,7 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @EqualsAndHashCode
@@ -23,9 +24,7 @@ public class Timetable {
     @ManyToOne
     private Teacher teacher;
     @ManyToMany
-    private List<Student> students;
-    @OneToOne
-    private Student student;
+    private List<Student> students = new ArrayList<>();
 
 
     public Long getId() {
@@ -82,13 +81,5 @@ public class Timetable {
 
     public void setStudents(List<Student> students) {
         this.students = students;
-    }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
     }
 }

@@ -80,8 +80,8 @@ public class TimetableRepositoryImpl implements TimetableRepository {
     @Override
     public List<Timetable> getTimetablesByStudentId(long studentId) {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from Timetable ti where ti.student.id = :id", Timetable.class)
-                .setParameter("id", studentId)
+        return session.createQuery("from Timetable ti  join ti.students tis where tis.id =:studentId", Timetable.class)
+                .setParameter("studentId", studentId)
                 .list();
     }
 
@@ -122,7 +122,7 @@ public class TimetableRepositoryImpl implements TimetableRepository {
     @Override
     public List<Timetable> getTimetableWithoutStudent() {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from Timetable where student is null", Timetable.class)
+        return session.createQuery("from Timetable  where students is null", Timetable.class)
                 .list();
     }
 

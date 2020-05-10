@@ -80,9 +80,10 @@ public class EducationConfiguration {
     }
 
     @Bean
-    public TimetableServiceImpl timeTableService(TimetableRepository timeTableRepository) {
+    public TimetableServiceImpl timeTableService(TimetableRepository timeTableRepository, StudentService studentService) {
         TimetableServiceImpl timeTableService = new TimetableServiceImpl();
         timeTableService.setTimeTableRepository(timeTableRepository);
+        timeTableService.setStudentService(studentService);
         return timeTableService;
 
     }

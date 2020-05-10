@@ -1,5 +1,6 @@
 package com.education.service;
 
+import com.education.domain.Student;
 import com.education.domain.Timetable;
 import com.education.repository.TimetableRepository;
 
@@ -10,6 +11,7 @@ import java.util.List;
 
 public class TimetableServiceImpl implements TimetableService {
     private TimetableRepository timeTableRepository;
+    private StudentService studentService;
 
     @Override
     public void save(Timetable timeTable) {
@@ -77,7 +79,7 @@ public class TimetableServiceImpl implements TimetableService {
     */
     @Override
     public List<Timetable> getTimetablesWithoutTeacher() {
-        return  timeTableRepository.getTimetablesWithoutTeacher();
+        return timeTableRepository.getTimetablesWithoutTeacher();
     }
 
     @Override
@@ -85,8 +87,31 @@ public class TimetableServiceImpl implements TimetableService {
         return timeTableRepository.getTimetableWithoutStudent();
     }
 
+    /*
+     * 1-accept two parameters --> timetableId,studentId:long
+     * 2-read timetable base on id -->timetable:timetable
+     * 3-read all students of timetable -->allStudents:List<Students>
+     * 3-read a student by getById -->student: Student
+     * 4-add studentId to this List
+     * 6-set student to the timetable
+     * 7- save this timetable
+     from Timetable ti join ti.students tis where tis.id =:studentId
+        */
+    @Override
+    public void addStudentToTimetable(long timetableId, long studentId) {
+        Timetable timetable = getById(timetableId);
+        Student student = studentService.getById(studentId);
+        List<Student> students = timetable.getStudents();
+        students.add(student);
+        timetable.setStudents(students);
+        timeTableRepository.save(timetable);
+    }
 
     public void setTimeTableRepository(TimetableRepository timeTableRepository) {
         this.timeTableRepository = timeTableRepository;
+    }
+
+    public void setStudentService(StudentService studentService) {
+        this.studentService = studentService;
     }
 }
