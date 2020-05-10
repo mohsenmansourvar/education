@@ -1,21 +1,17 @@
 package com.education.repository;
 
-import com.education.domain.Student;
 import com.education.domain.Timetable;
-import com.education.service.StudentService;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
 public class TimetableRepositoryImpl implements TimetableRepository {
     private SessionFactory sessionFactory;
-    private StudentService studentService;
 
     @Override
     public void save(Timetable timeTable) {
@@ -132,9 +128,5 @@ public class TimetableRepositoryImpl implements TimetableRepository {
 
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
-    }
-
-    public void setStudentService(StudentService studentService) {
-        this.studentService = studentService;
     }
 }

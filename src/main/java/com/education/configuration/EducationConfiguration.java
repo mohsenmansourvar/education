@@ -73,15 +73,14 @@ public class EducationConfiguration {
     }
 
     @Bean
-    public TimetableRepositoryImpl timeTableRepository(SessionFactory sessionFactory,StudentService studentService) {
+    public TimetableRepositoryImpl timeTableRepository(SessionFactory sessionFactory) {
         TimetableRepositoryImpl timeTableRepository = new TimetableRepositoryImpl();
         timeTableRepository.setSessionFactory(sessionFactory);
-        timeTableRepository.setStudentService(studentService);
         return timeTableRepository;
     }
 
     @Bean
-    public TimetableServiceImpl timeTableService(TimetableRepository timeTableRepository,StudentService studentService) {
+    public TimetableServiceImpl timeTableService(TimetableRepository timeTableRepository, StudentService studentService) {
         TimetableServiceImpl timeTableService = new TimetableServiceImpl();
         timeTableService.setTimeTableRepository(timeTableRepository);
         timeTableService.setStudentService(studentService);
