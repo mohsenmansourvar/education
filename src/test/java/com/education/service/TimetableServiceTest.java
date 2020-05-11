@@ -660,4 +660,84 @@ timetable.end <= e
         assertEquals("Adelaide", expectedStudent.getAddress());
         assertEquals("123", expectedStudent.getTelephone()); //"then"
     }
+
+    /*
+    1- create and save a student -->student:Student
+    2- create a list of student --> students:List<Student>
+    3- add student to the list of students
+    4- create a Timetable --> timetable1:Timetable
+    5- set the fields of timetable and also set the students of timetable1
+    6- create a Timetable --> timetable2:Timetable
+    7- set the fields of timetable and also set the students of timetable2
+    8- create a Timetable --> timetable3:Timetable
+    9- set the fields of timetable and also set the students of timetable3
+    10- call getTimetablesByStudentId method --> timetablesByStudentId
+    11- get 3 cells of list of timetablesByStudentId
+    12- assert timetablesByStudentId by date and start and end
+    */
+    @Test
+    public void getTimetablesByStudentId() {
+        //given
+        Student student = new Student();
+        student.setFirstName("Mohsen");
+        student.setLastName("Mansourvar");
+        student.setNationalCode("1111111111");
+        student.setStudentNumber("111");
+        student.setAddress("Adelaide");
+        student.setTelephone("0061");
+        studentService.save(student);
+        Long studentId = student.getId();
+
+        List<Student> students = new ArrayList<>();
+        students.add(student);
+
+        Timetable timeTable1 = new Timetable();
+        timeTable1.setStart(LocalTime.of(7, 0));
+        timeTable1.setEnd(LocalTime.of(8, 30));
+        timeTable1.setDate(LocalDate.now());
+        timeTable1.setStudents(students);
+        timeTableService.save(timeTable1);
+
+        Timetable timetable2 = new Timetable();
+        timetable2.setStart(LocalTime.of(10, 0));
+        timetable2.setEnd(LocalTime.of(11, 30));
+        timetable2.setDate(LocalDate.now());
+        timetable2.setStudents(students);
+        timeTableService.save(timetable2);
+
+        Timetable timetable3 = new Timetable();
+        timetable3.setStart(LocalTime.of(9, 0));
+        timetable3.setEnd(LocalTime.of(10, 30));
+        timetable3.setDate(LocalDate.now());
+        timetable3.setStudents(students);
+        timeTableService.save(timetable3);
+
+        //when
+        List<Timetable> timetablesByStudentId = timeTableService.getTimetablesByStudentId(studentId);
+        Timetable t1 = timetablesByStudentId.get(0);
+        Timetable t2 = timetablesByStudentId.get(1);
+        Timetable t3 = timetablesByStudentId.get(2);
+
+        LocalTime expectedStartTimeT1 = LocalTime.of(7, 0);
+        LocalTime expectedEndTimeT1 = LocalTime.of(8, 30);
+
+        LocalTime expectedStartTimeT2 = LocalTime.of(10, 0);
+        LocalTime expectedEndTimeT2 = LocalTime.of(11, 30);
+
+        LocalTime expectedStartTimeT3 = LocalTime.of(9, 0);
+        LocalTime expectedEndTimeT3 = LocalTime.of(10, 30);
+
+        //then
+        assertNotNull(timetablesByStudentId);
+        assertEquals(expectedStartTimeT1, t1.getStart());
+        assertEquals(expectedEndTimeT1, t1.getEnd());
+        assertEquals(LocalDate.now(), t1.getDate());
+        assertEquals(expectedStartTimeT2, t2.getStart());
+        assertEquals(expectedEndTimeT2, t2.getEnd());
+        assertEquals(LocalDate.now(), t2.getDate());
+        assertEquals(expectedStartTimeT3, t3.getStart());
+        assertEquals(expectedEndTimeT3, t3.getEnd());
+        assertEquals(LocalDate.now(), t3.getDate());
+        assertEquals(3, timetablesByStudentId.size());
+    }
 }
