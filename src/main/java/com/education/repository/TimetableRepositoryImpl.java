@@ -126,13 +126,13 @@ public class TimetableRepositoryImpl implements TimetableRepository {
         return session.createQuery("from Timetable  where students is null", Timetable.class)
                 .list();
     }
-//"select ti from Timetable ti  join ti.students s  where s.id = :studentId", Timetable.class
+
     @Override
     public List<Student> getAllStudentsTimetable(long id) {
         Session session = sessionFactory.getCurrentSession();
-        //select st.id from Timetable t join Student_ s on t.id = timeta student_timetable st.id =studentId;
-        return session.createQuery("select st from Timetable ti join ti.students st where ti.id = :id",Student.class)
-                .setParameter("id",id)
+        //"select  s.id , s.name , s.last name from timetable t join student_timetable st on t.id = st.timetableId join Student s on s.id = st.studentId
+        return session.createQuery("select st from Timetable ti join ti.students st where ti.id = :id", Student.class)
+                .setParameter("id", id)
                 .list();
     }
 
