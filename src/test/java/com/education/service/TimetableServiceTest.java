@@ -714,6 +714,8 @@ timetable.end <= e
 
         //when
         List<Timetable> timetablesByStudentId = timeTableService.getTimetablesByStudentId(studentId);
+
+        //then
         Timetable t1 = timetablesByStudentId.get(0);
         Timetable t2 = timetablesByStudentId.get(1);
         Timetable t3 = timetablesByStudentId.get(2);
@@ -727,7 +729,6 @@ timetable.end <= e
         LocalTime expectedStartTimeT3 = LocalTime.of(9, 0);
         LocalTime expectedEndTimeT3 = LocalTime.of(10, 30);
 
-        //then
         assertNotNull(timetablesByStudentId);
         assertEquals(expectedStartTimeT1, t1.getStart());
         assertEquals(expectedEndTimeT1, t1.getEnd());
