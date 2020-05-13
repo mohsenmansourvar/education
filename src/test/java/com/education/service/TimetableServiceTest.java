@@ -741,6 +741,7 @@ timetable.end <= e
         assertEquals(LocalDate.now(), t3.getDate());
         assertEquals(3, timetablesByStudentId.size());
     }
+
     /*
     1- create a student -->student1:Student
     2- set the fields of student and save
@@ -794,9 +795,6 @@ timetable.end <= e
 
         List<Student> allStudentsTimetable = timeTableService.getAllStudentsTimetable(timetable.getId());
         Student st1 = allStudentsTimetable.get(0);
-        Student st2 = allStudentsTimetable.get(1);
-        Student st3 = allStudentsTimetable.get(2);
-
 
         assertNotNull(allStudentsTimetable);
         assertEquals("Mohsen",st1.getFirstName());
