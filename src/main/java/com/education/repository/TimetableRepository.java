@@ -1,5 +1,6 @@
 package com.education.repository;
 
+import com.education.domain.Student;
 import com.education.domain.Timetable;
 
 import java.time.LocalDate;
@@ -30,5 +31,7 @@ public interface TimetableRepository {
     List<Timetable> getTimetablesWithoutTeacher();
 
     List<Timetable> getTimetableWithoutStudent();
+
+    List<Student> getAllStudentsTimetable(long id);
 
 }
