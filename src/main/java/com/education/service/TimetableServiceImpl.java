@@ -107,6 +107,11 @@ public class TimetableServiceImpl implements TimetableService {
         timeTableRepository.save(timetable);
     }
 
+    @Override
+    public List<Student> getAllStudentsTimetable(long id) {
+        return timeTableRepository.getAllStudentsTimetable(id);
+    }
+
     public void setTimeTableRepository(TimetableRepository timeTableRepository) {
         this.timeTableRepository = timeTableRepository;
     }

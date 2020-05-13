@@ -741,4 +741,68 @@ timetable.end <= e
         assertEquals(LocalDate.now(), t3.getDate());
         assertEquals(3, timetablesByStudentId.size());
     }
+
+    /*
+    1- create a student -->student1:Student
+    2- set the fields of student and save
+    3- create a student --> student2:Student
+    4- set the fields of student and save
+    5- create a student --> student3:Student
+    6- set the fields of student and save
+    7- create a timetable -->timetable:Timetable
+    8-set the fields of timetable and specially set these students and save
+    9-call getAllStudentsTimetable method -->studentsTimetable:List<Student>
+    10- assertion
+
+    */
+    @Test
+    public void getAllStudentsTimetable(){
+        Student student1 = new Student();
+        student1.setFirstName("Mohsen");
+        student1.setLastName("Mansourvar");
+        student1.setNationalCode("0000000000");
+        student1.setStudentNumber("111");
+        student1.setAddress("Adelaide");
+        student1.setTelephone("123");
+        studentService.save(student1);
+
+        Student student2 = new Student();
+        student2.setFirstName("Liam");
+        student2.setLastName("Mansourvar");
+        student2.setStudentNumber("000");
+        student2.setNationalCode("000000000");
+        student2.setAddress("Adelaide");
+        student2.setTelephone("0000");
+        studentService.save(student2);
+
+        Student student3 = new Student();
+        student3.setFirstName("Mary");
+        student3.setLastName("Ebrahimi");
+        student3.setStudentNumber("444");
+        student3.setNationalCode("5555555555");
+        student3.setAddress("Adelaide");
+        student3.setTelephone("5555");
+        studentService.save(student3);
+
+
+        Timetable timetable = new Timetable();
+        timetable.setStart(LocalTime.of(7,30));
+        timetable.setEnd(LocalTime.of(9,0));
+        timetable.getStudents().add(student1);
+        timetable.getStudents().add(student2);
+        timetable.getStudents().add(student3);
+        timeTableService.save(timetable);
+
+        List<Student> allStudentsTimetable = timeTableService.getAllStudentsTimetable(timetable.getId());
+        Student st1 = allStudentsTimetable.get(0);
+
+        assertNotNull(allStudentsTimetable);
+        assertEquals("Mohsen",st1.getFirstName());
+        assertEquals("Mansourvar",st1.getLastName());
+        assertEquals("0000000000",st1.getNationalCode());
+        assertEquals("111",st1.getStudentNumber());
+        assertEquals("123",st1.getTelephone());
+        assertEquals("Adelaide",st1.getAddress());
+        assertEquals(3,allStudentsTimetable.size());
+    }
 }
