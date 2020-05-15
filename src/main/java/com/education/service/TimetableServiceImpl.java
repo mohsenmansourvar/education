@@ -106,6 +106,9 @@ public class TimetableServiceImpl implements TimetableService {
         List<Student> students = timetable.getStudents();
         students.add(student);
         timetable.setStudents(students);
+        if (timetable.getStudents().size() > 5) {
+            throw new IllegalArgumentException("The capacity of this timetable is full");
+        }
         timeTableRepository.save(timetable);
     }
 
