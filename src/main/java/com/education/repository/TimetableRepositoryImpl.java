@@ -126,7 +126,7 @@ public class TimetableRepositoryImpl implements TimetableRepository {
     @Override
     public List<Timetable> getTimetableWithoutStudent() {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from Timetable  where students is null", Timetable.class)
+        return session.createQuery("select ti from Timetable ti  left join ti.students st where st.id is null", Timetable.class)
                 .list();
     }
 
