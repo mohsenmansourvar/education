@@ -6,7 +6,6 @@ import com.education.repository.TimetableRepository;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TimetableServiceImpl implements TimetableService {
@@ -15,6 +14,9 @@ public class TimetableServiceImpl implements TimetableService {
 
     @Override
     public void save(Timetable timeTable) {
+        if (timeTable.getCapacity() == 0) {
+            throw new IllegalArgumentException("The field of capacity should be full");
+        }
         timeTableRepository.save(timeTable);
     }
 

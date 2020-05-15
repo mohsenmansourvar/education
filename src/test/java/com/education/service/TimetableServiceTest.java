@@ -32,6 +32,7 @@ public class TimetableServiceTest {
         timeTable.setStart(LocalTime.of(8, 0));
         timeTable.setEnd(LocalTime.of(9, 30));
         timeTable.setDate(LocalDate.now());
+        timeTable.setCapacity(5);
         timeTableService.save(timeTable);
         Long timeTableId = timeTable.getId();
 
@@ -50,6 +51,7 @@ public class TimetableServiceTest {
         timeTable.setStart(LocalTime.of(9, 0));
         timeTable.setEnd(LocalTime.of(10, 30));
         timeTable.setDate(LocalDate.now());
+        timeTable.setCapacity(5);
         timeTableService.save(timeTable);
         Long timeTableId = timeTable.getId();
 
@@ -68,6 +70,7 @@ public class TimetableServiceTest {
         timeTable.setStart(LocalTime.of(10, 0));
         timeTable.setEnd(LocalTime.of(11, 30));
         timeTable.setDate(LocalDate.now());
+        timeTable.setCapacity(5);
         timeTableService.save(timeTable);
         Long timeTableId = timeTable.getId();
 
@@ -84,6 +87,7 @@ public class TimetableServiceTest {
         timeTable1.setStart(LocalTime.of(7, 0));
         timeTable1.setEnd(LocalTime.of(8, 30));
         timeTable1.setDate(LocalDate.now());
+        timeTable1.setCapacity(5);
         timeTableService.save(timeTable1);
         Long timeTableId = timeTable1.getId();
 
@@ -108,12 +112,14 @@ public class TimetableServiceTest {
         timeTable1.setStart(LocalTime.of(7, 0));
         timeTable1.setEnd(LocalTime.of(8, 30));
         timeTable1.setDate(LocalDate.now());
+        timeTable1.setCapacity(5);
         timeTableService.save(timeTable1);
 
         Timetable timetable2 = new Timetable();
         timetable2.setStart(LocalTime.of(10, 0));
         timetable2.setEnd(LocalTime.of(11, 30));
         timetable2.setDate(LocalDate.now());
+        timetable2.setCapacity(5);
         timeTableService.save(timetable2);
 
         List<Timetable> allTimetables = timeTableService.getAllTimetables();
@@ -167,6 +173,7 @@ public class TimetableServiceTest {
         timeTable1.setEnd(LocalTime.of(8, 30));
         timeTable1.setDate(LocalDate.now());
         timeTable1.setTeacher(teacher);
+        timeTable1.setCapacity(5);
         timeTableService.save(timeTable1);
 
 
@@ -175,6 +182,7 @@ public class TimetableServiceTest {
         timetable2.setEnd(LocalTime.of(11, 30));
         timetable2.setDate(LocalDate.now());
         timetable2.setTeacher(teacher);
+        timetable2.setCapacity(5);
         timeTableService.save(timetable2);
 
 
@@ -182,8 +190,8 @@ public class TimetableServiceTest {
         timetable3.setStart(LocalTime.of(9, 0));
         timetable3.setEnd(LocalTime.of(10, 30));
         timetable3.setDate(LocalDate.now());
-
         timetable3.setTeacher(teacher);
+        timetable3.setCapacity(5);
         timeTableService.save(timetable3);
 
 
@@ -243,6 +251,7 @@ public class TimetableServiceTest {
         timeTable1.setEnd(LocalTime.of(8, 30));
         timeTable1.setDate(LocalDate.now());
         timeTable1.setTeacher(teacher1);
+        timeTable1.setCapacity(5);
         timeTableService.save(timeTable1);
 
         Timetable timetable2 = new Timetable();
@@ -250,6 +259,7 @@ public class TimetableServiceTest {
         timetable2.setEnd(LocalTime.of(10, 30));
         timetable2.setDate(LocalDate.now());
         timetable2.setTeacher(teacher1);
+        timetable2.setCapacity(5);
         timeTableService.save(timetable2);
 
         Timetable timetable3 = new Timetable();
@@ -257,6 +267,7 @@ public class TimetableServiceTest {
         timetable3.setEnd(LocalTime.of(12, 30));
         timetable3.setDate(LocalDate.now());
         timetable3.setTeacher(teacher2);
+        timetable3.setCapacity(5);
         timeTableService.save(timetable3);
 
         Timetable timetable4 = new Timetable();
@@ -264,6 +275,7 @@ public class TimetableServiceTest {
         timetable4.setEnd(LocalTime.of(2, 30));
         timetable4.setDate(LocalDate.now());
         timetable4.setTeacher(teacher2);
+        timetable4.setCapacity(5);
         timeTableService.save(timetable4);
 
 
@@ -324,24 +336,28 @@ timetable.end <= e
         timeTable1.setStart(LocalTime.of(7, 0));
         timeTable1.setEnd(LocalTime.of(8, 30));
         timeTable1.setDate(LocalDate.now());
+        timeTable1.setCapacity(5);
         timeTableService.save(timeTable1);
 
         Timetable timetable2 = new Timetable();
         timetable2.setStart(LocalTime.of(9, 0));
         timetable2.setEnd(LocalTime.of(10, 30));
         timetable2.setDate(LocalDate.now());
+        timetable2.setCapacity(5);
         timeTableService.save(timetable2);
 
         Timetable timetable3 = new Timetable();
         timetable3.setStart(LocalTime.of(11, 0));
         timetable3.setEnd(LocalTime.of(12, 30));
         timetable3.setDate(LocalDate.now());
+        timetable3.setCapacity(5);
         timeTableService.save(timetable3);
 
         Timetable timetable4 = new Timetable();
         timetable4.setStart(LocalTime.of(13, 0));
         timetable4.setEnd(LocalTime.of(14, 30));
         timetable4.setDate(LocalDate.now());
+        timetable4.setCapacity(5);
         timeTableService.save(timetable4);
 
         LocalTime expectedStartTimeT1 = LocalTime.of(7, 0);
@@ -370,18 +386,21 @@ timetable.end <= e
         timetable1.setStart(LocalTime.of(7, 0));
         timetable1.setEnd(LocalTime.of(8, 30));
         timetable1.setDate(LocalDate.now());
+        timetable1.setCapacity(5);
         timeTableService.save(timetable1);
 
         Timetable timetable2 = new Timetable();
         timetable2.setStart(LocalTime.of(9, 0));
         timetable2.setEnd(LocalTime.of(10, 30));
         timetable2.setDate(LocalDate.now());
+        timetable2.setCapacity(5);
         timeTableService.save(timetable2);
 
         Timetable timetable3 = new Timetable();
         timetable3.setStart(LocalTime.of(11, 0));
         timetable3.setEnd(LocalTime.of(12, 30));
         timetable3.setDate(LocalDate.now());
+        timetable3.setCapacity(5);
         timeTableService.save(timetable3);
 
         List<Timetable> timetableByDate = timeTableService.getTimetablesByDate(LocalDate.now());
@@ -408,6 +427,7 @@ timetable.end <= e
         timetable1.setEnd(LocalTime.of(8, 30));
         timetable1.setDate(LocalDate.now());
         timetable1.setTeacher(teacher1);
+        timetable1.setCapacity(5);
         timeTableService.save(timetable1);
 
         List<Long> ids = new ArrayList<>();
@@ -446,6 +466,7 @@ timetable.end <= e
         timeTable1.setEnd(LocalTime.of(8, 30));
         timeTable1.setDate(LocalDate.now());
         timeTable1.setTeacher(teacher1);
+        timeTable1.setCapacity(5);
         timeTableService.save(timeTable1);
 
         Timetable timetable2 = new Timetable();
@@ -453,18 +474,21 @@ timetable.end <= e
         timetable2.setEnd(LocalTime.of(10, 30));
         timetable2.setDate(LocalDate.now());
         timetable2.setTeacher(teacher1);
+        timetable2.setCapacity(5);
         timeTableService.save(timetable2);
 
         Timetable timetable3 = new Timetable();
         timetable3.setStart(LocalTime.of(11, 0));
         timetable3.setEnd(LocalTime.of(12, 30));
         timetable3.setDate(LocalDate.now());
+        timetable3.setCapacity(5);
         timeTableService.save(timetable3);
 
         Timetable timetable4 = new Timetable();
         timetable4.setStart(LocalTime.of(1, 0));
         timetable4.setEnd(LocalTime.of(2, 30));
         timetable4.setDate(LocalDate.now());
+        timetable4.setCapacity(5);
         timeTableService.save(timetable4);
 
 
@@ -491,6 +515,7 @@ timetable.end <= e
         timeTable1.setEnd(LocalTime.of(8, 30));
         timeTable1.setDate(LocalDate.now());
         timeTable1.setStudents(allStudents);
+        timeTable1.setCapacity(5);
         timeTableService.save(timeTable1);
 
         List<Timetable> timetablesByStudentId = timeTableService.getTimetablesByStudentId(-1L);
@@ -515,6 +540,7 @@ timetable.end <= e
         timetable.setEnd(LocalTime.of(8, 30));
         timetable.setDate(LocalDate.now());
         timetable.setTeacher(teacher);
+        timetable.setCapacity(5);
         timeTableService.save(timetable);
 
         List<Timetable> timetablesByTeacherId = timeTableService.getTimetablesByTeacherId(-1L);
@@ -550,18 +576,21 @@ timetable.end <= e
         timeTable1.setEnd(LocalTime.of(8, 30));
         timeTable1.setDate(LocalDate.now());
         timeTable1.setStudents(allStudents);
+        timeTable1.setCapacity(5);
         timeTableService.save(timeTable1);
 
         Timetable timetable2 = new Timetable();
         timetable2.setStart(LocalTime.of(9, 0));
         timetable2.setEnd(LocalTime.of(10, 30));
         timetable2.setDate(LocalDate.now());
+        timetable2.setCapacity(5);
         timeTableService.save(timetable2);
 
         Timetable timetable3 = new Timetable();
         timetable3.setStart(LocalTime.of(11, 0));
         timetable3.setEnd(LocalTime.of(12, 30));
         timetable3.setDate(LocalDate.now());
+        timetable3.setCapacity(5);
         timeTableService.save(timetable3);
 
         Timetable timetable4 = new Timetable();
@@ -569,6 +598,7 @@ timetable.end <= e
         timetable4.setEnd(LocalTime.of(2, 30));
         timetable4.setDate(LocalDate.now());
         timetable4.setStudents(allStudents);
+        timetable4.setCapacity(5);
         timeTableService.save(timetable4);
 
         List<Timetable> timetableWithoutStudent = timeTableService.getTimetableWithoutStudent();
@@ -624,6 +654,7 @@ timetable.end <= e
         timetable.setDate(LocalDate.now());
         timetable.getStudents().add(student2);
         timetable.getStudents().add(student3);
+        timetable.setCapacity(5);
         timeTableService.save(timetable);
 
         Student student = new Student();
@@ -696,6 +727,7 @@ timetable.end <= e
         timeTable1.setEnd(LocalTime.of(8, 30));
         timeTable1.setDate(LocalDate.now());
         timeTable1.setStudents(students);
+        timeTable1.setCapacity(5);
         timeTableService.save(timeTable1);
 
         Timetable timetable2 = new Timetable();
@@ -703,6 +735,7 @@ timetable.end <= e
         timetable2.setEnd(LocalTime.of(11, 30));
         timetable2.setDate(LocalDate.now());
         timetable2.setStudents(students);
+        timetable2.setCapacity(5);
         timeTableService.save(timetable2);
 
         Timetable timetable3 = new Timetable();
@@ -710,6 +743,7 @@ timetable.end <= e
         timetable3.setEnd(LocalTime.of(10, 30));
         timetable3.setDate(LocalDate.now());
         timetable3.setStudents(students);
+        timetable3.setCapacity(5);
         timeTableService.save(timetable3);
 
         //when
@@ -756,7 +790,7 @@ timetable.end <= e
 
     */
     @Test
-    public void getAllStudentsTimetable(){
+    public void getAllStudentsTimetable() {
         Student student1 = new Student();
         student1.setFirstName("Mohsen");
         student1.setLastName("Mansourvar");
@@ -786,23 +820,24 @@ timetable.end <= e
 
 
         Timetable timetable = new Timetable();
-        timetable.setStart(LocalTime.of(7,30));
-        timetable.setEnd(LocalTime.of(9,0));
+        timetable.setStart(LocalTime.of(7, 30));
+        timetable.setEnd(LocalTime.of(9, 0));
         timetable.getStudents().add(student1);
         timetable.getStudents().add(student2);
         timetable.getStudents().add(student3);
+        timetable.setCapacity(5);
         timeTableService.save(timetable);
 
         List<Student> allStudentsTimetable = timeTableService.getAllStudentsTimetable(timetable.getId());
         Student st1 = allStudentsTimetable.get(0);
 
         assertNotNull(allStudentsTimetable);
-        assertEquals("Mohsen",st1.getFirstName());
-        assertEquals("Mansourvar",st1.getLastName());
-        assertEquals("0000000000",st1.getNationalCode());
-        assertEquals("111",st1.getStudentNumber());
-        assertEquals("123",st1.getTelephone());
-        assertEquals("Adelaide",st1.getAddress());
-        assertEquals(3,allStudentsTimetable.size());
+        assertEquals("Mohsen", st1.getFirstName());
+        assertEquals("Mansourvar", st1.getLastName());
+        assertEquals("0000000000", st1.getNationalCode());
+        assertEquals("111", st1.getStudentNumber());
+        assertEquals("123", st1.getTelephone());
+        assertEquals("Adelaide", st1.getAddress());
+        assertEquals(3, allStudentsTimetable.size());
     }
 }
