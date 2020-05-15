@@ -19,6 +19,7 @@ public class Timetable {
     private LocalTime start;
     private LocalTime end;
     private LocalDate date;
+    private int capacity;
     @ManyToOne
     private Subject subject;
     @ManyToOne
@@ -81,5 +82,13 @@ public class Timetable {
 
     public void setStudents(List<Student> students) {
         this.students = students;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 }
