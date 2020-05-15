@@ -1,6 +1,7 @@
 package com.education.domain;
 
 import lombok.EqualsAndHashCode;
+import lombok.NonNull;
 import lombok.ToString;
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ public class Timetable {
     private LocalTime start;
     private LocalTime end;
     private LocalDate date;
+    @NonNull
     private int capacity;
     @ManyToOne
     private Subject subject;
