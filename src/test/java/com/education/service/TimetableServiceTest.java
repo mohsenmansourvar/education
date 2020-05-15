@@ -548,6 +548,26 @@ timetable.end <= e
         assertTrue(timetablesByTeacherId.isEmpty());
         assertEquals(0, timetablesByTeacherId.size());
     }
+    /*
+    "given"
+    1-create a student -->student1:Student
+    2- set the fields of student1 and save
+    3-create a student -->student2:Student
+    4-set the fields of student2 and save
+    5-create a timetable --> timetable1:timetable
+    6- set the fields of timetable1 and also set student1 and student2
+    7-create a timetable --> timetable2:timetable
+    8-set the fields of timetable2 without any students
+    9-create a timetable --> timetable3:timetable
+    10- set the fields of timetable3 without any students
+    11-create a timetable --> timetable4:timetable
+    12-set the fields of timetable4 and also set student1 and student2
+    "when"
+    13-call the getTimetableWithoutStudent() method --> timetablesWithoutStudent:List<Timetable>
+    "then"
+    14-students field of the first cell of timetablesWithoutStudent should be null
+    15-students field of the second cell of timetablesWithoutStudent should be null
+    */
 
     @Test
     public void getTimetableWithoutStudent() {
@@ -569,13 +589,12 @@ timetable.end <= e
         student2.setTelephone("0000");
         studentService.save(student2);
 
-        List<Student> allStudents = studentService.getAllStudents();
-
         Timetable timeTable1 = new Timetable();
         timeTable1.setStart(LocalTime.of(7, 0));
         timeTable1.setEnd(LocalTime.of(8, 30));
         timeTable1.setDate(LocalDate.now());
-        timeTable1.setStudents(allStudents);
+        timeTable1.getStudents().add(student1);
+        timeTable1.getStudents().add(student2);
         timeTable1.setCapacity(5);
         timeTableService.save(timeTable1);
 
@@ -597,13 +616,26 @@ timetable.end <= e
         timetable4.setStart(LocalTime.of(1, 0));
         timetable4.setEnd(LocalTime.of(2, 30));
         timetable4.setDate(LocalDate.now());
-        timetable4.setStudents(allStudents);
+        timetable4.getStudents().add(student1);
+        timetable4.getStudents().add(student2);
         timetable4.setCapacity(5);
         timeTableService.save(timetable4);
 
         List<Timetable> timetableWithoutStudent = timeTableService.getTimetableWithoutStudent();
 
+        LocalTime expectedStartTimeT1 = LocalTime.of(9, 0);
+        LocalTime expectedEndTimeT1 = LocalTime.of(10, 30);
+
+        LocalTime expectedStartTimeT2 = LocalTime.of(11, 0);
+        LocalTime expectedEndTimeT2 = LocalTime.of(12, 30);
+
         assertEquals(2, timetableWithoutStudent.size());
+        assertTrue(timetableWithoutStudent.get(0).getStudents().isEmpty());
+        assertTrue(timetableWithoutStudent.get(1).getStudents().isEmpty());
+        assertEquals(expectedStartTimeT1, timetableWithoutStudent.get(0).getStart());
+        assertEquals(expectedEndTimeT1, timetableWithoutStudent.get(0).getEnd());
+        assertEquals(expectedStartTimeT2, timetableWithoutStudent.get(1).getStart());
+        assertEquals(expectedEndTimeT2, timetableWithoutStudent.get(1).getEnd());
     }
     /*
     1- add a student to the special timetable
