@@ -95,16 +95,28 @@ public class TimetableServiceImpl implements TimetableService {
      * 3-read all students of timetable -->allStudents:List<Students>
      * 3-read a student by getById -->student: Student
      * 4-add studentId to this List
-     * 6-set student to the timetable
-     * 7- save this timetable
-     from Timetable ti join ti.students tis where tis.id =:studentId
-        */
+     * 5-read all of timetables of this student --> timetablesByStudentId
+     * 6-loop in the timetables
+     *  6-1- if Start timetable lower than end timetablesByStudentId and Start timetable bigger than start
+     * timetablesByStudentId or end timetable bigger than start timetablesByStudentId and end timetable lower
+     * than end timetablesByStudentId
+     *  6-2- throws an exception
+     * 7-set student to the timetable
+     * 8- save this timetable
+     */
     @Override
     public void addStudentToTimetable(long timetableId, long studentId) {
         Timetable timetable = getById(timetableId);
         Student student = studentService.getById(studentId);
         List<Student> students = timetable.getStudents();
         students.add(student);
+        List<Timetable> timetablesByStudentId = getTimetablesByStudentId(studentId);
+        for (Timetable timetables : timetablesByStudentId) {
+            if (timetable.getStart().isBefore(timetables.getEnd()) && timetable.getStart().isAfter(timetables.getStart()) || timetable.getEnd()
+                    .isAfter(timetables.getStart()) && timetable.getEnd().isBefore(timetables.getEnd())) {
+                throw new IllegalArgumentException("This timetable has conflict with other timetables");
+            }
+        }
         timetable.setStudents(students);
         if (timetable.getStudents().size() > 5) {
             throw new IllegalArgumentException("The capacity of this timetable is full");

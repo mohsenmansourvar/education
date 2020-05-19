@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
+
 public class TimetableServiceTest {
 
     @Autowired
@@ -241,7 +242,6 @@ public class TimetableServiceTest {
         teacher2.setNationalCode("1111111111");
         teacher2.setAddress("Adelaide");
         teacher2.setTelephone("0069");
-        teacher2.setSpecialty("Teacher");
         teacherService.save(teacher2);
         Long teacher2Id = teacher2.getId();
 
@@ -840,4 +840,120 @@ timetable.end <= e
         assertEquals("Adelaide", st1.getAddress());
         assertEquals(3, allStudentsTimetable.size());
     }
+
+    @Test
+    public void registerStudentInTimetableWithoutConflict() {
+        Student student = new Student();
+        student.setFirstName("Mohsen");
+        student.setLastName("Mansourvar");
+        student.setStudentNumber("001");
+        student.setNationalCode("1111111111");
+        student.setAddress("Adelaide");
+        student.setTelephone("1111");
+        studentService.save(student);
+
+        Timetable timeTable1 = new Timetable();
+        timeTable1.setStart(LocalTime.of(7, 0));
+        timeTable1.setEnd(LocalTime.of(8, 30));
+        timeTable1.setDate(LocalDate.now());
+        timeTable1.getStudents().add(student);
+        timeTable1.setCapacity(5);
+        timeTableService.save(timeTable1);
+
+        Timetable timetable2 = new Timetable();
+        timetable2.setStart(LocalTime.of(9, 0));
+        timetable2.setEnd(LocalTime.of(10, 30));
+        timetable2.setDate(LocalDate.now());
+        timetable2.getStudents().add(student);
+        timetable2.setCapacity(5);
+        timeTableService.save(timetable2);
+
+        Timetable timetable3 = new Timetable();
+        timetable3.setStart(LocalTime.of(11, 0));
+        timetable3.setEnd(LocalTime.of(12, 30));
+        timetable3.setDate(LocalDate.now());
+        timetable3.getStudents().add(student);
+        timetable3.setCapacity(5);
+        timeTableService.save(timetable3);
+
+        Timetable timetable4 = new Timetable();
+        timetable4.setStart(LocalTime.of(1, 0));
+        timetable4.setEnd(LocalTime.of(2, 30));
+        timetable4.setDate(LocalDate.now());
+        timetable4.setCapacity(5);
+        timeTableService.save(timetable4);
+
+        timeTableService.addStudentToTimetable(timetable4.getId(), student.getId());
+
+        Timetable timetable4ById = timeTableService.getById(timetable4.getId());
+        List<Student> students = timetable4ById.getStudents();
+        Student expectedStudent = null;
+
+        for (Student foundStudent : students) {
+            if (foundStudent.getId().equals(student.getId())) {
+                expectedStudent = foundStudent;
+            }
+        }
+        LocalTime expectedStartTimetable4 = LocalTime.of(1, 0);
+        LocalTime expectedEndTimetable4 = LocalTime.of(2, 30);
+
+        assertNotNull(expectedStudent);
+        assertEquals(1, timetable4ById.getStudents().size());
+        assertEquals(expectedStartTimetable4, timetable4.getStart());
+        assertEquals(expectedEndTimetable4, timetable4.getEnd());
+        assertEquals("Mohsen", expectedStudent.getFirstName());
+        assertEquals("Mansourvar", expectedStudent.getLastName());
+        assertEquals("001", expectedStudent.getStudentNumber());
+        assertEquals("1111111111", expectedStudent.getNationalCode());
+        assertEquals("1111", expectedStudent.getTelephone());
+        assertEquals("Adelaide", expectedStudent.getAddress());
+    }
+
+    @Test
+    public void registerStudentInTimetableWithConflict() {
+        Student student = new Student();
+        student.setFirstName("Mohsen");
+        student.setLastName("Mansourvar");
+        student.setStudentNumber("001");
+        student.setNationalCode("1111111111");
+        student.setAddress("Adelaide");
+        student.setTelephone("1111");
+        studentService.save(student);
+
+        Timetable timeTable1 = new Timetable();
+        timeTable1.setStart(LocalTime.of(7, 0));
+        timeTable1.setEnd(LocalTime.of(8, 30));
+        timeTable1.setDate(LocalDate.now());
+        timeTable1.getStudents().add(student);
+        timeTable1.setCapacity(5);
+        timeTableService.save(timeTable1);
+
+        Timetable timetable2 = new Timetable();
+        timetable2.setStart(LocalTime.of(9, 0));
+        timetable2.setEnd(LocalTime.of(10, 30));
+        timetable2.setDate(LocalDate.now());
+        timetable2.getStudents().add(student);
+        timetable2.setCapacity(5);
+        timeTableService.save(timetable2);
+
+        Timetable timetable3 = new Timetable();
+        timetable3.setStart(LocalTime.of(11, 0));
+        timetable3.setEnd(LocalTime.of(12, 30));
+        timetable3.setDate(LocalDate.now());
+        timetable3.getStudents().add(student);
+        timetable3.setCapacity(5);
+        timeTableService.save(timetable3);
+
+        Timetable timetable4 = new Timetable();
+        timetable4.setStart(LocalTime.of(6, 0));
+        timetable4.setEnd(LocalTime.of(7, 30));
+        timetable4.setDate(LocalDate.now());
+        timetable4.setCapacity(5);
+        timeTableService.save(timetable4);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            timeTableService.addStudentToTimetable(timetable4.getId(), student.getId());
+        });
+    }
 }
+
