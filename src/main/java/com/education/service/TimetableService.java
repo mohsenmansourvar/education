@@ -35,5 +35,4 @@ public interface TimetableService {
     void addStudentToTimetable(long timetableId, long studentId);
 
     List<Student> getAllStudentsTimetable(long id);
-
 }

@@ -93,16 +93,20 @@ public class TimetableServiceImpl implements TimetableService {
      * 1-accept two parameters --> timetableId,studentId:long
      * 2-read timetable base on id -->timetable:timetable
      * 3-read all students of timetable -->allStudents:List<Students>
-     * 3-read a student by getById -->student: Student
-     * 4-add studentId to this List
-     * 5-read all of timetables of this student --> timetablesByStudentId
-     * 6-loop in the timetables
-     *  6-1- if Start timetable lower than end timetablesByStudentId and Start timetable bigger than start
-     * timetablesByStudentId or end timetable bigger than start timetablesByStudentId and end timetable lower
-     * than end timetablesByStudentId
-     *  6-2- throws an exception
-     * 7-set student to the timetable
-     * 8- save this timetable
+     * 4-read a student by getById -->student: Student
+     * 5-add studentId to this List
+     * 6-read all of timetables of this student --> timetablesByStudentId
+     * 7-loop in the timetablesByStudentId --> timetables
+     *  7-1-if the date of timetable equals of date of timetables
+     * 8-if Start timetable is before end of timetables and start of timetable is  after start of timetables or
+     * end of timetable is before end of timetables and end of timetable is after start of timetables
+     *   8-1-1 throws an exception
+     * 9- else if start of timetable is equal of start of timetables
+     *  9-1- throws an exception
+     * 10-set student to the timetable
+     * 11- if the size of students in timetable is bigger than capacity of timetable
+     *  11-1- throws an exception
+     * 12- save this timetable
      */
     @Override
     public void addStudentToTimetable(long timetableId, long studentId) {
@@ -112,10 +116,13 @@ public class TimetableServiceImpl implements TimetableService {
         students.add(student);
         List<Timetable> timetablesByStudentId = getTimetablesByStudentId(studentId);
         for (Timetable timetables : timetablesByStudentId) {
-            if (timetable.getStart().isBefore(timetables.getEnd()) && timetable.getStart().isAfter(timetables.getStart()) || timetable.getEnd()
-                    .isAfter(timetables.getStart()) && timetable.getEnd().isBefore(timetables.getEnd())) {
-                throw new IllegalArgumentException("This timetable has conflict with other timetables");
-            }
+            if (timetable.getDate().equals(timetables.getDate()))
+                if (timetable.getStart().isBefore(timetables.getEnd()) && timetable.getStart().isAfter(timetables.getStart()) || timetable.getEnd()
+                        .isAfter(timetables.getStart()) && timetable.getEnd().isBefore(timetables.getEnd())) {
+                    throw new IllegalArgumentException("This timetable has conflict with other timetables");
+                } else if (timetable.getStart().equals(timetables.getStart())) {
+                    throw new IllegalArgumentException("there is exactly the same timetable");
+                }
         }
         timetable.setStudents(students);
         if (timetable.getStudents().size() > 5) {
