@@ -90,44 +90,48 @@ public class TimetableServiceImpl implements TimetableService {
     }
 
     /*
-     * 1-accept two parameters --> timetableId,studentId:long
-     * 2-read timetable base on id -->timetable:timetable
-     * 3-read all students of timetable -->allStudents:List<Students>
-     * 4-read a student by getById -->student: Student
-     * 5-add studentId to this List
-     * 6-read all of timetables of this student --> timetablesByStudentId
-     * 7-loop in the timetablesByStudentId --> timetables
-     *  7-1-if the date of timetable equals of date of timetables
-     * 8-if Start timetable is before end of timetables and start of timetable is  after start of timetables or
-     * end of timetable is before end of timetables and end of timetable is after start of timetables
-     *   8-1-1 throws an exception
-     * 9- else if start of timetable is equal of start of timetables
-     *  9-1- throws an exception
-     * 10-set student to the timetable
-     * 11- if the size of students in timetable is bigger than capacity of timetable
-     *  11-1- throws an exception
-     * 12- save this timetable
+     * 1-read timetable base on id -->timetable:timetable
+     * 7-read all of timetables of this student --> timetablesByStudentId:List<Timetable>
+     * 8-loop in the timetablesByStudentId --> timetables
+     *  8-1- if the date of timetable equals of date of timetables
+     *    8-1-1 if Start timetable is before end of timetables and start of timetable is  after start of timetables or
+     *          end of timetable is before end of timetables and end of timetable is after start of timetables
+     *      8-1-1-1 throws an exception
+     *    8-1-2 else if start of timetable is equal of start of timetables
+     *      8-1-2-1 throws an exception END IF
+     *
+     * 5-if the size of students in timetable is bigger than capacity of timetable
+     *  5-1- throws an exception
+     * 2-read all students of timetable -->allStudents:List<Students>
+     * 3-read a student by getById -->student: Student
+     * 4-add studentId to this List
+     * 6-set student to the timetable
+     * 9-save this timetable
      */
     @Override
     public void addStudentToTimetable(long timetableId, long studentId) {
         Timetable timetable = getById(timetableId);
-        Student student = studentService.getById(studentId);
-        List<Student> students = timetable.getStudents();
-        students.add(student);
+
         List<Timetable> timetablesByStudentId = getTimetablesByStudentId(studentId);
+
         for (Timetable timetables : timetablesByStudentId) {
-            if (timetable.getDate().equals(timetables.getDate()))
+            if (timetable.getDate().equals(timetables.getDate())) {
                 if (timetable.getStart().isBefore(timetables.getEnd()) && timetable.getStart().isAfter(timetables.getStart()) || timetable.getEnd()
                         .isAfter(timetables.getStart()) && timetable.getEnd().isBefore(timetables.getEnd())) {
                     throw new IllegalArgumentException("This timetable has conflict with other timetables");
                 } else if (timetable.getStart().equals(timetables.getStart())) {
                     throw new IllegalArgumentException("there is exactly the same timetable");
                 }
+            }
         }
-        timetable.setStudents(students);
-        if (timetable.getStudents().size() > 5) {
+        if (timetable.getStudents().size() > timetable.getCapacity()) {
             throw new IllegalArgumentException("The capacity of this timetable is full");
         }
+        Student student = studentService.getById(studentId);
+        List<Student> students = timetable.getStudents();
+        students.add(student);
+
+        timetable.setStudents(students);
         timeTableRepository.save(timetable);
     }
 

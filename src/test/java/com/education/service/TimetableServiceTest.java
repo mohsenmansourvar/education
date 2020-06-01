@@ -1029,7 +1029,7 @@ timetable.end <= e
         Timetable timetable3 = new Timetable();
         timetable3.setStart(LocalTime.of(1, 0));
         timetable3.setEnd(LocalTime.of(2, 30));
-        timetable3.setDate(LocalDate.now().plusDays(1));
+        timetable3.setDate(LocalDate.now().plusDays(3));
         timetable3.getStudents().add(student);
         timetable3.setCapacity(5);
         timeTableService.save(timetable3);
