@@ -1,6 +1,7 @@
 package com.education.service;
 
 import com.education.domain.Teacher;
+import com.education.domain.TeacherBuilder;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -80,23 +81,29 @@ public class TeacherServiceTest {
     }
     @Test
     public void getAllTeachers(){
-        Teacher teacher = new Teacher();
-        teacher.setFirstName("Reza");
-        teacher.setLastName("Ebrahimi");
-        teacher.setNationalCode("0000000000");
-        teacher.setAddress("Berlin");
-        teacher.setTelephone("0049");
-        teacher.setSpecialty("Programming");
-        teacherService.save(teacher);
+        TeacherBuilder teacherBuilder1 =new TeacherBuilder()
+                .firstName("Reza")
+                .lastName("Ebrahimi")
+                .nationalCode("1122334455")
+                .specialty("IT")
+                .address("Berlin")
+                .telephone("0049")
+                ;
+        Teacher teacher1 = teacherBuilder1.build();
 
-        Teacher teacher1 = new Teacher();
-        teacher1.setFirstName("Mary");
-        teacher1.setLastName("Ebrahimi");
-        teacher1.setNationalCode("1111111111");
-        teacher1.setAddress("Istanbul");
-        teacher1.setTelephone("0090");
-        teacher1.setSpecialty("English");
         teacherService.save(teacher1);
+
+
+        TeacherBuilder teacherBuilder2 =new TeacherBuilder()
+                .firstName("Mary")
+                .lastName("Ebrahimi")
+                .nationalCode("5544332211")
+                .specialty("English language")
+                .address("Adelaide")
+                .telephone("0041")
+                ;
+        Teacher teacher2 = teacherBuilder2.build();
+        teacherService.save(teacher2);
 
         List<Teacher> allTeachers = teacherService.getAllTeachers();
 
