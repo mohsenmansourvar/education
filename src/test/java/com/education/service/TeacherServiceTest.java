@@ -1,4 +1,4 @@
-package com.education.service;
+qqpackage com.education.service;
 
 import com.education.domain.Teacher;
 import org.junit.jupiter.api.Test;
@@ -17,66 +17,46 @@ public class TeacherServiceTest {
 
     @Test
     public void save() {
-        Teacher teacher = new Teacher();
-        teacher.setFirstName("Reza");
-        teacher.setLastName("Ebrahimi");
-        teacher.setNationalCode("0000000000");
-        teacher.setAddress("Berlin");
-        teacher.setTelephone("0049");
+        Teacher teacher = SampleBuilder.teacher1();
         teacherService.save(teacher);
-        Long teacherId = teacher.getId();
 
-        Teacher teacherById = teacherService.getById(teacherId);
+        Teacher teacherById = teacherService.getById(teacher.getId());
 
         assertNotNull(teacherById);
         assertEquals("Reza", teacherById.getFirstName());
         assertEquals("Ebrahimi", teacherById.getLastName());
-        assertEquals("0000000000", teacherById.getNationalCode());
+        assertEquals("1122334455", teacherById.getNationalCode());
         assertEquals("Berlin", teacherById.getAddress());
         assertEquals("0049", teacherById.getTelephone());
     }
 
     @Test
     public void getById() {
-        Teacher teacher = new Teacher();
-        teacher.setFirstName("Reza");
-        teacher.setLastName("Ebrahimi");
-        teacher.setNationalCode("0000000000");
-        teacher.setAddress("Berlin");
-        teacher.setTelephone("0049");
-        teacher.setSpecialty("mathematics");
+        Teacher teacher = SampleBuilder.teacher1();
         teacherService.save(teacher);
-        Long teacherId = teacher.getId();
 
-        Teacher teacherById = teacherService.getById(teacherId);
+        Teacher teacherById = teacherService.getById(teacher.getId());
 
         assertNotNull(teacherById);
         assertEquals("Reza", teacherById.getFirstName());
         assertEquals("Ebrahimi", teacherById.getLastName());
-        assertEquals("0000000000", teacherById.getNationalCode());
+        assertEquals("1122334455", teacherById.getNationalCode());
         assertEquals("Berlin", teacherById.getAddress());
         assertEquals("0049", teacherById.getTelephone());
-        assertEquals("mathematics", teacherById.getSpecialty());
+        assertEquals("IT", teacherById.getSpecialty());
     }
 
     @Test
     public void update() {
-        Teacher teacher = new Teacher();
-        teacher.setFirstName("Reza");
-        teacher.setLastName("Ebrahimi");
-        teacher.setNationalCode("0000000000");
-        teacher.setAddress("Berlin");
-        teacher.setTelephone("0049");
-        teacher.setSpecialty("mathematics");
+        Teacher teacher = SampleBuilder.teacher1();
         teacherService.save(teacher);
-        Long teacherId = teacher.getId();
 
         Teacher newTeacher = new Teacher();
         newTeacher.setNationalCode("1111111111");
 
-        teacherService.update(teacherId, newTeacher);
+        teacherService.update(teacher.getId(), newTeacher);
 
-        Teacher teacherById = teacherService.getById(teacherId);
+        Teacher teacherById = teacherService.getById(teacher.getId());
 
         assertNotNull(teacherById);
         assertEquals("Reza", teacherById.getFirstName());
@@ -84,24 +64,17 @@ public class TeacherServiceTest {
         assertEquals("1111111111", teacherById.getNationalCode());
         assertEquals("Berlin", teacherById.getAddress());
         assertEquals("0049", teacherById.getTelephone());
-        assertEquals("mathematics", teacherById.getSpecialty());
+        assertEquals("IT", teacherById.getSpecialty());
     }
 
     @Test
     public void delete() {
-        Teacher teacher = new Teacher();
-        teacher.setFirstName("Reza");
-        teacher.setLastName("Ebrahimi");
-        teacher.setNationalCode("0000000000");
-        teacher.setAddress("Berlin");
-        teacher.setTelephone("0049");
-        teacher.setSpecialty("mathematics");
+        Teacher teacher = SampleBuilder.teacher1();
         teacherService.save(teacher);
-        Long teacherId = teacher.getId();
 
-        teacherService.delete(teacherId);
+        teacherService.delete(teacher.getId());
 
-        Teacher teacherById = teacherService.getById(teacherId);
+        Teacher teacherById = teacherService.getById(teacher.getId());
 
         assertNull(teacherById);
     }
