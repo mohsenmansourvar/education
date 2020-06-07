@@ -1,4 +1,4 @@
-qqpackage com.education.service;
+package com.education.service;
 
 import com.education.domain.Teacher;
 import org.junit.jupiter.api.Test;
