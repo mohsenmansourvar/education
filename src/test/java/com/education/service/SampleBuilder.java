@@ -43,10 +43,10 @@ public class SampleBuilder {
 
     public static Student student2() {
         Student student2 = new Student();
-        student2.setFirstName("Liam");
-        student2.setLastName("Mansourvar");
-        student2.setNationalCode("0000000000");
-        student2.setStudentNumber("321");
+        student2.setFirstName("Mary");
+        student2.setLastName("Ebrahimi");
+        student2.setNationalCode("5544332211");
+        student2.setStudentNumber("231");
         student2.setAddress("Adelaide");
         student2.setTelephone("0041");
         return student2;
@@ -54,10 +54,10 @@ public class SampleBuilder {
 
     public static Student student3() {
         Student student3 = new Student();
-        student3.setFirstName("Mary");
-        student3.setLastName("Ebrahimi");
-        student3.setNationalCode("5544332211");
-        student3.setStudentNumber("231");
+        student3.setFirstName("Liam");
+        student3.setLastName("Mansourvar");
+        student3.setNationalCode("0000000000");
+        student3.setStudentNumber("321");
         student3.setAddress("Adelaide");
         student3.setTelephone("0041");
         return student3;
