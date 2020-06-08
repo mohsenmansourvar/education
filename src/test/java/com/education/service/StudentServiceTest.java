@@ -1,6 +1,7 @@
 package com.education.service;
 
 import com.education.domain.Student;
+import com.education.domain.StudentBuilder;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -64,39 +65,54 @@ public class StudentServiceTest {
 
     @Test
     public void getById() {
-        Student student = SampleBuilder.student2();
+        StudentBuilder studentBuilder = new StudentBuilder()
+                .firstName("Mary")
+                .lastName("Ebrahimi")
+                .nationalCode("5544332211")
+                .studentNumber("231")
+                .address("Adelaide")
+                .telephone("0041");
+        Student student = studentBuilder.build();
+
         studentService.save(student);
-        Long studentId = student.getId();
-        Student studentById = studentService.getById(studentId);
+
+        Student studentById = studentService.getById(student.getId());
 
         assertNotNull(studentById);
         assertEquals("Mary", studentById.getFirstName());
         assertEquals("Ebrahimi", studentById.getLastName());
-        assertEquals("Adelaide", studentById.getAddress());
-        assertEquals("0041", studentById.getTelephone());
         assertEquals("5544332211", studentById.getNationalCode());
+        assertEquals("Adelaide", studentById.getAddress());
         assertEquals("231", studentById.getStudentNumber());
+        assertEquals("0041", studentById.getTelephone());
     }
 
     @Test
     public void getAllStudents() {
-        Student student = new Student();
-        student.setFirstName("Mary");
-        student.setLastName("Ebrahimi");
-        student.setAddress("Istanbul");
-        student.setTelephone("1111");
-        student.setNationalCode("1111111111");
-        student.setStudentNumber("123");
-        studentService.save(student);
-
-        Student student1 = new Student();
-        student1.setFirstName("Liam");
-        student1.setLastName("Mansourvar");
-        student1.setAddress("Istanbul");
-        student1.setTelephone("0000");
-        student1.setNationalCode("0000000000");
-        student1.setStudentNumber("321");
+        StudentBuilder studentBuilder1 = new StudentBuilder();
+        studentBuilder1
+                .firstName("Mary")
+                .lastName("Ebrahimi")
+                .nationalCode("5544332211")
+                .studentNumber("231")
+                .address("Adelaide")
+                .telephone("0041")
+        ;
+        Student student1 = studentBuilder1.build();
         studentService.save(student1);
+
+        StudentBuilder studentBuilder2 = new StudentBuilder();
+        studentBuilder2
+                .firstName("Laim")
+                .lastName("Mansourvar")
+                .nationalCode("0000000000")
+                .studentNumber("111")
+                .address("Adelaide")
+                .telephone("0049")
+        ;
+        Student student2 = studentBuilder2.build();
+
+        studentService.save(student2);
 
         List<Student> allStudents = studentService.getAllStudents();
 
