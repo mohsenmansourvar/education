@@ -3,6 +3,7 @@ package com.education.service;
 import com.education.domain.Student;
 import com.education.domain.Teacher;
 import com.education.domain.Timetable;
+import com.education.domain.TimetableBuilder;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -68,20 +69,20 @@ public class TimetableServiceTest {
 
     @Test
     public void update() {
-        Timetable timeTable1 = new Timetable();
-        timeTable1.setStart(LocalTime.of(7, 0));
-        timeTable1.setEnd(LocalTime.of(8, 30));
-        timeTable1.setDate(LocalDate.now());
-        timeTable1.setCapacity(5);
-        timeTableService.save(timeTable1);
-        Long timeTableId = timeTable1.getId();
+        TimetableBuilder timetableBuilder1 = new TimetableBuilder()
+                .start(LocalTime.of(7,0))
+                .end(LocalTime.of(8,30))
+                .date(LocalDate.now())
+                .capacity(5);
+        Timetable timetable1 = timetableBuilder1.build();
+        timeTableService.save(timetable1);
 
-        Timetable timetable2 = new Timetable();
-        timetable2.setEnd(LocalTime.of(8, 45));
+        TimetableBuilder timetableBuilder2 = new TimetableBuilder();
+timetableBuilder2.end(LocalTime.of(8,45));
+        Timetable timetable2 = timetableBuilder2.build();
+        timeTableService.update(timetable1.getId(), timetable2);
 
-        timeTableService.update(timeTableId, timetable2);
-
-        Timetable timetableById = timeTableService.getById(timeTableId);
+        Timetable timetableById = timeTableService.getById(timetable1.getId());
 
         LocalTime expectedStart = LocalTime.of(7, 0);
         LocalTime expectedEnd = LocalTime.of(8, 45);
