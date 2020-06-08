@@ -116,4 +116,13 @@ public class SampleBuilder {
         timetable6.setCapacity(5);
         return timetable6;
     }
+
+    public static Timetable timetable7() {
+        Timetable timetable6 = new Timetable();
+        timetable6.setStart(LocalTime.of(6, 0));
+        timetable6.setEnd(LocalTime.of(7, 30));
+        timetable6.setDate(LocalDate.now());
+        timetable6.setCapacity(5);
+        return timetable6;
+    }
 }
