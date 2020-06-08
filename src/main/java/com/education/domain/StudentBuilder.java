@@ -9,27 +9,27 @@ public class StudentBuilder {
     }
 
     public StudentBuilder lastName(String lastName) {
-        student.setFirstName(lastName);
+        student.setLastName(lastName);
         return this;
     }
 
     public StudentBuilder nationalCode(String nationalCode) {
-        student.setFirstName(nationalCode);
+        student.setNationalCode(nationalCode);
         return this;
     }
 
     public StudentBuilder studentNumber(String studentNumber) {
-        student.setFirstName(studentNumber);
+        student.setStudentNumber(studentNumber);
         return this;
     }
 
     public StudentBuilder address(String address) {
-        student.setFirstName(address);
+        student.setAddress(address);
         return this;
     }
 
     public StudentBuilder telephone(String telephone) {
-        student.setFirstName(telephone);
+        student.setTelephone(telephone);
         return this;
     }
 
