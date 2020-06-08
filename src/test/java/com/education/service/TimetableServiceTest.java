@@ -28,17 +28,12 @@ public class TimetableServiceTest {
 
     @Test
     public void save() {
-        Timetable timeTable = new Timetable();
-        timeTable.setStart(LocalTime.of(8, 0));
-        timeTable.setEnd(LocalTime.of(9, 30));
-        timeTable.setDate(LocalDate.now());
-        timeTable.setCapacity(5);
-        timeTableService.save(timeTable);
-        Long timeTableId = timeTable.getId();
+        Timetable timetable = SampleBuilder.timetable1();
+        timeTableService.save(timetable);
 
-        Timetable timeTableById = timeTableService.getById(timeTableId);
-        LocalTime expectedStart = LocalTime.of(8, 0);
-        LocalTime expectedEnd = LocalTime.of(9, 30);
+        Timetable timeTableById = timeTableService.getById(timetable.getId());
+        LocalTime expectedStart = LocalTime.of(7, 0);
+        LocalTime expectedEnd = LocalTime.of(8, 30);
         assertNotNull(timeTableById);
         assertEquals(expectedStart, timeTableById.getStart());
         assertEquals(expectedEnd, timeTableById.getEnd());
@@ -47,17 +42,12 @@ public class TimetableServiceTest {
 
     @Test
     public void getById() {
-        Timetable timeTable = new Timetable();
-        timeTable.setStart(LocalTime.of(9, 0));
-        timeTable.setEnd(LocalTime.of(10, 30));
-        timeTable.setDate(LocalDate.now());
-        timeTable.setCapacity(5);
-        timeTableService.save(timeTable);
-        Long timeTableId = timeTable.getId();
+        Timetable timetable = SampleBuilder.timetable1();
+        timeTableService.save(timetable);
 
-        Timetable timeTableById = timeTableService.getById(timeTableId);
-        LocalTime expectedStart = LocalTime.of(9, 0);
-        LocalTime expectedEnd = LocalTime.of(10, 30);
+        Timetable timeTableById = timeTableService.getById(timetable.getId());
+        LocalTime expectedStart = LocalTime.of(7, 0);
+        LocalTime expectedEnd = LocalTime.of(8, 30);
         assertNotNull(timeTableById);
         assertEquals(expectedStart, timeTableById.getStart());
         assertEquals(expectedEnd, timeTableById.getEnd());
@@ -66,17 +56,12 @@ public class TimetableServiceTest {
 
     @Test
     public void delete() {
-        Timetable timeTable = new Timetable();
-        timeTable.setStart(LocalTime.of(10, 0));
-        timeTable.setEnd(LocalTime.of(11, 30));
-        timeTable.setDate(LocalDate.now());
-        timeTable.setCapacity(5);
-        timeTableService.save(timeTable);
-        Long timeTableId = timeTable.getId();
+        Timetable timetable = SampleBuilder.timetable1();
+        timeTableService.save(timetable);
 
-        timeTableService.delete(timeTableId);
+        timeTableService.delete(timetable.getId());
 
-        Timetable timeTableById = timeTableService.getById(timeTableId);
+        Timetable timeTableById = timeTableService.getById(timetable.getId());
 
         assertNull(timeTableById);
     }
@@ -108,18 +93,10 @@ public class TimetableServiceTest {
 
     @Test
     public void getAllTimetables() {
-        Timetable timeTable1 = new Timetable();
-        timeTable1.setStart(LocalTime.of(7, 0));
-        timeTable1.setEnd(LocalTime.of(8, 30));
-        timeTable1.setDate(LocalDate.now());
-        timeTable1.setCapacity(5);
-        timeTableService.save(timeTable1);
+        Timetable timetable1 = SampleBuilder.timetable1();
+        timeTableService.save(timetable1);
 
-        Timetable timetable2 = new Timetable();
-        timetable2.setStart(LocalTime.of(10, 0));
-        timetable2.setEnd(LocalTime.of(11, 30));
-        timetable2.setDate(LocalDate.now());
-        timetable2.setCapacity(5);
+        Timetable timetable2 = SampleBuilder.timetable2();
         timeTableService.save(timetable2);
 
         List<Timetable> allTimetables = timeTableService.getAllTimetables();
