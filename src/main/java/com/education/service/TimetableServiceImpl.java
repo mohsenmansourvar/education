@@ -6,7 +6,6 @@ import com.education.repository.TimetableRepository;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TimetableServiceImpl implements TimetableService {
@@ -92,48 +91,63 @@ public class TimetableServiceImpl implements TimetableService {
 
     /*
      * 1-read timetable base on id -->timetable:timetable
-     * 7-read all of timetables of this student --> timetablesByStudentId:List<Timetable>
-     * 8-loop in the timetablesByStudentId --> timetables
-     *  8-1- if the date of timetable equals of date of timetables
-     *    8-1-1 if Start timetable is before end of timetables and start of timetable is  after start of timetables or
+     * 2-read all of timetables of this student --> timetablesByStudentId:List<Timetable>
+     * 3-loop in the timetablesByStudentId --> timetables
+     *  3-1- if the date of timetable equals of date of timetables
+     *    3-1-1 if Start timetable is before end of timetables and start of timetable is  after start of timetables or
      *          end of timetable is before end of timetables and end of timetable is after start of timetables
-     *      8-1-1-1 throws an exception
-     *    8-1-2 else if start of timetable is equal of start of timetables
-     *      8-1-2-1 throws an exception END IF
+     *      3-1-1-1 throws an exception
+     *    3-1-2 else if start of timetable is equal of start of timetables
+     *      3-1-2-1 throws an exception END IF
      *
-     * 5-if the size of students in timetable is bigger than capacity of timetable
-     *  5-1- throws an exception
-     * 2-read all students of timetable -->allStudents:List<Students>
-     * 3-read a student by getById -->student: Student
-     * 4-add studentId to this List
-     * 6-set student to the timetable
+     * 4-if the size of students in timetable is bigger than capacity of timetable
+     *  4-1- throws an exception
+     * 5-read all students of timetable -->allStudents:List<Students>
+     * 6-read a student by getById -->student: Student
+     * 7-add studentId to this List
+     * 8-set student to the timetable
      * 9-save this timetable
      */
     @Override
     public void addStudentToTimetable(long timetableId, long studentId) {
-        Timetable timetable = getById(timetableId);
+        Timetable target = getById(timetableId);
+        validateStartAndEndOfTimetableWithOtherTimetables(studentId, target);
+        validateTargetTimetableCapacity(target);
+        addStudentToTargetTimetable(studentId, target);
+        timeTableRepository.save(target);
+    }
 
+    public void validateStartAndEndOfTimetableWithOtherTimetables(Long studentId, Timetable target) {
         List<Timetable> timetablesByStudentId = getTimetablesByStudentId(studentId);
 
-        for (Timetable timetables : timetablesByStudentId) {
-            if (timetable.getDate().equals(timetables.getDate())) {
-                if (timetable.getStart().isBefore(timetables.getEnd()) && timetable.getStart().isAfter(timetables.getStart()) || timetable.getEnd()
-                        .isAfter(timetables.getStart()) && timetable.getEnd().isBefore(timetables.getEnd())) {
-                    throw new IllegalArgumentException("This timetable has conflict with other timetables");
-                } else if (timetable.getStart().equals(timetables.getStart())) {
-                    throw new IllegalArgumentException("there is exactly the same timetable");
+        for (Timetable timetable : timetablesByStudentId) {
+            if (target.getDate().equals(timetable.getDate())) {
+
+                boolean startOfTargetBetweenATimetable = target.getStart().isBefore(timetable.getEnd()) && target.getStart().isAfter(timetable.getStart());
+                boolean endOfTargetBetweenAnotherATimetable = target.getEnd().isAfter(timetable.getStart()) && target.getEnd().isBefore(timetable.getEnd());
+
+                if (startOfTargetBetweenATimetable || endOfTargetBetweenAnotherATimetable) {
+                    throw new IllegalArgumentException("This target has conflict with other timetable");
+                } else if (target.getStart().equals(timetable.getStart())) {
+                    throw new IllegalArgumentException("there is exactly the same target");
                 }
             }
         }
-        if (timetable.getStudents().size() > timetable.getCapacity()) {
-            throw new IllegalArgumentException("The capacity of this timetable is full");
-        }
-        Student student = studentService.getById(studentId);
-        List<Student> students = timetable.getStudents();
-        students.add(student);
+    }
 
-        timetable.setStudents(students);
-        timeTableRepository.save(timetable);
+    public void validateTargetTimetableCapacity(Timetable target) {
+        boolean capacityOfStudentsOfTarget = target.getStudents().size() > target.getCapacity();
+
+        if (capacityOfStudentsOfTarget) {
+            throw new IllegalArgumentException("The capacity of this target is full");
+        }
+    }
+
+    public void addStudentToTargetTimetable(Long studentId, Timetable target) {
+        Student student = studentService.getById(studentId);
+        List<Student> students = target.getStudents();
+        students.add(student);
+        target.setStudents(students);
     }
 
     @Override
