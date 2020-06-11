@@ -69,17 +69,17 @@ public class TimetableServiceTest {
 
     @Test
     public void update() {
-        TimetableBuilder timetableBuilder1 = new TimetableBuilder()
+        Timetable timetable1 = new TimetableBuilder()
                 .start(LocalTime.of(7, 0))
                 .end(LocalTime.of(8, 30))
                 .date(LocalDate.now())
-                .capacity(5);
-        Timetable timetable1 = timetableBuilder1.build();
+                .capacity(5)
+                .build();
         timeTableService.save(timetable1);
 
-        TimetableBuilder timetableBuilder2 = new TimetableBuilder();
-        timetableBuilder2.end(LocalTime.of(8, 45));
-        Timetable timetable2 = timetableBuilder2.build();
+        Timetable timetable2 = new TimetableBuilder()
+        .end(LocalTime.of(8, 45))
+        .build();
         timeTableService.update(timetable1.getId(), timetable2);
 
         Timetable timetableById = timeTableService.getById(timetable1.getId());
