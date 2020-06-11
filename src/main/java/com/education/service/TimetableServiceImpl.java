@@ -13,11 +13,9 @@ public class TimetableServiceImpl implements TimetableService {
     private StudentService studentService;
 
     @Override
-    public void save(Timetable timeTable) {
-        if (timeTable.getCapacity() == 0) {
-            throw new IllegalArgumentException("The field of capacity should be full");
-        }
-        timeTableRepository.save(timeTable);
+    public void save(Timetable timetable) {
+        hasTimetableCapacity(timetable);
+        timeTableRepository.save(timetable);
     }
 
     @Override
@@ -161,5 +159,10 @@ public class TimetableServiceImpl implements TimetableService {
 
     public void setStudentService(StudentService studentService) {
         this.studentService = studentService;
+    }
+    public void hasTimetableCapacity(Timetable timetable){
+        if (timetable.getCapacity() <= 0) {
+            throw new IllegalArgumentException("The field of capacity should be full");
+        }
     }
 }
