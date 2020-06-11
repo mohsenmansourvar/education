@@ -70,15 +70,15 @@ public class TimetableServiceTest {
     @Test
     public void update() {
         TimetableBuilder timetableBuilder1 = new TimetableBuilder()
-                .start(LocalTime.of(7,0))
-                .end(LocalTime.of(8,30))
+                .start(LocalTime.of(7, 0))
+                .end(LocalTime.of(8, 30))
                 .date(LocalDate.now())
                 .capacity(5);
         Timetable timetable1 = timetableBuilder1.build();
         timeTableService.save(timetable1);
 
         TimetableBuilder timetableBuilder2 = new TimetableBuilder();
-timetableBuilder2.end(LocalTime.of(8,45));
+        timetableBuilder2.end(LocalTime.of(8, 45));
         Timetable timetable2 = timetableBuilder2.build();
         timeTableService.update(timetable1.getId(), timetable2);
 
@@ -711,6 +711,7 @@ timetable.end <= e
             timeTableService.addStudentToTimetable(timetable6.getId(), student.getId());
         });
     }
+
     @Test
     public void registerStudentInTimetableWithExactSameStartAndEndWithDifferentDate() {
         Student student = SampleBuilder.student1();
