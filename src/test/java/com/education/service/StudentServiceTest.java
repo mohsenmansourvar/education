@@ -65,14 +65,14 @@ public class StudentServiceTest {
 
     @Test
     public void getById() {
-        StudentBuilder studentBuilder = new StudentBuilder()
+        Student student = new StudentBuilder()
                 .firstName("Mary")
                 .lastName("Ebrahimi")
                 .nationalCode("5544332211")
                 .studentNumber("231")
                 .address("Adelaide")
-                .telephone("0041");
-        Student student = studentBuilder.build();
+                .telephone("0041")
+                .build();
 
         studentService.save(student);
 
@@ -89,28 +89,24 @@ public class StudentServiceTest {
 
     @Test
     public void getAllStudents() {
-        StudentBuilder studentBuilder1 = new StudentBuilder();
-        studentBuilder1
+        Student student1 = new StudentBuilder()
                 .firstName("Mary")
                 .lastName("Ebrahimi")
                 .nationalCode("5544332211")
                 .studentNumber("231")
                 .address("Adelaide")
                 .telephone("0041")
-        ;
-        Student student1 = studentBuilder1.build();
+                .build();
         studentService.save(student1);
 
-        StudentBuilder studentBuilder2 = new StudentBuilder();
-        studentBuilder2
+        Student student2 = new StudentBuilder()
                 .firstName("Laim")
                 .lastName("Mansourvar")
                 .nationalCode("0000000000")
                 .studentNumber("111")
                 .address("Adelaide")
                 .telephone("0049")
-        ;
-        Student student2 = studentBuilder2.build();
+                .build();
 
         studentService.save(student2);
 
