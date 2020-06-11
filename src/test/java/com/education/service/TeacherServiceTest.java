@@ -81,28 +81,25 @@ public class TeacherServiceTest {
     }
     @Test
     public void getAllTeachers(){
-        TeacherBuilder teacherBuilder1 =new TeacherBuilder()
+        Teacher teacher1 =new TeacherBuilder()
                 .firstName("Reza")
                 .lastName("Ebrahimi")
                 .nationalCode("1122334455")
                 .specialty("IT")
                 .address("Berlin")
                 .telephone("0049")
-                ;
-        Teacher teacher1 = teacherBuilder1.build();
+                .build();
 
         teacherService.save(teacher1);
 
-
-        TeacherBuilder teacherBuilder2 =new TeacherBuilder()
+        Teacher teacher2 =new TeacherBuilder()
                 .firstName("Mary")
                 .lastName("Ebrahimi")
                 .nationalCode("5544332211")
                 .specialty("English language")
                 .address("Adelaide")
                 .telephone("0041")
-                ;
-        Teacher teacher2 = teacherBuilder2.build();
+                .build();
         teacherService.save(teacher2);
 
         List<Teacher> allTeachers = teacherService.getAllTeachers();
