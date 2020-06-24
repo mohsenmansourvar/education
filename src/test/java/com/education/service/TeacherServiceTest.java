@@ -92,14 +92,14 @@ public class TeacherServiceTest {
 
         teacherService.save(teacher1);
 
-        Teacher teacher2 =new TeacherBuilder()
-                .firstName("Mary")
-                .lastName("Ebrahimi")
-                .nationalCode("5544332211")
-                .specialty("English language")
-                .address("Adelaide")
-                .telephone("0041")
-                .build();
+        Teacher teacher2 =new TeacherBuilder() // TeacherBuilder
+                .firstName("Mary") //TeacherBuilder
+                .lastName("Ebrahimi") //TeacherBuilder
+                .nationalCode("5544332211") //TeacherBuilder
+                .specialty("English language") //TeacherBuilder
+                .address("Adelaide")  //TeacherBuilder
+                .telephone("0041")  //TeacherBuilder
+                .build(); // Teacher
         teacherService.save(teacher2);
 
         List<Teacher> allTeachers = teacherService.getAllTeachers();
