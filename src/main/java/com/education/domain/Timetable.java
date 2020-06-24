@@ -20,6 +20,7 @@ public class Timetable {
     private LocalTime start;
     private LocalTime end;
     private LocalDate date;
+    private TimetableStatus status;
     @NonNull
     private int capacity;
     @ManyToOne
@@ -92,5 +93,13 @@ public class Timetable {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    public TimetableStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(TimetableStatus status) {
+        this.status = status;
     }
 }
