@@ -20,7 +20,7 @@ public class Timetable {
     private LocalTime start;
     private LocalTime end;
     private LocalDate date;
-    private TimetableStatus status;
+    private TimetableStatus status = TimetableStatus.IN_PROGRESS;
     @NonNull
     private int capacity;
     @ManyToOne
