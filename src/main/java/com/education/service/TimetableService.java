@@ -38,4 +38,6 @@ public interface TimetableService {
     List<Student> getAllStudentsTimetable(long id);
 
     List<Timetable> getTimetablesByStatus(TimetableStatus status);
+
+    Timetable activeTimetableStatus(long id);
 }

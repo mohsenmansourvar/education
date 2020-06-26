@@ -770,7 +770,16 @@ timetable.end <= e
 
         assertNotNull(timetablesByStatus);
         assertEquals(2,timetablesByStatus.size());
+    }
 
+    @Test
+    public void activeTimetableStatus(){
+        Timetable timetable = SampleBuilder.timetable1();
+        timeTableService.save(timetable);
+        Timetable timetableStatus = timeTableService.activeTimetableStatus(timetable.getId());
+
+        assertNotNull(timetableStatus);
+        assertEquals(TimetableStatus.ACTIVE,timetableStatus.getStatus());
     }
 }
 
