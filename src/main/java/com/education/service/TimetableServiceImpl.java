@@ -166,6 +166,13 @@ public class TimetableServiceImpl implements TimetableService {
         timeTableRepository.update(timetable.getId(),timetable);
     }
 
+    @Override
+    public void deactivateTimetableStatus(long id) {
+        Timetable timetable = getById(id);
+        timetable.setStatus(TimetableStatus.INACTIVE);
+        timeTableRepository.update(timetable.getId(),timetable);
+    }
+
     public void setTimeTableRepository(TimetableRepository timeTableRepository) {
         this.timeTableRepository = timeTableRepository;
     }

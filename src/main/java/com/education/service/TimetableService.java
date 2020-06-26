@@ -40,4 +40,6 @@ public interface TimetableService {
     List<Timetable> getTimetablesByStatus(TimetableStatus status);
 
     void activeTimetableStatus(long id);
+
+    void deactivateTimetableStatus(long id);
 }

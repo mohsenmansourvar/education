@@ -783,5 +783,17 @@ timetable.end <= e
         assertNotNull(timetableById);
         assertEquals(TimetableStatus.ACTIVE,timetableById.getStatus());
     }
+
+    @Test
+    public void deactivateTimetableStatus(){
+        Timetable timetable = SampleBuilder.timetable1();
+        timeTableService.save(timetable);
+
+        timeTableService.deactivateTimetableStatus(timetable.getId());
+        Timetable timetableById = timeTableService.getById(timetable.getId());
+
+        assertNotNull(timetableById);
+        assertEquals(TimetableStatus.INACTIVE,timetableById.getStatus());
+    }
 }
 
