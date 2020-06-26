@@ -2,6 +2,7 @@ package com.education.service;
 
 import com.education.domain.Student;
 import com.education.domain.Timetable;
+import com.education.domain.TimetableStatus;
 import com.education.repository.TimetableRepository;
 
 import java.time.LocalDate;
@@ -151,6 +152,11 @@ public class TimetableServiceImpl implements TimetableService {
     @Override
     public List<Student> getAllStudentsTimetable(long id) {
         return timeTableRepository.getAllStudentsTimetable(id);
+    }
+
+    @Override
+    public List<Timetable> getTimetablesByStatus(TimetableStatus status) {
+        return timeTableRepository.getTimetablesByStatus(status);
     }
 
     public void setTimeTableRepository(TimetableRepository timeTableRepository) {
