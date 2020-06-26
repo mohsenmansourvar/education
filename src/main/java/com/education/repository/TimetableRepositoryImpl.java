@@ -2,6 +2,7 @@ package com.education.repository;
 
 import com.education.domain.Student;
 import com.education.domain.Timetable;
+import com.education.domain.TimetableStatus;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,7 +53,7 @@ public class TimetableRepositoryImpl implements TimetableRepository {
         if (newTimetable.getStudents() != null) {
             timetable.setStudents(newTimetable.getStudents());
         }
-        if (newTimetable.getCapacity() != 0){
+        if (newTimetable.getCapacity() != 0) {
             timetable.setCapacity(newTimetable.getCapacity());
         }
         if (newTimetable.getSubject() != null) {
@@ -136,6 +137,15 @@ public class TimetableRepositoryImpl implements TimetableRepository {
         //"select  s.id , s.name , s.last name from timetable t join student_timetable st on t.id = st.timetableId join Student s on s.id = st.studentId
         return session.createQuery("select st from Timetable ti join ti.students st where ti.id = :id", Student.class)
                 .setParameter("id", id)
+                .list();
+    }
+
+    @Override
+    public List<Timetable> getTimetablesByStatus(TimetableStatus status) {
+
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Timetable where status = :status ", Timetable.class)
+                .setParameter("status", status)
                 .list();
     }
 

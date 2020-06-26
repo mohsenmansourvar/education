@@ -2,6 +2,7 @@ package com.education.service;
 
 import com.education.domain.Student;
 import com.education.domain.Timetable;
+import com.education.domain.TimetableStatus;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -35,4 +36,6 @@ public interface TimetableService {
     void addStudentToTimetable(long timetableId, long studentId);
 
     List<Student> getAllStudentsTimetable(long id);
+
+    List<Timetable> getTimetablesByStatus(TimetableStatus status);
 }

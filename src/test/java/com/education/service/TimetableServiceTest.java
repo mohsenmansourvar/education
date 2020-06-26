@@ -1,9 +1,6 @@
 package com.education.service;
 
-import com.education.domain.Student;
-import com.education.domain.Teacher;
-import com.education.domain.Timetable;
-import com.education.domain.TimetableBuilder;
+import com.education.domain.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -78,8 +75,8 @@ public class TimetableServiceTest {
         timeTableService.save(timetable1);
 
         Timetable timetable2 = new TimetableBuilder()
-        .end(LocalTime.of(8, 45))
-        .build();
+                .end(LocalTime.of(8, 45))
+                .build();
         timeTableService.update(timetable1.getId(), timetable2);
 
         Timetable timetableById = timeTableService.getById(timetable1.getId());
@@ -754,6 +751,26 @@ timetable.end <= e
         assertEquals("3322114455", student1.getNationalCode());
         assertEquals("0041", student1.getTelephone());
         assertEquals("Adelaide", student1.getAddress());
+    }
+
+    @Test
+    public void getTimetablesByStatus() {
+        Timetable timetable1 = SampleBuilder.timetable1();
+        timetable1.setStatus(TimetableStatus.ACTIVE);
+        timeTableService.save(timetable1);
+
+        Timetable timetable2 = SampleBuilder.timetable2();
+        timeTableService.save(timetable2);
+
+        Timetable timetable3 = SampleBuilder.timetable3();
+        timetable3.setStatus(TimetableStatus.ACTIVE);
+        timeTableService.save(timetable3);
+
+        List<Timetable> timetablesByStatus = timeTableService.getTimetablesByStatus(TimetableStatus.ACTIVE);
+
+        assertNotNull(timetablesByStatus);
+        assertEquals(2,timetablesByStatus.size());
+
     }
 }
 
