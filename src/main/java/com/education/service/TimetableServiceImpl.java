@@ -160,11 +160,10 @@ public class TimetableServiceImpl implements TimetableService {
     }
 
     @Override
-    public Timetable activeTimetableStatus(long id) {
+    public void activeTimetableStatus(long id) {
         Timetable timetable = getById(id);
         timetable.setStatus(TimetableStatus.ACTIVE);
         timeTableRepository.update(timetable.getId(),timetable);
-        return timetable;
     }
 
     public void setTimeTableRepository(TimetableRepository timeTableRepository) {

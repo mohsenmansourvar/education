@@ -776,10 +776,12 @@ timetable.end <= e
     public void activeTimetableStatus(){
         Timetable timetable = SampleBuilder.timetable1();
         timeTableService.save(timetable);
-        Timetable timetableStatus = timeTableService.activeTimetableStatus(timetable.getId());
+         timeTableService.activeTimetableStatus(timetable.getId());
 
-        assertNotNull(timetableStatus);
-        assertEquals(TimetableStatus.ACTIVE,timetableStatus.getStatus());
+        Timetable timetableById = timeTableService.getById(timetable.getId());
+
+        assertNotNull(timetableById);
+        assertEquals(TimetableStatus.ACTIVE,timetableById.getStatus());
     }
 }
 

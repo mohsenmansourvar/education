@@ -39,5 +39,5 @@ public interface TimetableService {
 
     List<Timetable> getTimetablesByStatus(TimetableStatus status);
 
-    Timetable activeTimetableStatus(long id);
+    void activeTimetableStatus(long id);
 }
