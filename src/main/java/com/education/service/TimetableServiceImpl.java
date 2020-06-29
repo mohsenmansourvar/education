@@ -162,15 +162,18 @@ public class TimetableServiceImpl implements TimetableService {
     @Override
     public void activeTimetableStatus(long id) {
         Timetable timetable = getById(id);
+        if (timetable.getTeacher() == null) {
+            throw new IllegalArgumentException("Activating timetable without teacher is impossible");
+        }
         timetable.setStatus(TimetableStatus.ACTIVE);
-        timeTableRepository.update(timetable.getId(),timetable);
+        timeTableRepository.update(timetable.getId(), timetable);
     }
 
     @Override
     public void deactivateTimetableStatus(long id) {
         Timetable timetable = getById(id);
         timetable.setStatus(TimetableStatus.INACTIVE);
-        timeTableRepository.update(timetable.getId(),timetable);
+        timeTableRepository.update(timetable.getId(), timetable);
     }
 
     public void setTimeTableRepository(TimetableRepository timeTableRepository) {
@@ -180,7 +183,8 @@ public class TimetableServiceImpl implements TimetableService {
     public void setStudentService(StudentService studentService) {
         this.studentService = studentService;
     }
-    public void hasTimetableCapacity(Timetable timetable){
+
+    public void hasTimetableCapacity(Timetable timetable) {
         if (timetable.getCapacity() <= 0) {
             throw new IllegalArgumentException("The field of capacity should be full");
         }
