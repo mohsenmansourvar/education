@@ -827,5 +827,32 @@ timetable.end <= e
         assertNotNull(timetableById);
         assertEquals(TimetableStatus.ACTIVE, timetableById.getStatus());
     }
+
+    @Test
+    public void activeTimetableWithStudent() {
+        Timetable timetable = SampleBuilder.timetable1();
+
+        Teacher teacher = SampleBuilder.teacher1();
+        teacherService.save(teacher);
+
+        Class room1 = SampleBuilder.room1();
+        classService.save(room1);
+
+        Student student = SampleBuilder.student1();
+        studentService.save(student);
+
+        timetable.setTeacher(teacher);
+        timetable.setRoom(room1);
+        timetable.getStudents().add(student);
+
+        timeTableService.save(timetable);
+
+        timeTableService.activeTimetableStatus(timetable.getId());
+
+        Timetable timetableById = timeTableService.getById(timetable.getId());
+
+        assertNotNull(timetableById);
+        assertEquals(TimetableStatus.ACTIVE, timetableById.getStatus());
+    }
 }
 

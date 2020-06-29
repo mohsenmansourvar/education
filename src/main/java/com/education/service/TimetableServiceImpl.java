@@ -164,10 +164,12 @@ public class TimetableServiceImpl implements TimetableService {
         Timetable timetable = getById(id);
         if (timetable.getTeacher() == null) {
             throw new IllegalArgumentException("Activating timetable without teacher is impossible");
-        } else {
-            if (timetable.getRoom() == null) {
-                throw new IllegalArgumentException("Activating timetable without class is impossible");
-            }
+        }
+        if (timetable.getRoom() == null) {
+            throw new IllegalArgumentException("Activating timetable without class is impossible");
+        }
+        if (timetable.getStudents().isEmpty()) {
+            throw new IllegalArgumentException("Activating timetable without student is impossible");
         }
         timetable.setStatus(TimetableStatus.ACTIVE);
         timeTableRepository.update(timetable.getId(), timetable);
