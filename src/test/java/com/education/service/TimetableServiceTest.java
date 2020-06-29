@@ -769,23 +769,29 @@ timetable.end <= e
         List<Timetable> timetablesByStatus = timeTableService.getTimetablesByStatus(TimetableStatus.ACTIVE);
 
         assertNotNull(timetablesByStatus);
-        assertEquals(2,timetablesByStatus.size());
+        assertEquals(2, timetablesByStatus.size());
     }
 
     @Test
-    public void activeTimetableStatus(){
+    public void activeTimetableStatus() {
         Timetable timetable = SampleBuilder.timetable1();
+        Teacher teacher = SampleBuilder.teacher1();
+        teacherService.save(teacher);
+
+        timetable.setTeacher(teacher);
+
         timeTableService.save(timetable);
-         timeTableService.activeTimetableStatus(timetable.getId());
+
+        timeTableService.activeTimetableStatus(timetable.getId());
 
         Timetable timetableById = timeTableService.getById(timetable.getId());
 
         assertNotNull(timetableById);
-        assertEquals(TimetableStatus.ACTIVE,timetableById.getStatus());
+        assertEquals(TimetableStatus.ACTIVE, timetableById.getStatus());
     }
 
     @Test
-    public void deactivateTimetableStatus(){
+    public void deactivateTimetableStatus() {
         Timetable timetable = SampleBuilder.timetable1();
         timeTableService.save(timetable);
 
@@ -793,7 +799,7 @@ timetable.end <= e
         Timetable timetableById = timeTableService.getById(timetable.getId());
 
         assertNotNull(timetableById);
-        assertEquals(TimetableStatus.INACTIVE,timetableById.getStatus());
+        assertEquals(TimetableStatus.INACTIVE, timetableById.getStatus());
     }
 }
 
