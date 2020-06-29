@@ -29,6 +29,8 @@ public class Timetable {
     private Teacher teacher;
     @ManyToMany
     private List<Student> students = new ArrayList<>();
+    @OneToOne
+    private Class room;
 
 
     public Long getId() {
@@ -101,5 +103,13 @@ public class Timetable {
 
     public void setStatus(TimetableStatus status) {
         this.status = status;
+    }
+
+    public Class getRoom() {
+        return room;
+    }
+
+    public void setRoom(Class room) {
+        this.room = room;
     }
 }
