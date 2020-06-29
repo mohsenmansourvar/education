@@ -1,5 +1,6 @@
 package com.education.service;
 
+import com.education.domain.Class;
 import com.education.domain.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class TimetableServiceTest {
     private TeacherService teacherService;
     @Autowired
     private StudentService studentService;
+    @Autowired
+    private ClassService classService;
 
     @Test
     public void save() {
@@ -800,6 +803,29 @@ timetable.end <= e
 
         assertNotNull(timetableById);
         assertEquals(TimetableStatus.INACTIVE, timetableById.getStatus());
+    }
+
+    @Test
+    public void activeTimetableWithClass() {
+        Timetable timetable = SampleBuilder.timetable1();
+
+        Teacher teacher = SampleBuilder.teacher1();
+        teacherService.save(teacher);
+
+        Class room1 = SampleBuilder.room1();
+        classService.save(room1);
+
+        timetable.setTeacher(teacher);
+        timetable.setRoom(room1);
+
+        timeTableService.save(timetable);
+
+        timeTableService.activeTimetableStatus(timetable.getId());
+
+        Timetable timetableById = timeTableService.getById(timetable.getId());
+
+        assertNotNull(timetableById);
+        assertEquals(TimetableStatus.ACTIVE, timetableById.getStatus());
     }
 }
 

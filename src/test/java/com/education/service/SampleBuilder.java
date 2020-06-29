@@ -1,5 +1,6 @@
 package com.education.service;
 
+import com.education.domain.Class;
 import com.education.domain.Student;
 import com.education.domain.Teacher;
 import com.education.domain.Timetable;
@@ -124,5 +125,26 @@ public class SampleBuilder {
         timetable6.setDate(LocalDate.now());
         timetable6.setCapacity(5);
         return timetable6;
+    }
+
+    public static Class room1() {
+        Class room1 = new Class();
+        room1.setClassNumber("111");
+        room1.setCapacity(20);
+        return room1;
+    }
+
+    public static Class room2() {
+        Class room2 = new Class();
+        room2.setClassNumber("222");
+        room2.setCapacity(25);
+        return room2;
+    }
+
+    public static Class room3() {
+        Class room3 = new Class();
+        room3.setClassNumber("222");
+        room3.setCapacity(30);
+        return room3;
     }
 }
