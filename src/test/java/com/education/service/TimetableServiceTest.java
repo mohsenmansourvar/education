@@ -777,11 +777,19 @@ timetable.end <= e
 
     @Test
     public void activeTimetableStatus() {
-        Timetable timetable = SampleBuilder.timetable1();
         Teacher teacher = SampleBuilder.teacher1();
         teacherService.save(teacher);
 
+        Class room1 = SampleBuilder.room1();
+        classService.save(room1);
+
+        Student student = SampleBuilder.student1();
+        studentService.save(student);
+
+        Timetable timetable = SampleBuilder.timetable1();
         timetable.setTeacher(teacher);
+        timetable.setRoom(room1);
+        timetable.getStudents().add(student);
 
         timeTableService.save(timetable);
 
@@ -815,8 +823,12 @@ timetable.end <= e
         Class room1 = SampleBuilder.room1();
         classService.save(room1);
 
+        Student student = SampleBuilder.student1();
+        studentService.save(student);
+
         timetable.setTeacher(teacher);
         timetable.setRoom(room1);
+        timetable.getStudents().add(student);
 
         timeTableService.save(timetable);
 
@@ -853,6 +865,72 @@ timetable.end <= e
 
         assertNotNull(timetableById);
         assertEquals(TimetableStatus.ACTIVE, timetableById.getStatus());
+    }
+
+    @Test
+    public void inactiveTimetableCanBeIgnoredToCompareWithAnotherTimetables() {
+
+        Teacher teacher1 = SampleBuilder.teacher1();
+        teacherService.save(teacher1);
+
+        Student student1 = SampleBuilder.student1();
+        studentService.save(student1);
+
+        Class room1 = SampleBuilder.room1();
+        classService.save(room1);
+
+        Timetable timetable1 = SampleBuilder.timetable1();
+        timetable1.setTeacher(teacher1);
+        timetable1.setRoom(room1);
+        timetable1.getStudents().add(student1);
+
+        timeTableService.save(timetable1);
+        timeTableService.deactivateTimetableStatus(timetable1.getId());
+
+
+
+        Teacher teacher2 = SampleBuilder.teacher2();
+        teacherService.save(teacher2);
+
+
+        Class room2 = SampleBuilder.room2();
+        classService.save(room2);
+
+        Timetable timetable2 = SampleBuilder.timetable2();
+        timetable2.setTeacher(teacher2);
+        timetable2.setRoom(room2);
+        timetable2.getStudents().add(student1);
+
+        timeTableService.save(timetable2);
+        timeTableService.activeTimetableStatus(timetable2.getId());
+
+
+        Teacher teacher3 = SampleBuilder.teacher2();
+        teacherService.save(teacher3);
+
+
+        Class room3 = SampleBuilder.room3();
+        classService.save(room3);
+
+        Timetable timetable6 = SampleBuilder.timetable6();
+        timetable6.setTeacher(teacher3);
+        timetable6.setRoom(room3);
+
+        timeTableService.save(timetable6);
+
+        timeTableService.addStudentToTimetable(timetable6.getId(), student1.getId());
+        timeTableService.activeTimetableStatus(timetable6.getId());
+
+
+        List<Timetable> timetablesByStudentId = timeTableService.getTimetablesByStudentId(student1.getId());
+        Timetable t3 = timetablesByStudentId.get(0);
+
+
+        assertNotNull(timetablesByStudentId);
+        assertEquals(LocalTime.of(7, 0), t3.getStart());
+        assertEquals(LocalTime.of(8, 30), t3.getEnd());
+        assertEquals(LocalDate.now(), t3.getDate());
+        assertEquals(3,timetablesByStudentId.size());
     }
 }
 
