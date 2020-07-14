@@ -120,6 +120,9 @@ public class TimetableServiceImpl implements TimetableService {
         List<Timetable> timetablesByStudentId = getTimetablesByStudentId(studentId);
 
         for (Timetable timetable : timetablesByStudentId) {
+            if (timetable.getStatus().equals(TimetableStatus.INACTIVE)) {
+                continue;
+            }
             if (target.getDate().equals(timetable.getDate())) {
 
                 boolean startOfTargetBetweenATimetable = target.getStart().isBefore(timetable.getEnd()) && target.getStart().isAfter(timetable.getStart());
@@ -131,8 +134,10 @@ public class TimetableServiceImpl implements TimetableService {
                     throw new IllegalArgumentException("there is exactly the same target");
                 }
             }
+
         }
     }
+
 
     public void validateTargetTimetableCapacity(Timetable target) {
         boolean capacityOfStudentsOfTarget = target.getStudents().size() > target.getCapacity();
