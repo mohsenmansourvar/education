@@ -186,6 +186,9 @@ public class TimetableServiceImpl implements TimetableService {
     @Override
     public void deactivateTimetableStatus(long id) {
         Timetable timetable = getById(id);
+        if (timetable.getStatus().equals(TimetableStatus.INACTIVE)){
+            throw new IllegalArgumentException("An inactive timetable cannot be deactivated again");
+        }
         timetable.setStatus(TimetableStatus.INACTIVE);
         timeTableRepository.update(timetable.getId(), timetable);
     }

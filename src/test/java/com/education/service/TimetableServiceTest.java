@@ -888,7 +888,6 @@ timetable.end <= e
         timeTableService.deactivateTimetableStatus(timetable1.getId());
 
 
-
         Teacher teacher2 = SampleBuilder.teacher2();
         teacherService.save(teacher2);
 
@@ -930,8 +929,9 @@ timetable.end <= e
         assertEquals(LocalTime.of(7, 0), t3.getStart());
         assertEquals(LocalTime.of(8, 30), t3.getEnd());
         assertEquals(LocalDate.now(), t3.getDate());
-        assertEquals(3,timetablesByStudentId.size());
+        assertEquals(3, timetablesByStudentId.size());
     }
+
     @Test
     public void activeTimetableCannotActivateAgain() {
         Teacher teacher = SampleBuilder.teacher1();
@@ -954,6 +954,19 @@ timetable.end <= e
 
         assertThrows(IllegalArgumentException.class, () -> {
             timeTableService.activeTimetableStatus(timetable.getId());
+        });
+    }
+
+    @Test
+    public void inactiveTimetableCannotBeDeactivatedAgain() {
+        Timetable timetable = SampleBuilder.timetable1();
+        timetable.setStatus(TimetableStatus.INACTIVE);
+
+        timeTableService.save(timetable);
+
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            timeTableService.deactivateTimetableStatus(timetable.getId());
         });
     }
 }
