@@ -932,5 +932,29 @@ timetable.end <= e
         assertEquals(LocalDate.now(), t3.getDate());
         assertEquals(3,timetablesByStudentId.size());
     }
+    @Test
+    public void activeTimetableCannotActivateAgain() {
+        Teacher teacher = SampleBuilder.teacher1();
+        teacherService.save(teacher);
+
+        Class room1 = SampleBuilder.room1();
+        classService.save(room1);
+
+        Student student = SampleBuilder.student1();
+        studentService.save(student);
+
+        Timetable timetable = SampleBuilder.timetable1();
+        timetable.setTeacher(teacher);
+        timetable.setRoom(room1);
+        timetable.getStudents().add(student);
+        timetable.setStatus(TimetableStatus.ACTIVE);
+
+        timeTableService.save(timetable);
+
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            timeTableService.activeTimetableStatus(timetable.getId());
+        });
+    }
 }
 

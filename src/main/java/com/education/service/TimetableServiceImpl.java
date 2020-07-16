@@ -167,6 +167,9 @@ public class TimetableServiceImpl implements TimetableService {
     @Override
     public void activeTimetableStatus(long id) {
         Timetable timetable = getById(id);
+        if (timetable.getStatus().equals(TimetableStatus.ACTIVE)){
+            throw new IllegalArgumentException("Active timetable cannot be Activated again");
+        }
         if (timetable.getTeacher() == null) {
             throw new IllegalArgumentException("Activating timetable without teacher is impossible");
         }
