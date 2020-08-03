@@ -1,6 +1,7 @@
 package com.education.service;
 
 import com.education.domain.Student;
+import com.education.domain.Teacher;
 import com.education.domain.Timetable;
 import com.education.domain.TimetableStatus;
 import com.education.repository.TimetableRepository;
@@ -15,7 +16,7 @@ public class TimetableServiceImpl implements TimetableService {
 
     @Override
     public void save(Timetable timetable) {
-        hasTimetableCapacity(timetable);
+        isTimetableCapacityNegative(timetable);
         timeTableRepository.save(timetable);
     }
 
@@ -140,10 +141,10 @@ public class TimetableServiceImpl implements TimetableService {
 
 
     public void validateTargetTimetableCapacity(Timetable target) {
-        boolean capacityOfStudentsOfTarget = target.getStudents().size() > target.getCapacity();
+        boolean isCapacityFull = target.getStudents().size() > target.getCapacity();
 
-        if (capacityOfStudentsOfTarget) {
-            throw new IllegalArgumentException("The capacity of this target is full");
+        if (isCapacityFull) {
+            throw new IllegalArgumentException("The capacity of timetable is full");
         }
     }
 
@@ -167,20 +168,36 @@ public class TimetableServiceImpl implements TimetableService {
     @Override
     public void activeTimetableStatus(long id) {
         Timetable timetable = getById(id);
-        if (timetable.getStatus().equals(TimetableStatus.ACTIVE)){
-            throw new IllegalArgumentException("Active timetable cannot be Activated again");
-        }
-        if (timetable.getTeacher() == null) {
-            throw new IllegalArgumentException("Activating timetable without teacher is impossible");
-        }
-        if (timetable.getRoom() == null) {
-            throw new IllegalArgumentException("Activating timetable without class is impossible");
-        }
-        if (timetable.getStudents().isEmpty()) {
-            throw new IllegalArgumentException("Activating timetable without student is impossible");
-        }
+        validateStatusTimetableNotToBeActivateBefore(timetable);
+        checkFillingTeacherField(timetable);
+        checkFillingClassField(timetable);
+        checkFillingStudentField(timetable);
         timetable.setStatus(TimetableStatus.ACTIVE);
         timeTableRepository.update(timetable.getId(), timetable);
+    }
+
+    public void validateStatusTimetableNotToBeActivateBefore(Timetable timetable) {
+
+        if (timetable.getStatus().equals(TimetableStatus.ACTIVE)) {
+            throw new IllegalArgumentException("Active timetable cannot be Activated again");
+        }
+    }
+
+
+    public void checkFillingTeacherField (Timetable timetable){
+        if (timetable.getTeacher() == null) {
+            throw new IllegalArgumentException("Cannot activate a timetable without a teacher");
+        }
+    }
+    public void checkFillingClassField(Timetable timetable){
+        if (timetable.getRoom() == null) {
+            throw new IllegalArgumentException("Cannot activate a timetable without a class");
+        }
+    }
+    public void checkFillingStudentField(Timetable timetable){
+        if (timetable.getStudents().isEmpty()) {
+            throw new IllegalArgumentException("Cannot activate a timetable without a student");
+        }
     }
 
     @Override
@@ -201,7 +218,7 @@ public class TimetableServiceImpl implements TimetableService {
         this.studentService = studentService;
     }
 
-    public void hasTimetableCapacity(Timetable timetable) {
+    public void isTimetableCapacityNegative(Timetable timetable) {
         if (timetable.getCapacity() <= 0) {
             throw new IllegalArgumentException("The field of capacity should be full");
         }
