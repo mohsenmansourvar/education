@@ -1,7 +1,6 @@
 package com.education.service;
 
 import com.education.domain.Student;
-import com.education.domain.Teacher;
 import com.education.domain.Timetable;
 import com.education.domain.TimetableStatus;
 import com.education.repository.TimetableRepository;
@@ -184,17 +183,19 @@ public class TimetableServiceImpl implements TimetableService {
     }
 
 
-    public void checkFillingTeacherField (Timetable timetable){
+    public void checkFillingTeacherField(Timetable timetable) {
         if (timetable.getTeacher() == null) {
             throw new IllegalArgumentException("Cannot activate a timetable without a teacher");
         }
     }
-    public void checkFillingClassField(Timetable timetable){
+
+    public void checkFillingClassField(Timetable timetable) {
         if (timetable.getRoom() == null) {
             throw new IllegalArgumentException("Cannot activate a timetable without a class");
         }
     }
-    public void checkFillingStudentField(Timetable timetable){
+
+    public void checkFillingStudentField(Timetable timetable) {
         if (timetable.getStudents().isEmpty()) {
             throw new IllegalArgumentException("Cannot activate a timetable without a student");
         }
@@ -203,10 +204,20 @@ public class TimetableServiceImpl implements TimetableService {
     @Override
     public void deactivateTimetableStatus(long id) {
         Timetable timetable = getById(id);
-        if (timetable.getStatus().equals(TimetableStatus.INACTIVE)){
+        if (timetable.getStatus().equals(TimetableStatus.INACTIVE)) {
             throw new IllegalArgumentException("An inactive timetable cannot be deactivated again");
         }
         timetable.setStatus(TimetableStatus.INACTIVE);
+        timeTableRepository.update(timetable.getId(), timetable);
+    }
+
+    @Override
+    public void startTimetable(long id) {
+        Timetable timetable = getById(id);
+        if (!timetable.getStatus().equals(TimetableStatus.ACTIVE)) {
+            throw new IllegalArgumentException("Only active timetables can be started");
+        }
+        timetable.setStatus(TimetableStatus.STARTED);
         timeTableRepository.update(timetable.getId(), timetable);
     }
 

@@ -969,5 +969,33 @@ timetable.end <= e
             timeTableService.deactivateTimetableStatus(timetable.getId());
         });
     }
+
+    @Test
+    public void startTimetable() {
+        Teacher teacher1 = SampleBuilder.teacher1();
+        teacherService.save(teacher1);
+
+        Student student1 = SampleBuilder.student1();
+        studentService.save(student1);
+
+        Class room1 = SampleBuilder.room1();
+        classService.save(room1);
+
+        Timetable timetable1 = SampleBuilder.timetable1();
+        timetable1.setTeacher(teacher1);
+        timetable1.getStudents().add(student1);
+        timetable1.setRoom(room1);
+        timeTableService.save(timetable1);
+
+        timeTableService.activeTimetableStatus(timetable1.getId());
+
+        timeTableService.startTimetable(timetable1.getId());
+
+        Timetable timetableById = timeTableService.getById(timetable1.getId());
+
+        assertNotNull(timetableById);
+        assertEquals(TimetableStatus.STARTED, timetableById.getStatus());
+
+    }
 }
 
