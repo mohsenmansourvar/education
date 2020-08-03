@@ -42,4 +42,6 @@ public interface TimetableService {
     void activeTimetableStatus(long id);
 
     void deactivateTimetableStatus(long id);
+
+    void startTimetable(long id);
 }
