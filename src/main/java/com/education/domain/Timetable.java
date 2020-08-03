@@ -20,6 +20,7 @@ public class Timetable {
     private LocalTime start;
     private LocalTime end;
     private LocalDate date;
+    private int minStudent;
     private TimetableStatus status = TimetableStatus.IN_PROGRESS;
     @NonNull
     private int capacity;
@@ -111,5 +112,13 @@ public class Timetable {
 
     public void setRoom(Class room) {
         this.room = room;
+    }
+
+    public int getMinStudent() {
+        return minStudent;
+    }
+
+    public void setMinStudent(int minStudent) {
+        this.minStudent = minStudent;
     }
 }
