@@ -730,7 +730,7 @@ timetable.end <= e
         timeTableService.save(timetable5);
 
         Timetable timetable4 = SampleBuilder.timetable4();
-        timetable4.setCapacity(5);
+        timetable4.setMaxStudents(5);
         timeTableService.save(timetable4);
 
         timeTableService.addStudentToTimetable(timetable4.getId(), student.getId());

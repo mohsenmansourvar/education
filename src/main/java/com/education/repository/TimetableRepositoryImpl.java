@@ -53,8 +53,8 @@ public class TimetableRepositoryImpl implements TimetableRepository {
         if (newTimetable.getStudents() != null) {
             timetable.setStudents(newTimetable.getStudents());
         }
-        if (newTimetable.getCapacity() != 0) {
-            timetable.setCapacity(newTimetable.getCapacity());
+        if (newTimetable.getMaxStudents() != 0) {
+            timetable.setMaxStudents(newTimetable.getMaxStudents());
         }
         if (newTimetable.getSubject() != null) {
             timetable.setSubject(newTimetable.getSubject());

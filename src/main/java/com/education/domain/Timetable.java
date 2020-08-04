@@ -23,7 +23,7 @@ public class Timetable {
     private int minStudents;
     private TimetableStatus status = TimetableStatus.IN_PROGRESS;
     @NonNull
-    private int capacity;
+    private int maxStudents;
     @ManyToOne
     private Subject subject;
     @ManyToOne
@@ -90,12 +90,12 @@ public class Timetable {
         this.students = students;
     }
 
-    public int getCapacity() {
-        return capacity;
+    public int getMaxStudents() {
+        return maxStudents;
     }
 
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
+    public void setMaxStudents(int capacity) {
+        this.maxStudents = capacity;
     }
 
     public TimetableStatus getStatus() {
