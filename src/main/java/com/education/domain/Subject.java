@@ -13,8 +13,6 @@ public class Subject {
     private int unitNumber;
     @ManyToMany
     private List<Student> students = new ArrayList<>();
-    @ManyToOne
-    private Teacher teacher;
 
     public Long getId() {
         return id;
@@ -46,13 +44,5 @@ public class Subject {
 
     public void setStudents(List<Student> students) {
         this.students = students;
-    }
-
-    public Teacher getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
     }
 }
