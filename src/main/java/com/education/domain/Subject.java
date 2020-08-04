@@ -36,11 +36,5 @@ public class Subject {
         this.unitNumber = unitNumber;
     }
 
-    public List<Student> getStudents() {
-        return students;
-    }
 
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
 }

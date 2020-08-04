@@ -23,8 +23,6 @@ public class Teacher {
     private String address;
     private String telephone;
     private String specialty;
-    @ManyToMany
-    private List<Student> students = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -82,11 +80,4 @@ public class Teacher {
         this.specialty = specialty;
     }
 
-    public List<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
 }
