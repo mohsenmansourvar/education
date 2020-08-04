@@ -217,6 +217,9 @@ public class TimetableServiceImpl implements TimetableService {
         if (!timetable.getStatus().equals(TimetableStatus.ACTIVE)) {
             throw new IllegalArgumentException("Only active timetables can be started");
         }
+        if (timetable.getStudents().size() < timetable.getMinStudents()) {
+            throw new IllegalArgumentException("The number of students can not be less than the minimum number");
+        }
         timetable.setStatus(TimetableStatus.STARTED);
         timeTableRepository.update(timetable.getId(), timetable);
     }
