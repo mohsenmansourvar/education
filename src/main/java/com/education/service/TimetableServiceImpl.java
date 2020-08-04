@@ -220,6 +220,9 @@ public class TimetableServiceImpl implements TimetableService {
         if (timetable.getStudents().size() < timetable.getMinStudents()) {
             throw new IllegalArgumentException("The number of students can not be less than the minimum number");
         }
+        if (timetable.getStudents().size()>timetable.getMaxStudents()){
+            throw new IllegalArgumentException("The number of students can not be more than the maximum number");
+        }
         timetable.setStatus(TimetableStatus.STARTED);
         timeTableRepository.update(timetable.getId(), timetable);
     }
