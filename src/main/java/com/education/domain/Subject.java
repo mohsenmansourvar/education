@@ -11,8 +11,6 @@ public class Subject {
     private Long id;
     private String name;
     private int unitNumber;
-    @ManyToMany
-    private List<Student> students = new ArrayList<>();
 
     public Long getId() {
         return id;
