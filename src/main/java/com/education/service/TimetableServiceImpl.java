@@ -140,7 +140,7 @@ public class TimetableServiceImpl implements TimetableService {
 
 
     public void validateTargetTimetableCapacity(Timetable target) {
-        boolean isCapacityFull = target.getStudents().size() > target.getCapacity();
+        boolean isCapacityFull = target.getStudents().size() > target.getMaxStudents();
 
         if (isCapacityFull) {
             throw new IllegalArgumentException("The capacity of timetable is full");
@@ -233,7 +233,7 @@ public class TimetableServiceImpl implements TimetableService {
     }
 
     public void isTimetableCapacityNegative(Timetable timetable) {
-        if (timetable.getCapacity() <= 0) {
+        if (timetable.getMaxStudents() <= 0) {
             throw new IllegalArgumentException("The field of capacity should be full");
         }
     }

@@ -69,7 +69,7 @@ public class SampleBuilder {
         timetable1.setStart(LocalTime.of(7, 0));
         timetable1.setEnd(LocalTime.of(8, 30));
         timetable1.setDate(LocalDate.now());
-        timetable1.setCapacity(20);
+        timetable1.setMaxStudents(5);
         timetable1.setMinStudents(3);
         return timetable1;
     }
@@ -79,7 +79,7 @@ public class SampleBuilder {
         timetable2.setStart(LocalTime.of(9, 0));
         timetable2.setEnd(LocalTime.of(10, 30));
         timetable2.setDate(LocalDate.now());
-        timetable2.setCapacity(20);
+        timetable2.setMaxStudents(5);
         timetable2.setMinStudents(3);
         return timetable2;
     }
@@ -89,7 +89,7 @@ public class SampleBuilder {
         timetable3.setStart(LocalTime.of(11, 0));
         timetable3.setEnd(LocalTime.of(12, 30));
         timetable3.setDate(LocalDate.now());
-        timetable3.setCapacity(20);
+        timetable3.setMaxStudents(5);
         timetable3.setMinStudents(3);
         return timetable3;
     }
@@ -99,7 +99,7 @@ public class SampleBuilder {
         timetable4.setStart(LocalTime.of(13, 0));
         timetable4.setEnd(LocalTime.of(14, 30));
         timetable4.setDate(LocalDate.now());
-        timetable4.setCapacity(20);
+        timetable4.setMaxStudents(5);
         timetable4.setMinStudents(3);
         return timetable4;
     }
@@ -109,7 +109,7 @@ public class SampleBuilder {
         timetable5.setStart(LocalTime.of(7, 0));
         timetable5.setEnd(LocalTime.of(8, 30));
         timetable5.setDate(LocalDate.now().plusDays(1));
-        timetable5.setCapacity(20);
+        timetable5.setMaxStudents(5);
         timetable5.setMinStudents(3);
         return timetable5;
     }
@@ -119,7 +119,7 @@ public class SampleBuilder {
         timetable6.setStart(LocalTime.of(7, 0));
         timetable6.setEnd(LocalTime.of(8, 30));
         timetable6.setDate(LocalDate.now());
-        timetable6.setCapacity(20);
+        timetable6.setMaxStudents(5);
         timetable6.setMinStudents(3);
         return timetable6;
     }
@@ -129,7 +129,7 @@ public class SampleBuilder {
         timetable7.setStart(LocalTime.of(6, 0));
         timetable7.setEnd(LocalTime.of(7, 30));
         timetable7.setDate(LocalDate.now());
-        timetable7.setCapacity(20);
+        timetable7.setMaxStudents(5);
         timetable7.setMinStudents(3);
         return timetable7;
     }

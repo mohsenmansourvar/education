@@ -22,7 +22,7 @@ public class TimetableBuilder {
     }
 
     public TimetableBuilder capacity(int capacity) {
-        timetable.setCapacity(capacity);
+        timetable.setMaxStudents(capacity);
         return this;
     }
 
