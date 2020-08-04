@@ -3,7 +3,6 @@ package com.education.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Class {
@@ -12,10 +11,6 @@ public class Class {
     private Long id;
     private String classNumber;
     private int capacity;
-    @ManyToOne
-    private Student student;
-    @ManyToOne
-    private Teacher teacher;
 
     public Long getId() {
         return id;
@@ -41,19 +36,4 @@ public class Class {
         this.capacity = capacity;
     }
 
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
-
-    public Teacher getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
-    }
 }
