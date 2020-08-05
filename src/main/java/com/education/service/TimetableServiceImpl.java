@@ -134,7 +134,6 @@ public class TimetableServiceImpl implements TimetableService {
                     throw new IllegalArgumentException("there is exactly the same target");
                 }
             }
-
         }
     }
 
@@ -148,6 +147,9 @@ public class TimetableServiceImpl implements TimetableService {
     }
 
     public void addStudentToTargetTimetable(Long studentId, Timetable target) {
+        if (target.getStatus().equals(TimetableStatus.STARTED)) {
+            throw new IllegalArgumentException("In this status, student can not be added to the timetable");
+        }
         Student student = studentService.getById(studentId);
         List<Student> students = target.getStudents();
         students.add(student);
@@ -220,7 +222,7 @@ public class TimetableServiceImpl implements TimetableService {
         if (timetable.getStudents().size() < timetable.getMinStudents()) {
             throw new IllegalArgumentException("The number of students can not be less than the minimum number");
         }
-        if (timetable.getStudents().size()>timetable.getMaxStudents()){
+        if (timetable.getStudents().size() > timetable.getMaxStudents()) {
             throw new IllegalArgumentException("The number of students can not be more than the maximum number");
         }
         timetable.setStatus(TimetableStatus.STARTED);

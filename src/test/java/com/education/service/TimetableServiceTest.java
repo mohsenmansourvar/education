@@ -984,6 +984,8 @@ timetable.end <= e
         Timetable timetable1 = SampleBuilder.timetable1();
         timetable1.setTeacher(teacher1);
         timetable1.getStudents().add(student1);
+        timetable1.getStudents().add(student1);
+        timetable1.getStudents().add(student1);
         timetable1.setRoom(room1);
         timeTableService.save(timetable1);
 
@@ -996,8 +998,9 @@ timetable.end <= e
         assertNotNull(timetableById);
         assertEquals(TimetableStatus.STARTED, timetableById.getStatus());
     }
+
     @Test
-    public void timetableCannotStartWithLessThanMinimumStudents(){
+    public void timetableCannotStartWithLessThanMinimumStudents() {
         Teacher teacher1 = SampleBuilder.teacher1();
         teacherService.save(teacher1);
 
@@ -1031,8 +1034,9 @@ timetable.end <= e
         assertNotNull(timetableById);
         assertEquals(TimetableStatus.STARTED, timetableById.getStatus());
     }
+
     @Test
-    public void timetableCannotStartWithMoreThanMaximumStudents(){
+    public void timetableCannotStartWithMoreThanMaximumStudents() {
         Teacher teacher1 = SampleBuilder.teacher1();
         teacherService.save(teacher1);
 
@@ -1065,6 +1069,34 @@ timetable.end <= e
 
         assertNotNull(timetableById);
         assertEquals(TimetableStatus.STARTED, timetableById.getStatus());
+    }
+
+    @Test
+    public void registerStudentInTimetableInStartStatus() {
+        Student student = SampleBuilder.student1();
+        studentService.save(student);
+
+        Timetable timetable1 = SampleBuilder.timetable1();
+        timetable1.getStudents().add(student);
+        timeTableService.save(timetable1);
+
+        Timetable timetable2 = SampleBuilder.timetable2();
+        timetable2.getStudents().add(student);
+        timeTableService.save(timetable2);
+
+        Timetable timetable3 = SampleBuilder.timetable3();
+        timetable3.getStudents().add(student);
+        timeTableService.save(timetable3);
+
+        Timetable timetable4 = SampleBuilder.timetable4();
+        timetable4.setStatus(TimetableStatus.STARTED);
+        timeTableService.save(timetable4);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            timeTableService.addStudentToTimetable(timetable4.getId(), student.getId());
+
+        });
     }
 }
+
 
