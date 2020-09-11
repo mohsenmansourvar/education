@@ -4,6 +4,8 @@ import com.education.domain.Student;
 import com.education.domain.Timetable;
 import com.education.domain.TimetableStatus;
 import com.education.repository.TimetableRepository;
+import com.mysql.cj.protocol.x.Notice;
+import org.springframework.context.annotation.Scope;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

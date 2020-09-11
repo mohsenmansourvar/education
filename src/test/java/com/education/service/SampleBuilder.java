@@ -1,12 +1,12 @@
 package com.education.service;
 
+import com.education.domain.*;
 import com.education.domain.Class;
-import com.education.domain.Student;
-import com.education.domain.Teacher;
-import com.education.domain.Timetable;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Arrays;
+import java.util.List;
 
 public class SampleBuilder {
     public static Teacher teacher1() {
@@ -65,73 +65,430 @@ public class SampleBuilder {
     }
 
     public static Timetable timetable1() {
-        Timetable timetable1 = new Timetable();
-        timetable1.setStart(LocalTime.of(7, 0));
-        timetable1.setEnd(LocalTime.of(8, 30));
-        timetable1.setDate(LocalDate.now());
-        timetable1.setMaxStudents(5);
-        timetable1.setMinStudents(3);
-        return timetable1;
+        return Timetable.builder()
+                .start(LocalTime.of(7, 0))
+                .end(LocalTime.of(8, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
+    }
+
+    public static Timetable timetable1(Teacher teacher) {
+        return Timetable.builder()
+                .start(LocalTime.of(7, 0))
+                .end(LocalTime.of(8, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .teacher(teacher)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
+    }
+
+    public static Timetable timetable1(List<Student> students) {
+        return Timetable.builder()
+                .start(LocalTime.of(7, 0))
+                .end(LocalTime.of(8, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .students(students)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
+    }
+
+    public static Timetable timetable1(Class room) {
+        return Timetable.builder()
+                .start(LocalTime.of(7, 0))
+                .end(LocalTime.of(8, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .room(room)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
+    }
+
+    public static Timetable timetable1(Teacher teacher, List<Student> students, Class room) {
+        return Timetable.builder()
+                .start(LocalTime.of(7, 0))
+                .end(LocalTime.of(8, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .teacher(teacher)
+                .students(students)
+                .room(room)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
     }
 
     public static Timetable timetable2() {
-        Timetable timetable2 = new Timetable();
-        timetable2.setStart(LocalTime.of(9, 0));
-        timetable2.setEnd(LocalTime.of(10, 30));
-        timetable2.setDate(LocalDate.now());
-        timetable2.setMaxStudents(5);
-        timetable2.setMinStudents(3);
-        return timetable2;
+        return Timetable.builder()
+                .start(LocalTime.of(9, 0))
+                .end(LocalTime.of(10, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
+    }
+
+    public static Timetable timetable2(Teacher teacher) {
+        return Timetable.builder()
+                .start(LocalTime.of(9, 0))
+                .end(LocalTime.of(10, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .teacher(teacher)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
+    }
+
+    public static Timetable timetable2(List<Student> students) {
+        return Timetable.builder()
+                .start(LocalTime.of(9, 0))
+                .end(LocalTime.of(10, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .students(students)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
+    }
+
+    public static Timetable timetable2(Class room) {
+        return Timetable.builder()
+                .start(LocalTime.of(9, 0))
+                .end(LocalTime.of(10, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .room(room)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
+    }
+
+    public static Timetable timetable2(Teacher teacher, List<Student> students, Class room) {
+        return Timetable.builder()
+                .start(LocalTime.of(9, 0))
+                .end(LocalTime.of(10, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .teacher(teacher)
+                .students(students)
+                .room(room)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
     }
 
     public static Timetable timetable3() {
-        Timetable timetable3 = new Timetable();
-        timetable3.setStart(LocalTime.of(11, 0));
-        timetable3.setEnd(LocalTime.of(12, 30));
-        timetable3.setDate(LocalDate.now());
-        timetable3.setMaxStudents(5);
-        timetable3.setMinStudents(3);
-        return timetable3;
+        return Timetable.builder()
+                .start(LocalTime.of(11, 0))
+                .end(LocalTime.of(12, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
+    }
+
+    public static Timetable timetable3(Teacher teacher) {
+        return Timetable.builder()
+                .start(LocalTime.of(11, 0))
+                .end(LocalTime.of(12, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .teacher(teacher)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
+    }
+
+    public static Timetable timetable3(List<Student> students) {
+        return Timetable.builder()
+                .start(LocalTime.of(11, 0))
+                .end(LocalTime.of(12, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .students(students)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
+    }
+
+    public static Timetable timetable3(Class room) {
+        return Timetable.builder()
+                .start(LocalTime.of(11, 0))
+                .end(LocalTime.of(12, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .room(room)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
+    }
+
+    public static Timetable timetable3(Teacher teacher, List<Student> students, Class room) {
+        return Timetable.builder()
+                .start(LocalTime.of(11, 0))
+                .end(LocalTime.of(12, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .teacher(teacher)
+                .students(students)
+                .room(room)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
     }
 
     public static Timetable timetable4() {
-        Timetable timetable4 = new Timetable();
-        timetable4.setStart(LocalTime.of(13, 0));
-        timetable4.setEnd(LocalTime.of(14, 30));
-        timetable4.setDate(LocalDate.now());
-        timetable4.setMaxStudents(5);
-        timetable4.setMinStudents(3);
-        return timetable4;
+        return Timetable.builder()
+                .start(LocalTime.of(13, 0))
+                .end(LocalTime.of(14, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
+    }
+
+    public static Timetable timetable4(Teacher teacher) {
+        return Timetable.builder()
+                .start(LocalTime.of(13, 0))
+                .end(LocalTime.of(14, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .teacher(teacher)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
+    }
+
+    public static Timetable timetable4(List<Student> students) {
+        return Timetable.builder()
+                .start(LocalTime.of(13, 0))
+                .end(LocalTime.of(14, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .students(students)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
+    }
+
+    public static Timetable timetable4(Class room) {
+        return Timetable.builder()
+                .start(LocalTime.of(13, 0))
+                .end(LocalTime.of(14, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .room(room)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
+    }
+
+    public static Timetable timetable4(Teacher teacher, List<Student> students, Class room) {
+        return Timetable.builder()
+                .start(LocalTime.of(13, 0))
+                .end(LocalTime.of(14, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .teacher(teacher)
+                .students(students)
+                .room(room)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
     }
 
     public static Timetable timetable5() {
-        Timetable timetable5 = new Timetable();
-        timetable5.setStart(LocalTime.of(7, 0));
-        timetable5.setEnd(LocalTime.of(8, 30));
-        timetable5.setDate(LocalDate.now().plusDays(1));
-        timetable5.setMaxStudents(5);
-        timetable5.setMinStudents(3);
-        return timetable5;
+        return Timetable.builder()
+                .start(LocalTime.of(7, 0))
+                .end(LocalTime.of(8, 30))
+                .date(LocalDate.now().plusDays(1))
+                .minStudents(3)
+                .maxStudents(5)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
+    }
+
+    public static Timetable timetable5(Teacher teacher) {
+        return Timetable.builder()
+                .start(LocalTime.of(7, 0))
+                .end(LocalTime.of(8, 30))
+                .date(LocalDate.now().plusDays(1))
+                .minStudents(3)
+                .maxStudents(5)
+                .teacher(teacher)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
+    }
+
+    public static Timetable timetable5(List<Student> students) {
+        return Timetable.builder()
+                .start(LocalTime.of(7, 0))
+                .end(LocalTime.of(8, 30))
+                .date(LocalDate.now().plusDays(1))
+                .minStudents(3)
+                .maxStudents(5)
+                .students(students)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
+    }
+
+    public static Timetable timetable5(Class room) {
+        return Timetable.builder()
+                .start(LocalTime.of(7, 0))
+                .end(LocalTime.of(8, 30))
+                .date(LocalDate.now().plusDays(1))
+                .minStudents(3)
+                .maxStudents(5)
+                .room(room)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
+    }
+
+    public static Timetable timetable5(Teacher teacher, List<Student> students, Class room) {
+        return Timetable.builder()
+                .start(LocalTime.of(7, 0))
+                .end(LocalTime.of(8, 30))
+                .date(LocalDate.now().plusDays(1))
+                .minStudents(3)
+                .maxStudents(5)
+                .teacher(teacher)
+                .students(students)
+                .room(room)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
     }
 
     public static Timetable timetable6() {
-        Timetable timetable6 = new Timetable();
-        timetable6.setStart(LocalTime.of(7, 0));
-        timetable6.setEnd(LocalTime.of(8, 30));
-        timetable6.setDate(LocalDate.now());
-        timetable6.setMaxStudents(5);
-        timetable6.setMinStudents(3);
-        return timetable6;
+        return Timetable.builder()
+                .start(LocalTime.of(7, 0))
+                .end(LocalTime.of(8, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
+    }
+
+    public static Timetable timetable6(Teacher teacher) {
+        return Timetable.builder()
+                .start(LocalTime.of(7, 0))
+                .end(LocalTime.of(8, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .teacher(teacher)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
+    }
+
+    public static Timetable timetable6(List<Student> students) {
+        return Timetable.builder()
+                .start(LocalTime.of(7, 0))
+                .end(LocalTime.of(8, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .students(students)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
+    }
+
+    public static Timetable timetable6(Class room) {
+        return Timetable.builder()
+                .start(LocalTime.of(7, 0))
+                .end(LocalTime.of(8, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .room(room)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
+    }
+
+    public static Timetable timetable6(Teacher teacher, List<Student> students, Class room) {
+        return Timetable.builder()
+                .start(LocalTime.of(7, 0))
+                .end(LocalTime.of(8, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .teacher(teacher)
+                .students(students)
+                .room(room)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
     }
 
     public static Timetable timetable7() {
-        Timetable timetable7 = new Timetable();
-        timetable7.setStart(LocalTime.of(6, 0));
-        timetable7.setEnd(LocalTime.of(7, 30));
-        timetable7.setDate(LocalDate.now());
-        timetable7.setMaxStudents(5);
-        timetable7.setMinStudents(3);
-        return timetable7;
+        return Timetable.builder()
+                .start(LocalTime.of(6, 0))
+                .end(LocalTime.of(7, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
+    }
+
+    public static Timetable timetable7(Teacher teacher) {
+        return Timetable.builder()
+                .start(LocalTime.of(6, 0))
+                .end(LocalTime.of(7, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .teacher(teacher)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
+    }
+
+    public static Timetable timetable7(List<Student> students) {
+        return Timetable.builder()
+                .start(LocalTime.of(6, 0))
+                .end(LocalTime.of(7, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .students(students)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
+    }
+
+    public static Timetable timetable7(Class room) {
+        return Timetable.builder()
+                .start(LocalTime.of(6, 0))
+                .end(LocalTime.of(7, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .room(room)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
+    }
+
+    public static Timetable timetable7(Teacher teacher, List<Student> students, Class room) {
+        return Timetable.builder()
+                .start(LocalTime.of(6, 0))
+                .end(LocalTime.of(7, 30))
+                .date(LocalDate.now())
+                .minStudents(3)
+                .maxStudents(5)
+                .teacher(teacher)
+                .students(students)
+                .room(room)
+                .status(TimetableStatus.IN_PROGRESS)
+                .build();
     }
 
     public static Class room1() {
