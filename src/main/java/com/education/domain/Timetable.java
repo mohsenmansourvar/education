@@ -1,18 +1,20 @@
 package com.education.domain;
 
-import lombok.EqualsAndHashCode;
-import lombok.NonNull;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
-@EqualsAndHashCode
-@ToString
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
+
 public class Timetable {
     @Id
     @GeneratedValue
@@ -21,104 +23,16 @@ public class Timetable {
     private LocalTime end;
     private LocalDate date;
     private int minStudents;
-    private TimetableStatus status = TimetableStatus.IN_PROGRESS;
-    @NonNull
     private int maxStudents;
+    private TimetableStatus status = TimetableStatus.IN_PROGRESS;
     @ManyToOne
     private Subject subject;
     @ManyToOne
     private Teacher teacher;
     @ManyToMany
     private List<Student> students = new ArrayList<>();
+
     @OneToOne
     private Class room;
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LocalTime getStart() {
-        return start;
-    }
-
-    public void setStart(LocalTime start) {
-        this.start = start;
-    }
-
-    public LocalTime getEnd() {
-        return end;
-    }
-
-    public void setEnd(LocalTime end) {
-        this.end = end;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public Subject getSubject() {
-        return subject;
-    }
-
-    public void setSubject(Subject subject) {
-        this.subject = subject;
-    }
-
-    public Teacher getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
-    }
-
-    public List<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
-
-    public int getMaxStudents() {
-        return maxStudents;
-    }
-
-    public void setMaxStudents(int capacity) {
-        this.maxStudents = capacity;
-    }
-
-    public TimetableStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(TimetableStatus status) {
-        this.status = status;
-    }
-
-    public Class getRoom() {
-        return room;
-    }
-
-    public void setRoom(Class room) {
-        this.room = room;
-    }
-
-    public int getMinStudents() {
-        return minStudents;
-    }
-
-    public void setMinStudents(int minStudent) {
-        this.minStudents = minStudent;
-    }
 }

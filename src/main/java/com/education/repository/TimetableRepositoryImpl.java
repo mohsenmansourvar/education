@@ -62,7 +62,7 @@ public class TimetableRepositoryImpl implements TimetableRepository {
         if (newTimetable.getTeacher() != null) {
             timetable.setTeacher(newTimetable.getTeacher());
         }
-        if(newTimetable.getStatus() != null){
+        if (newTimetable.getStatus() != null) {
             timetable.setStatus(newTimetable.getStatus());
         }
         session.update(timetable);
