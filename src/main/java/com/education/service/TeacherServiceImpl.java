@@ -6,7 +6,11 @@ import com.education.repository.TeacherRepository;
 import java.util.List;
 
 public class TeacherServiceImpl implements TeacherService {
-    private TeacherRepository teacherRepository;
+    private final TeacherRepository teacherRepository;
+
+    public TeacherServiceImpl(TeacherRepository teacherRepository) {
+        this.teacherRepository = teacherRepository;
+    }
 
     @Override
     public void save(Teacher teacher) {
@@ -31,9 +35,5 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public List<Teacher> getAllTeachers() {
         return teacherRepository.getAllTeachers();
-    }
-
-    public void setTeacherRepository(TeacherRepository teacherRepository) {
-        this.teacherRepository = teacherRepository;
     }
 }

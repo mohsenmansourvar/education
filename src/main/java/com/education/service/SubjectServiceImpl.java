@@ -2,12 +2,15 @@ package com.education.service;
 
 import com.education.domain.Subject;
 import com.education.repository.SubjectRepository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 public class SubjectServiceImpl implements SubjectService {
-    private SubjectRepository subjectRepository;
+    private final SubjectRepository subjectRepository;
+
+    public SubjectServiceImpl(SubjectRepository subjectRepository) {
+        this.subjectRepository = subjectRepository;
+    }
 
     @Override
     public List<Subject> getAllSubjects() {
@@ -26,15 +29,11 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public void update(long id, Subject newSubject) {
-        subjectRepository.update(id,newSubject);
+        subjectRepository.update(id, newSubject);
     }
 
     @Override
     public void delete(long id) {
         subjectRepository.delete(id);
-    }
-
-    public void setSubjectRepository(SubjectRepository subjectRepository) {
-        this.subjectRepository = subjectRepository;
     }
 }

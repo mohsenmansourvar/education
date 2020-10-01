@@ -25,9 +25,7 @@ public class EducationConfiguration {
 
     @Bean
     public StudentServiceImpl studentService(StudentRepository studentRepository) {
-        StudentServiceImpl studentService = new StudentServiceImpl();
-        studentService.setStudentRepository(studentRepository);
-        return studentService;
+        return new StudentServiceImpl(studentRepository);
     }
 
     @Bean
@@ -39,9 +37,8 @@ public class EducationConfiguration {
 
     @Bean
     public TeacherServiceImpl teacherService(TeacherRepository teacherRepository) {
-        TeacherServiceImpl teacherService = new TeacherServiceImpl();
-        teacherService.setTeacherRepository(teacherRepository);
-        return teacherService;
+        return new TeacherServiceImpl(teacherRepository);
+
     }
 
     @Bean
@@ -53,9 +50,7 @@ public class EducationConfiguration {
 
     @Bean
     public SubjectServiceImpl subjectService(SubjectRepository subjectRepository) {
-        SubjectServiceImpl subjectService = new SubjectServiceImpl();
-        subjectService.setSubjectRepository(subjectRepository);
-        return subjectService;
+        return new SubjectServiceImpl(subjectRepository);
     }
 
     @Bean
@@ -67,9 +62,7 @@ public class EducationConfiguration {
 
     @Bean
     public ClassServiceImpl classService(ClassRepository classRepository) {
-        ClassServiceImpl classService = new ClassServiceImpl();
-        classService.setClassRepository(classRepository);
-        return classService;
+        return new ClassServiceImpl(classRepository);
     }
 
     @Bean
@@ -81,11 +74,7 @@ public class EducationConfiguration {
 
     @Bean
     public TimetableServiceImpl timeTableService(TimetableRepository timeTableRepository, StudentService studentService) {
-        TimetableServiceImpl timeTableService = new TimetableServiceImpl();
-        timeTableService.setTimeTableRepository(timeTableRepository);
-        timeTableService.setStudentService(studentService);
-        return timeTableService;
-
+        return new TimetableServiceImpl(timeTableRepository, studentService);
     }
 
     @Bean
