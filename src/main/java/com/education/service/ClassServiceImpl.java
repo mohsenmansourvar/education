@@ -6,7 +6,11 @@ import com.education.repository.ClassRepository;
 import java.util.List;
 
 public class ClassServiceImpl implements ClassService {
-    private ClassRepository classRepository;
+    private final ClassRepository classRepository;
+
+    public ClassServiceImpl(ClassRepository classRepository) {
+        this.classRepository = classRepository;
+    }
 
     @Override
     public void save(Class aClass) {
@@ -25,15 +29,11 @@ public class ClassServiceImpl implements ClassService {
 
     @Override
     public void update(long id, Class newRoom) {
-        classRepository.update(id,newRoom);
+        classRepository.update(id, newRoom);
     }
 
     @Override
     public List<Class> getAllRooms() {
         return classRepository.getAllRooms();
-    }
-
-    public void setClassRepository(ClassRepository classRepository) {
-        this.classRepository = classRepository;
     }
 }

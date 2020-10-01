@@ -6,16 +6,15 @@ import com.education.repository.StudentRepository;
 import java.util.List;
 
 public class StudentServiceImpl implements StudentService {
-    private StudentRepository studentRepository;
+    private final StudentRepository studentRepository;
 
+    public StudentServiceImpl(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
 
     @Override
     public void save(Student student) {
         studentRepository.save(student);
-    }
-
-    public void setStudentRepository(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
     }
 
     @Override

@@ -10,8 +10,13 @@ import java.time.LocalTime;
 import java.util.List;
 
 public class TimetableServiceImpl implements TimetableService {
-    private TimetableRepository timeTableRepository;
-    private StudentService studentService;
+    private final TimetableRepository timeTableRepository;
+    private final StudentService studentService;
+
+    public TimetableServiceImpl(TimetableRepository timeTableRepository, StudentService studentService) {
+        this.timeTableRepository = timeTableRepository;
+        this.studentService = studentService;
+    }
 
     @Override
     public void save(Timetable timetable) {
@@ -227,14 +232,6 @@ public class TimetableServiceImpl implements TimetableService {
         }
         timetable.setStatus(TimetableStatus.STARTED);
         timeTableRepository.update(timetable.getId(), timetable);
-    }
-
-    public void setTimeTableRepository(TimetableRepository timeTableRepository) {
-        this.timeTableRepository = timeTableRepository;
-    }
-
-    public void setStudentService(StudentService studentService) {
-        this.studentService = studentService;
     }
 
     public void isTimetableCapacityNegative(Timetable timetable) {
