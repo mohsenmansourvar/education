@@ -16,6 +16,15 @@ public class SubjectRepositoryImpl implements SubjectRepository {
         session.save(subject);
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public Subject getById(long id) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Subject where id = :id", Subject.class)
+                .setParameter("id", id)
+                .uniqueResult();
+    }
+
     @Override
     public void update(long id, Subject newSubject) {
         Session session = sessionFactory.getCurrentSession();
@@ -36,20 +45,11 @@ public class SubjectRepositoryImpl implements SubjectRepository {
         session.delete(subject);
     }
 
-    @Transactional(readOnly = true)
-    @Override
-    public Subject getById(long id) {
-        Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from Subject where id = :id", Subject.class)
-                .setParameter("id", id)
-                .uniqueResult();
-    }
-
     @Override
     @Transactional(readOnly = true)
     public List<Subject> getAllSubjects() {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from Subject", Subject.class)
+        return session.createQuery("from Subject",Subject.class)
                 .list();
     }
 

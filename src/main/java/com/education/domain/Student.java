@@ -6,7 +6,6 @@ import javax.persistence.Id;
 
 @Entity
 public class Student {
-
     @Id
     @GeneratedValue
     private Long id;

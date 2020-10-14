@@ -5,7 +5,6 @@ import com.education.service.*;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -16,7 +15,6 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories
 public class EducationConfiguration {
     @Bean
     public StudentRepositoryImpl studentRepository(SessionFactory sessionFactory) {
@@ -55,12 +53,12 @@ public class EducationConfiguration {
         return new SubjectServiceImpl(subjectRepository);
     }
 
-   /* @Bean
+    @Bean
     public ClassRepositoryImpl classRepository(SessionFactory sessionFactory) {
         ClassRepositoryImpl classRepository = new ClassRepositoryImpl();
         classRepository.setSessionFactory(sessionFactory);
         return classRepository;
-    }*/
+    }
 
     @Bean
     public ClassServiceImpl classService(ClassRepository classRepository) {
@@ -97,7 +95,7 @@ public class EducationConfiguration {
         return properties;
     }
 
-    @Bean(name="entityManagerFactory")
+    @Bean
     public LocalSessionFactoryBean sessionFactory(DataSource dataSource, Properties properties) {
         LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
         localSessionFactoryBean.setDataSource(dataSource);

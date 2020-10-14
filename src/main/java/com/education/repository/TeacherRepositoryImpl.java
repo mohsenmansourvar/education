@@ -9,13 +9,20 @@ import java.util.List;
 
 @Transactional
 public class TeacherRepositoryImpl implements TeacherRepository {
-
     private SessionFactory sessionFactory;
 
     @Override
     public void save(Teacher teacher) {
         Session session = sessionFactory.getCurrentSession();
         session.save(teacher);
+    }
+
+    @Override
+    public Teacher getById(long id) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Teacher where id= :id", Teacher.class)
+                .setParameter("id", id)
+                .uniqueResult();
     }
 
     @Override
@@ -48,14 +55,6 @@ public class TeacherRepositoryImpl implements TeacherRepository {
         Session session = sessionFactory.getCurrentSession();
         Teacher teacher = getById(id);
         session.delete(teacher);
-    }
-
-    @Override
-    public Teacher getById(long id) {
-        Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from Teacher where id= :id", Teacher.class)
-                .setParameter("id", id)
-                .uniqueResult();
     }
 
     @Override

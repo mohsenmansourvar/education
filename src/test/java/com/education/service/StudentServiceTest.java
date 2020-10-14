@@ -13,13 +13,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
-class StudentServiceTest {
-
+public class StudentServiceTest {
     @Autowired
     private StudentService studentService;
 
     @Test
-    void save() {
+    public void save() {
         Student student = SampleBuilder.student3();
         studentService.save(student);
         Student studentById = studentService.getById(student.getId());
@@ -34,7 +33,7 @@ class StudentServiceTest {
     }
 
     @Test
-    void delete() {
+    public void delete() {
         Student student = SampleBuilder.student3();
         studentService.save(student);
         studentService.delete(student.getId());
@@ -44,7 +43,7 @@ class StudentServiceTest {
     }
 
     @Test
-    void update() {
+    public void update() {
         Student student1 = SampleBuilder.student3();
         studentService.save(student1);
 
@@ -65,7 +64,7 @@ class StudentServiceTest {
     }
 
     @Test
-    void getById() {
+    public void getById() {
         Student student = new StudentBuilder()
                 .firstName("Mary")
                 .lastName("Ebrahimi")
@@ -89,7 +88,7 @@ class StudentServiceTest {
     }
 
     @Test
-    void getAllStudents() {
+    public void getAllStudents() {
         Student student1 = new StudentBuilder()
                 .firstName("Mary")
                 .lastName("Ebrahimi")

@@ -12,13 +12,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
-class SubjectServiceTest {
-
+public class SubjectServiceTest {
     @Autowired
     private SubjectService subjectService;
 
     @Test
-    void save() {
+    public void save() {
         Subject subject = new Subject();
         subject.setName("Math");
         subject.setUnitNumber(3);
@@ -33,7 +32,7 @@ class SubjectServiceTest {
     }
 
     @Test
-    void getById() {
+    public void getById() {
         Subject subject = new Subject();
         subject.setName("English");
         subject.setUnitNumber(2);
@@ -48,7 +47,7 @@ class SubjectServiceTest {
     }
 
     @Test
-    void update() {
+    public void update() {
         Subject subject = new Subject();
         subject.setName("Math");
         subject.setUnitNumber(2);
@@ -68,7 +67,7 @@ class SubjectServiceTest {
     }
 
     @Test
-    void delete() {
+    public void delete() {
         Subject subject = new Subject();
         subject.setName("Math");
         subject.setUnitNumber(2);
@@ -83,7 +82,7 @@ class SubjectServiceTest {
     }
 
     @Test
-    void getAllSubjects() {
+    public void getAllSubjects() {
         Subject subject = new Subject();
         subject.setName("Math");
         subject.setUnitNumber(3);

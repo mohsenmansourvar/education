@@ -1,14 +1,14 @@
 package com.education.service;
 
-import com.education.domain.Class;
 import com.education.domain.*;
+import com.education.domain.Class;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.List;
 
 public class SampleBuilder {
-
     public static Teacher teacher1() {
         Teacher teacher1 = new Teacher();
         teacher1.setFirstName("Reza");

@@ -6,7 +6,6 @@ import com.education.repository.SubjectRepository;
 import java.util.List;
 
 public class SubjectServiceImpl implements SubjectService {
-
     private final SubjectRepository subjectRepository;
 
     public SubjectServiceImpl(SubjectRepository subjectRepository) {
@@ -14,8 +13,18 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
+    public List<Subject> getAllSubjects() {
+        return subjectRepository.getAllSubjects();
+    }
+
+    @Override
     public void save(Subject subject) {
         subjectRepository.save(subject);
+    }
+
+    @Override
+    public Subject getById(long id) {
+        return subjectRepository.getById(id);
     }
 
     @Override
@@ -26,15 +35,5 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public void delete(long id) {
         subjectRepository.delete(id);
-    }
-
-    @Override
-    public Subject getById(long id) {
-        return subjectRepository.getById(id);
-    }
-
-    @Override
-    public List<Subject> getAllSubjects() {
-        return subjectRepository.getAllSubjects();
     }
 }

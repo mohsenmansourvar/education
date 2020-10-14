@@ -4,95 +4,97 @@ import com.education.domain.Class;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.jdbc.Sql;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TEST_METHOD;
 
 @SpringBootTest
-@Sql(executionPhase = AFTER_TEST_METHOD, value = "/sql/cleanup.sql")
-class ClassServiceTest {
-
+@Transactional
+public class ClassServiceTest {
     @Autowired
     private ClassService classService;
 
     @Test
-    void save() {
-        Class aClass = new Class();
-        aClass.setClassNumber("125");
-        aClass.setCapacity(45);
-        classService.save(aClass);
+    public void save() {
+        Class room = new Class();
+        room.setClassNumber("125");
+        room.setCapacity(45);
+        classService.save(room);
+        Long roomId = room.getId();
 
-        Class classById = classService.getById(aClass.getId());
+        Class roomById = classService.getById(roomId);
 
-        assertNotNull(classById);
-        assertEquals("125", classById.getClassNumber());
-        assertEquals(45, classById.getCapacity());
+        assertNotNull(roomById);
+        assertEquals("125", roomById.getClassNumber());
+        assertEquals(45, roomById.getCapacity());
     }
 
     @Test
-    void getById() {
-        Class aClass = new Class();
-        aClass.setClassNumber("123");
-        aClass.setCapacity(12);
-        classService.save(aClass);
+    public void getById() {
+        Class room = new Class();
+        room.setClassNumber("123");
+        room.setCapacity(12);
+        classService.save(room);
+        Long roomId = room.getId();
 
-        Class classById = classService.getById(aClass.getId());
+        Class roomById = classService.getById(roomId);
 
-        assertNotNull(classById);
-        assertEquals("123", classById.getClassNumber());
-        assertEquals(12, classById.getCapacity());
+        assertNotNull(roomById);
+        assertEquals("123", roomById.getClassNumber());
+        assertEquals(12, roomById.getCapacity());
     }
 
     @Test
-    void delete() {
-        Class aClass = new Class();
-        aClass.setClassNumber("111");
-        aClass.setCapacity(20);
-        classService.save(aClass);
+    public void delete() {
+        Class room = new Class();
+        room.setClassNumber("111");
+        room.setCapacity(20);
+        classService.save(room);
+        Long roomId = room.getId();
 
-        classService.delete(aClass.getId());
+        classService.delete(roomId);
 
-        assertThrows(IllegalArgumentException.class, () -> classService.getById(aClass.getId()));
+        Class roomById = classService.getById(roomId);
+
+        assertNull(roomById);
     }
 
     @Test
-    void update() {
-        Class aClass = new Class();
-        aClass.setClassNumber("111");
-        aClass.setCapacity(20);
-        classService.save(aClass);
-        Long roomId = aClass.getId();
+    public void update() {
+        Class room = new Class();
+        room.setClassNumber("111");
+        room.setCapacity(20);
+        classService.save(room);
+        Long roomId = room.getId();
 
-        Class aClass1 = new Class();
-        aClass1.setClassNumber("231");
+        Class newroom = new Class();
+        newroom.setClassNumber("231");
 
-        classService.update(roomId, aClass1);
+        classService.update(roomId, newroom);
 
-        Class classById = classService.getById(roomId);
+        Class roomById = classService.getById(roomId);
 
-        assertNotNull(classById);
-        assertEquals("231", classById.getClassNumber());
-        assertEquals(20, classById.getCapacity());
+        assertNotNull(roomById);
+        assertEquals("231", roomById.getClassNumber());
+        assertEquals(20, roomById.getCapacity());
     }
-
     @Test
-    void getAllClasses() {
-        Class aClass1 = new Class();
-        aClass1.setClassNumber("111");
-        aClass1.setCapacity(20);
-        classService.save(aClass1);
+    public void getAllRooms(){
+        Class room = new Class();
+        room.setClassNumber("111");
+        room.setCapacity(20);
+        classService.save(room);
 
-        Class aClass2 = new Class();
-        aClass2.setClassNumber("222");
-        aClass2.setCapacity(30);
-        classService.save(aClass2);
+        Class room1 = new Class();
+        room1.setClassNumber("222");
+        room1.setCapacity(30);
+        classService.save(room1);
 
-        List<Class> allClasses = classService.getAllClasses();
+        List<Class> allRooms = classService.getAllRooms();
 
-        assertNotNull(allClasses);
-        assertEquals(2, allClasses.size());
+        assertNotNull(allRooms);
+        assertEquals(2,allRooms.size());
     }
 }

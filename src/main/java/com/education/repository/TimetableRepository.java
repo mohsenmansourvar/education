@@ -9,14 +9,13 @@ import java.time.LocalTime;
 import java.util.List;
 
 public interface TimetableRepository {
-
     void save(Timetable timeTable);
 
-    void update(long id, Timetable newTimetable);
+    Timetable getById(long id);
 
     void delete(long id);
 
-    Timetable getById(long id);
+    void update(long id, Timetable newTimetable);
 
     List<Timetable> getAllTimetables();
 
@@ -37,4 +36,5 @@ public interface TimetableRepository {
     List<Student> getAllStudentsTimetable(long id);
 
     List<Timetable> getTimetablesByStatus(TimetableStatus status);
+
 }
