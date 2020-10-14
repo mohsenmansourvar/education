@@ -5,13 +5,14 @@ import com.education.domain.Teacher;
 import java.util.List;
 
 public interface TeacherService {
-    void save(Teacher teacher);
 
-    Teacher getById(long id);
+    void save(Teacher teacher);
 
     void update(long id, Teacher newTeacher);
 
     void delete(long id);
+
+    Teacher getById(long id);
 
     List<Teacher> getAllTeachers();
 }

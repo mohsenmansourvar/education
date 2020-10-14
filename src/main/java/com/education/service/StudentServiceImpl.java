@@ -6,6 +6,7 @@ import com.education.repository.StudentRepository;
 import java.util.List;
 
 public class StudentServiceImpl implements StudentService {
+
     private final StudentRepository studentRepository;
 
     public StudentServiceImpl(StudentRepository studentRepository) {
@@ -18,8 +19,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student getById(long id) {
-        return studentRepository.getById(id);
+    public void update(long id, Student newStudent) {
+        studentRepository.update(id, newStudent);
     }
 
     @Override
@@ -28,8 +29,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void update(long id, Student newStudent) {
-        studentRepository.update(id, newStudent);
+    public Student getById(long id) {
+        return studentRepository.getById(id);
     }
 
     @Override

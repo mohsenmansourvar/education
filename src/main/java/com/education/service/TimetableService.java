@@ -9,13 +9,14 @@ import java.time.LocalTime;
 import java.util.List;
 
 public interface TimetableService {
+
     void save(Timetable timeTable);
 
-    Timetable getById(long id);
+    void update(long id, Timetable newTimetable);
 
     void delete(long id);
 
-    void update(long id, Timetable newTimetable);
+    Timetable getById(long id);
 
     List<Timetable> getAllTimetables();
 

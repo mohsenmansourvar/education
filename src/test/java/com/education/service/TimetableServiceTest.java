@@ -16,19 +16,22 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
-public class TimetableServiceTest {
+class TimetableServiceTest {
 
     @Autowired
     private TimetableService timeTableService;
+
     @Autowired
     private TeacherService teacherService;
+
     @Autowired
     private StudentService studentService;
+
     @Autowired
     private ClassService classService;
 
     @Test
-    public void save() {
+    void save() {
         Timetable timetable = SampleBuilder.timetable1();
         timeTableService.save(timetable);
 
@@ -42,7 +45,7 @@ public class TimetableServiceTest {
     }
 
     @Test
-    public void getById() {
+    void getById() {
         Timetable timetable = SampleBuilder.timetable1();
         timeTableService.save(timetable);
 
@@ -56,7 +59,7 @@ public class TimetableServiceTest {
     }
 
     @Test
-    public void delete() {
+    void delete() {
         Timetable timetable = SampleBuilder.timetable1();
         timeTableService.save(timetable);
 
@@ -68,7 +71,7 @@ public class TimetableServiceTest {
     }
 
     @Test
-    public void update() {
+    void update() {
         Timetable timetable1 = Timetable.builder()
                 .start(LocalTime.of(7, 0))
                 .end(LocalTime.of(8, 30))
@@ -94,7 +97,7 @@ public class TimetableServiceTest {
     }
 
     @Test
-    public void getAllTimetables() {
+    void getAllTimetables() {
         Timetable timetable1 = SampleBuilder.timetable1();
         timeTableService.save(timetable1);
 
@@ -107,7 +110,6 @@ public class TimetableServiceTest {
         assertEquals(2, allTimetables.size());
     }
 
-    @Test
     /*
     1- create an object of Teacher class --> teacher:Teacher
     2- set the parameters of teacher
@@ -133,15 +135,14 @@ public class TimetableServiceTest {
     15- if t1 getStart  = 8 ?
     15- if t1 getEnd = 89:30 ?
     17- if t1 getDate = 6 ?
-
     */
-    public void getTimeTablesByTeacherId() {
+    @Test
+    void getTimeTablesByTeacherId() {
         Teacher teacher = SampleBuilder.teacher1();
         teacherService.save(teacher);
 
         Timetable timetable1 = SampleBuilder.timetable1(teacher);
         timeTableService.save(timetable1);
-
 
         Timetable timetable2 = SampleBuilder.timetable2();
         timeTableService.save(timetable2);
@@ -150,7 +151,6 @@ public class TimetableServiceTest {
         Timetable timetable3 = SampleBuilder.timetable3();
         timeTableService.save(timetable3);
         timetable3.setTeacher(teacher);
-
 
         List<Timetable> timetablesByTeacherId = timeTableService.getTimetablesByTeacherId(teacher.getId());
 
@@ -181,7 +181,7 @@ public class TimetableServiceTest {
     }
 
     @Test
-    public void getTimetablesByTeacherIds() {
+    void getTimetablesByTeacherIds() {
         Teacher teacher1 = SampleBuilder.teacher1();
         teacherService.save(teacher1);
 
@@ -199,7 +199,6 @@ public class TimetableServiceTest {
 
         Timetable timetable4 = SampleBuilder.timetable4(teacher2);
         timeTableService.save(timetable4);
-
 
         List<Long> ids = new ArrayList<>();
         ids.add(teacher1.getId());
@@ -237,23 +236,23 @@ public class TimetableServiceTest {
         assertEquals(teacher2.getId(), t3.getTeacher().getId());
         assertEquals(teacher2.getId(), t4.getTeacher().getId());
     }
-/*
 
-t1 = 7 - 8
-t2 = 8 - 9
-t3 = 9 - 10
-t4 = 10 - 11
+    /*
 
-s = 8
-e = 10
-timetable.start >= s
-timetable.end <= e
+    t1 = 7 - 8
+    t2 = 8 - 9
+    t3 = 9 - 10
+    t4 = 10 - 11
+
+    s = 8
+    e = 10
+    timetable.start >= s
+    timetable.end <= e
 
 
-* */
-
+    * */
     @Test
-    public void getTimetablesByTimeAndDate() {
+    void getTimetablesByTimeAndDate() {
         Timetable timetable1 = SampleBuilder.timetable1();
         timeTableService.save(timetable1);
 
@@ -275,7 +274,6 @@ timetable.end <= e
         Timetable t2 = timetablesByTimeAndDate.get(0);
         Timetable t3 = timetablesByTimeAndDate.get(1);
 
-
         assertEquals(expectedStartTimeT2, t2.getStart());
         assertEquals(expectedEndTimeT2, t2.getEnd());
         assertEquals(expectedStartTimeT3, t3.getStart());
@@ -283,7 +281,7 @@ timetable.end <= e
     }
 
     @Test
-    public void getTimetablesByWrongTeacherIds() {
+    void getTimetablesByWrongTeacherIds() {
         Teacher teacher1 = SampleBuilder.teacher1();
         teacherService.save(teacher1);
 
@@ -302,7 +300,7 @@ timetable.end <= e
     }
 
     @Test
-    public void getTimetableByDate() {
+    void getTimetableByDate() {
         Timetable timetable1 = SampleBuilder.timetable1();
         timeTableService.save(timetable1);
 
@@ -321,7 +319,7 @@ timetable.end <= e
     }
 
     @Test
-    public void getTimetablesWithoutTeacher() {
+    void getTimetablesWithoutTeacher() {
         Teacher teacher1 = SampleBuilder.teacher1();
         teacherService.save(teacher1);
 
@@ -340,14 +338,13 @@ timetable.end <= e
         Timetable timetable4 = SampleBuilder.timetable4();
         timeTableService.save(timetable4);
 
-
         List<Timetable> timetablesWithoutTeacher = timeTableService.getTimetablesWithoutTeacher();
 
         assertEquals(2, timetablesWithoutTeacher.size());
     }
 
     @Test
-    public void getTimetableWithWrongStudentId() {
+    void getTimetableWithWrongStudentId() {
         Student student = SampleBuilder.student1();
         studentService.save(student);
 
@@ -363,7 +360,7 @@ timetable.end <= e
     }
 
     @Test
-    public void getTimetableWithWrongTeacherId() {
+    void getTimetableWithWrongTeacherId() {
         Teacher teacher = SampleBuilder.teacher1();
         teacherService.save(teacher);
 
@@ -375,6 +372,7 @@ timetable.end <= e
         assertTrue(timetablesByTeacherId.isEmpty());
         assertEquals(0, timetablesByTeacherId.size());
     }
+
     /*
     "given"
     1-create a student -->student1:Student
@@ -395,9 +393,8 @@ timetable.end <= e
     14-students field of the first cell of timetablesWithoutStudent should be null
     15-students field of the second cell of timetablesWithoutStudent should be null
     */
-
     @Test
-    public void getTimetableWithoutStudent() {
+    void getTimetableWithoutStudent() {
         Student student1 = SampleBuilder.student1();
         studentService.save(student1);
 
@@ -460,7 +457,7 @@ timetable.end <= e
       13- assert trueStudent by firstName and LastName and .....
      */
     @Test
-    public void addStudentToTimetable() {
+    void addStudentToTimetable() {
         Student student1 = SampleBuilder.student1();
         studentService.save(student1);
 
@@ -476,7 +473,6 @@ timetable.end <= e
 
         Student student3 = SampleBuilder.student3();
         studentService.save(student3);//"given"
-
 
         timeTableService.addStudentToTimetable(timetable.getId(), student3.getId()); //"when"
         Timetable timetableById = timeTableService.getById(timetable.getId());//"then"
@@ -519,7 +515,7 @@ timetable.end <= e
     12- assert timetablesByStudentId by date and start and end
     */
     @Test
-    public void getTimetablesByStudentId() {
+    void getTimetablesByStudentId() {
         //given
         Student student = SampleBuilder.student1();
         studentService.save(student);
@@ -579,7 +575,7 @@ timetable.end <= e
 
     */
     @Test
-    public void getAllStudentsTimetable() {
+    void getAllStudentsTimetable() {
         Student student1 = SampleBuilder.student1();
         studentService.save(student1);
 
@@ -590,7 +586,6 @@ timetable.end <= e
         studentService.save(student3);
 
         List<Student> allStudents = studentService.getAllStudents();
-
 
         Timetable timetable = SampleBuilder.timetable1(allStudents);
         timeTableService.save(timetable);
@@ -609,7 +604,7 @@ timetable.end <= e
     }
 
     @Test
-    public void registerStudentInTimetableWithoutConflict() {
+    void registerStudentInTimetableWithoutConflict() {
         Student student = SampleBuilder.student1();
         studentService.save(student);
 
@@ -639,7 +634,6 @@ timetable.end <= e
         Timetable t4 = timetablesByStudentId.get(0);
         List<Student> student1 = t4.getStudents();*/
 
-
         List<Student> allStudentsTimetable4 = timeTableService.getAllStudentsTimetable(timetable4.getId());
 
         LocalTime expectedStartTimetable4 = LocalTime.of(13, 0);
@@ -658,7 +652,7 @@ timetable.end <= e
     }
 
     @Test
-    public void registerStudentInTimetableWithConflict() {
+    void registerStudentInTimetableWithConflict() {
         //given
         Student student = SampleBuilder.student1();
         studentService.save(student);
@@ -683,7 +677,7 @@ timetable.end <= e
     }
 
     @Test
-    public void registerStudentInTimetableWithExactSameStartAndEnd() {
+    void registerStudentInTimetableWithExactSameStartAndEnd() {
         Student student = SampleBuilder.student1();
         studentService.save(student);
 
@@ -707,7 +701,7 @@ timetable.end <= e
     }
 
     @Test
-    public void registerStudentInTimetableWithExactSameStartAndEndWithDifferentDate() {
+    void registerStudentInTimetableWithExactSameStartAndEndWithDifferentDate() {
         Student student = SampleBuilder.student1();
         studentService.save(student);
 
@@ -733,7 +727,6 @@ timetable.end <= e
 
         timeTableService.addStudentToTimetable(timetable4.getId(), student.getId());
 
-
         /*List<Timetable> timetablesByStudentId = timeTableService.getTimetablesByStudentId(student.getId());
         Timetable t4 = timetablesByStudentId.get(0);
         Student student1 = t4.getStudents().get(1);*/
@@ -756,7 +749,7 @@ timetable.end <= e
     }
 
     @Test
-    public void getTimetablesByStatus() {
+    void getTimetablesByStatus() {
         Timetable timetable1 = SampleBuilder.timetable1();
         timetable1.setStatus(TimetableStatus.ACTIVE);
         timeTableService.save(timetable1);
@@ -775,7 +768,7 @@ timetable.end <= e
     }
 
     @Test
-    public void activeTimetableStatus() {
+    void activeTimetableStatus() {
         Teacher teacher = SampleBuilder.teacher1();
         teacherService.save(teacher);
 
@@ -799,7 +792,7 @@ timetable.end <= e
     }
 
     @Test
-    public void deactivateTimetableStatus() {
+    void deactivateTimetableStatus() {
         Timetable timetable = SampleBuilder.timetable1();
         timeTableService.save(timetable);
 
@@ -835,7 +828,7 @@ timetable.end <= e
     }
 
     @Test
-    public void activeTimetableWithStudent() {
+    void activeTimetableWithStudent() {
         Teacher teacher = SampleBuilder.teacher1();
         teacherService.save(teacher);
 
@@ -859,7 +852,7 @@ timetable.end <= e
     }
 
     @Test
-    public void inactiveTimetableCanBeIgnoredToCompareWithAnotherTimetables() {
+    void inactiveTimetableCanBeIgnoredToCompareWithAnotherTimetables() {
         Teacher teacher1 = SampleBuilder.teacher1();
         teacherService.save(teacher1);
 
@@ -877,7 +870,6 @@ timetable.end <= e
 
         timeTableService.deactivateTimetableStatus(timetable1.getId());
 
-
         Teacher teacher2 = SampleBuilder.teacher2();
         teacherService.save(teacher2);
 
@@ -892,7 +884,6 @@ timetable.end <= e
         Teacher teacher3 = SampleBuilder.teacher2();
         teacherService.save(teacher3);
 
-
         Class room3 = SampleBuilder.room3();
         classService.save(room3);
 
@@ -904,12 +895,11 @@ timetable.end <= e
         timeTableService.save(timetable6);
 
         timeTableService.addStudentToTimetable(timetable6.getId(), student2.getId());
-        timeTableService.activeTimetableStatus(timetable6.getId());
 
+        timeTableService.activeTimetableStatus(timetable6.getId());
 
         List<Timetable> timetablesByStudentId = timeTableService.getTimetablesByStudentId(student1.getId());
         Timetable t3 = timetablesByStudentId.get(0);
-
 
         assertNotNull(timetablesByStudentId);
         assertEquals(LocalTime.of(7, 0), t3.getStart());
@@ -919,7 +909,7 @@ timetable.end <= e
     }
 
     @Test
-    public void activeTimetableCannotActivateAgain() {
+    void activeTimetableCannotActivateAgain() {
         Teacher teacher = SampleBuilder.teacher1();
         teacherService.save(teacher);
 
@@ -935,19 +925,17 @@ timetable.end <= e
         timetable.setStatus(TimetableStatus.ACTIVE);
         timeTableService.save(timetable);
 
-
         assertThrows(IllegalArgumentException.class, () -> {
             timeTableService.activeTimetableStatus(timetable.getId());
         });
     }
 
     @Test
-    public void inactiveTimetableCannotBeDeactivatedAgain() {
+    void inactiveTimetableCannotBeDeactivatedAgain() {
         Timetable timetable = SampleBuilder.timetable1();
         timetable.setStatus(TimetableStatus.INACTIVE);
 
         timeTableService.save(timetable);
-
 
         assertThrows(IllegalArgumentException.class, () -> {
             timeTableService.deactivateTimetableStatus(timetable.getId());
@@ -955,7 +943,7 @@ timetable.end <= e
     }
 
     @Test
-    public void startTimetable() {
+    void startTimetable() {
         Teacher teacher1 = SampleBuilder.teacher1();
         teacherService.save(teacher1);
 
@@ -990,40 +978,7 @@ timetable.end <= e
     }
 
     @Test
-    public void timetableCannotStartWithLessThanMinimumStudents() {
-        Teacher teacher1 = SampleBuilder.teacher1();
-        teacherService.save(teacher1);
-
-        Student student1 = SampleBuilder.student1();
-        studentService.save(student1);
-
-        Student student2 = SampleBuilder.student2();
-        studentService.save(student2);
-
-        Student student3 = SampleBuilder.student3();
-        studentService.save(student3);
-
-        List<Student> allStudents = studentService.getAllStudents();
-
-        Class room1 = SampleBuilder.room1();
-        classService.save(room1);
-
-        Timetable timetable1 = SampleBuilder.timetable1(teacher1, allStudents, room1);
-        timeTableService.save(timetable1);
-
-        timeTableService.activeTimetableStatus(timetable1.getId());
-
-
-        timeTableService.startTimetable(timetable1.getId());
-
-        Timetable timetableById = timeTableService.getById(timetable1.getId());
-
-        assertNotNull(timetableById);
-        assertEquals(TimetableStatus.STARTED, timetableById.getStatus());
-    }
-
-    @Test
-    public void timetableCannotStartWithMoreThanMaximumStudents() {
+    void timetableCannotStartWithLessThanMinimumStudents() {
         Teacher teacher1 = SampleBuilder.teacher1();
         teacherService.save(teacher1);
 
@@ -1055,7 +1010,39 @@ timetable.end <= e
     }
 
     @Test
-    public void registerStudentInTimetableInStartStatus() {
+    void timetableCannotStartWithMoreThanMaximumStudents() {
+        Teacher teacher1 = SampleBuilder.teacher1();
+        teacherService.save(teacher1);
+
+        Student student1 = SampleBuilder.student1();
+        studentService.save(student1);
+
+        Student student2 = SampleBuilder.student2();
+        studentService.save(student2);
+
+        Student student3 = SampleBuilder.student3();
+        studentService.save(student3);
+
+        List<Student> allStudents = studentService.getAllStudents();
+
+        Class room1 = SampleBuilder.room1();
+        classService.save(room1);
+
+        Timetable timetable1 = SampleBuilder.timetable1(teacher1, allStudents, room1);
+        timeTableService.save(timetable1);
+
+        timeTableService.activeTimetableStatus(timetable1.getId());
+
+        timeTableService.startTimetable(timetable1.getId());
+
+        Timetable timetableById = timeTableService.getById(timetable1.getId());
+
+        assertNotNull(timetableById);
+        assertEquals(TimetableStatus.STARTED, timetableById.getStatus());
+    }
+
+    @Test
+    void registerStudentInTimetableInStartStatus() {
         Student student = SampleBuilder.student1();
         studentService.save(student);
 
@@ -1076,9 +1063,6 @@ timetable.end <= e
 
         assertThrows(IllegalArgumentException.class, () -> {
             timeTableService.addStudentToTimetable(timetable4.getId(), student.getId());
-
         });
     }
 }
-
-
