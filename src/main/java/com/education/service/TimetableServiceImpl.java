@@ -4,16 +4,19 @@ import com.education.domain.Student;
 import com.education.domain.Timetable;
 import com.education.domain.TimetableStatus;
 import com.education.repository.TimetableRepository;
-import lombok.AllArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-@AllArgsConstructor
 public class TimetableServiceImpl implements TimetableService {
     private final TimetableRepository timeTableRepository;
     private final StudentService studentService;
+
+    public TimetableServiceImpl(TimetableRepository timeTableRepository, StudentService studentService) {
+        this.timeTableRepository = timeTableRepository;
+        this.studentService = studentService;
+    }
 
     @Override
     public void save(Timetable timetable) {

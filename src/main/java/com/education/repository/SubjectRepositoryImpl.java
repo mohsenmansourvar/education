@@ -1,16 +1,14 @@
 package com.education.repository;
 
 import com.education.domain.Subject;
-import lombok.AllArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@AllArgsConstructor
 public class SubjectRepositoryImpl implements SubjectRepository {
-    private final SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
     @Override
     public void save(Subject subject) {
@@ -53,5 +51,9 @@ public class SubjectRepositoryImpl implements SubjectRepository {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("from Subject", Subject.class)
                 .list();
+    }
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 }

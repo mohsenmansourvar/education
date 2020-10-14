@@ -3,7 +3,6 @@ package com.education.repository;
 import com.education.domain.Student;
 import com.education.domain.Timetable;
 import com.education.domain.TimetableStatus;
-import lombok.AllArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,10 +12,9 @@ import java.time.LocalTime;
 import java.util.List;
 
 @Transactional
-@AllArgsConstructor
 public class TimetableRepositoryImpl implements TimetableRepository {
 
-    private final SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
     @Override
     public void save(Timetable timeTable) {
@@ -155,4 +153,7 @@ public class TimetableRepositoryImpl implements TimetableRepository {
                 .list();
     }
 
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 }

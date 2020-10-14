@@ -2,14 +2,16 @@ package com.education.service;
 
 import com.education.domain.Student;
 import com.education.repository.StudentRepository;
-import lombok.AllArgsConstructor;
 
 import java.util.List;
 
-@AllArgsConstructor
 public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
+
+    public StudentServiceImpl(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
 
     @Override
     public void save(Student student) {
