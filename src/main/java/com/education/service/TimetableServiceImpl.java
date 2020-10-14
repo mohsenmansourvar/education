@@ -25,8 +25,8 @@ public class TimetableServiceImpl implements TimetableService {
     }
 
     @Override
-    public Timetable getById(long id) {
-        return timeTableRepository.getById(id);
+    public void update(long id, Timetable newTimetable) {
+        timeTableRepository.update(id, newTimetable);
     }
 
     @Override
@@ -35,8 +35,8 @@ public class TimetableServiceImpl implements TimetableService {
     }
 
     @Override
-    public void update(long id, Timetable newTimetable) {
-        timeTableRepository.update(id, newTimetable);
+    public Timetable getById(long id) {
+        return timeTableRepository.getById(id);
     }
 
     @Override
@@ -142,7 +142,6 @@ public class TimetableServiceImpl implements TimetableService {
         }
     }
 
-
     public void validateTargetTimetableCapacity(Timetable target) {
         boolean isCapacityFull = target.getStudents().size() > target.getMaxStudents();
 
@@ -188,7 +187,6 @@ public class TimetableServiceImpl implements TimetableService {
             throw new IllegalArgumentException("Active timetable cannot be Activated again");
         }
     }
-
 
     public void checkFillingTeacherField(Timetable timetable) {
         if (timetable.getTeacher() == null) {

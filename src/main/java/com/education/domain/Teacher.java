@@ -6,14 +6,12 @@ import lombok.ToString;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import java.util.ArrayList;
-import java.util.List;
 
 @EqualsAndHashCode
 @ToString
 @Entity
 public class Teacher {
+
     @Id
     @GeneratedValue
     private Long id;

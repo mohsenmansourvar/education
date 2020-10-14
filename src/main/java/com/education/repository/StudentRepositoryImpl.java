@@ -9,28 +9,13 @@ import java.util.List;
 
 @Transactional
 public class StudentRepositoryImpl implements StudentRepository {
+
     private SessionFactory sessionFactory;
 
     @Override
     public void save(Student student) {
         Session session = sessionFactory.getCurrentSession();
         session.save(student);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Student getById(long id) {
-        Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from Student where id = :id", Student.class)
-                .setParameter("id", id)
-                .uniqueResult();
-    }
-
-    @Override
-    public void delete(long id) {
-        Session session = sessionFactory.getCurrentSession();
-        Student studentById = getById(id);
-        session.delete(studentById);
     }
 
     @Override
@@ -53,6 +38,22 @@ public class StudentRepositoryImpl implements StudentRepository {
             studentId.setTelephone(newStudent.getTelephone());
         }
         session.update(studentId);
+    }
+
+    @Override
+    public void delete(long id) {
+        Session session = sessionFactory.getCurrentSession();
+        Student studentById = getById(id);
+        session.delete(studentById);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Student getById(long id) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Student where id = :id", Student.class)
+                .setParameter("id", id)
+                .uniqueResult();
     }
 
     @Override
