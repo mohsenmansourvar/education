@@ -20,9 +20,7 @@ import java.util.Properties;
 public class EducationConfiguration {
     @Bean
     public StudentRepositoryImpl studentRepository(SessionFactory sessionFactory) {
-        StudentRepositoryImpl studentRepository = new StudentRepositoryImpl();
-        studentRepository.setSessionFactory(sessionFactory);
-        return studentRepository;
+        return new StudentRepositoryImpl(sessionFactory);
     }
 
     @Bean
@@ -32,9 +30,7 @@ public class EducationConfiguration {
 
     @Bean
     public TeacherRepositoryImpl teacherRepository(SessionFactory sessionFactory) {
-        TeacherRepositoryImpl teacherRepository = new TeacherRepositoryImpl();
-        teacherRepository.setSessionFactory(sessionFactory);
-        return teacherRepository;
+        return new TeacherRepositoryImpl(sessionFactory);
     }
 
     @Bean
@@ -45,9 +41,7 @@ public class EducationConfiguration {
 
     @Bean
     public SubjectRepositoryImpl subjectRepository(SessionFactory sessionFactory) {
-        SubjectRepositoryImpl subjectRepository = new SubjectRepositoryImpl();
-        subjectRepository.setSessionFactory(sessionFactory);
-        return subjectRepository;
+       return new SubjectRepositoryImpl(sessionFactory);
     }
 
     @Bean
@@ -69,9 +63,7 @@ public class EducationConfiguration {
 
     @Bean
     public TimetableRepositoryImpl timeTableRepository(SessionFactory sessionFactory) {
-        TimetableRepositoryImpl timeTableRepository = new TimetableRepositoryImpl();
-        timeTableRepository.setSessionFactory(sessionFactory);
-        return timeTableRepository;
+        return new TimetableRepositoryImpl(sessionFactory);
     }
 
     @Bean

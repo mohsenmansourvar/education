@@ -1,6 +1,7 @@
 package com.education.repository;
 
 import com.education.domain.Teacher;
+import lombok.AllArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,9 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Transactional
+@AllArgsConstructor
 public class TeacherRepositoryImpl implements TeacherRepository {
 
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
     @Override
     public void save(Teacher teacher) {
@@ -64,9 +66,5 @@ public class TeacherRepositoryImpl implements TeacherRepository {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("from Teacher", Teacher.class)
                 .list();
-    }
-
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
     }
 }

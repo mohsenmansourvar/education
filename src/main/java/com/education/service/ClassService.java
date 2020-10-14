@@ -8,7 +8,7 @@ public interface ClassService {
 
     void save(Class aClass);
 
-    void update(long id, Class newRoom);
+    void update(long id, Class newClass);
 
     void delete(long id);
 
