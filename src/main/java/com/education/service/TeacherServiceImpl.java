@@ -2,16 +2,13 @@ package com.education.service;
 
 import com.education.domain.Teacher;
 import com.education.repository.TeacherRepository;
+import lombok.AllArgsConstructor;
 
 import java.util.List;
-
+@AllArgsConstructor
 public class TeacherServiceImpl implements TeacherService {
 
     private final TeacherRepository teacherRepository;
-
-    public TeacherServiceImpl(TeacherRepository teacherRepository) {
-        this.teacherRepository = teacherRepository;
-    }
 
     @Override
     public void save(Teacher teacher) {

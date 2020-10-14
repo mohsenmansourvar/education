@@ -2,16 +2,14 @@ package com.education.service;
 
 import com.education.domain.Subject;
 import com.education.repository.SubjectRepository;
+import lombok.AllArgsConstructor;
 
 import java.util.List;
 
+@AllArgsConstructor
 public class SubjectServiceImpl implements SubjectService {
 
     private final SubjectRepository subjectRepository;
-
-    public SubjectServiceImpl(SubjectRepository subjectRepository) {
-        this.subjectRepository = subjectRepository;
-    }
 
     @Override
     public void save(Subject subject) {
