@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @Transactional
 public class StudentServiceTest {
+
     @Autowired
     private StudentService studentService;
 
@@ -37,9 +38,8 @@ public class StudentServiceTest {
         Student student = SampleBuilder.student3();
         studentService.save(student);
         studentService.delete(student.getId());
-        Student studentById = studentService.getById(student.getId());
 
-        assertNull(studentById);
+        assertThrows(IllegalArgumentException.class,()->studentService.getById(student.getId()));
     }
 
     @Test
@@ -60,7 +60,6 @@ public class StudentServiceTest {
         assertEquals("Adelaide", studentById.getAddress());
         assertEquals("0041", studentById.getTelephone());
         assertEquals("0000000000", studentById.getNationalCode());
-        assertEquals("321", studentById.getStudentNumber());
     }
 
     @Test

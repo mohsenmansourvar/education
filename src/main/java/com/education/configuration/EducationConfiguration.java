@@ -16,12 +16,6 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 public class EducationConfiguration {
-    @Bean
-    public StudentRepositoryImpl studentRepository(SessionFactory sessionFactory) {
-        StudentRepositoryImpl studentRepository = new StudentRepositoryImpl();
-        studentRepository.setSessionFactory(sessionFactory);
-        return studentRepository;
-    }
 
     @Bean
     public StudentServiceImpl studentService(StudentRepository studentRepository) {
@@ -95,7 +89,7 @@ public class EducationConfiguration {
         return properties;
     }
 
-    @Bean
+    @Bean(name = "entityManagerFactory")
     public LocalSessionFactoryBean sessionFactory(DataSource dataSource, Properties properties) {
         LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
         localSessionFactoryBean.setDataSource(dataSource);

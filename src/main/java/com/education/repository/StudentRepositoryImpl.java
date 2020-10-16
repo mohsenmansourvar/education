@@ -1,3 +1,4 @@
+/*
 package com.education.repository;
 
 import com.education.domain.Student;
@@ -66,3 +67,4 @@ public class StudentRepositoryImpl implements StudentRepository {
         this.sessionFactory = sessionFactory;
     }
 }
+*/
