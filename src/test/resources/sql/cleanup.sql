@@ -1,9 +1,0 @@
-delete from class;
-delete from student;
-delete from student_teacher;
-delete from teacher;
-delete from subject;
-delete from subject_student;
-delete from teacher_timetable;
-delete from timetable;
-delete from timetable_student;

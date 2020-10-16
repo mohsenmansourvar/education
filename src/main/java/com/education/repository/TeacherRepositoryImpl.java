@@ -1,7 +1,6 @@
 package com.education.repository;
 
 import com.education.domain.Teacher;
-import lombok.AllArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,15 +8,21 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Transactional
-@AllArgsConstructor
 public class TeacherRepositoryImpl implements TeacherRepository {
-
-    private final SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
     @Override
     public void save(Teacher teacher) {
         Session session = sessionFactory.getCurrentSession();
         session.save(teacher);
+    }
+
+    @Override
+    public Teacher getById(long id) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Teacher where id= :id", Teacher.class)
+                .setParameter("id", id)
+                .uniqueResult();
     }
 
     @Override
@@ -53,18 +58,14 @@ public class TeacherRepositoryImpl implements TeacherRepository {
     }
 
     @Override
-    public Teacher getById(long id) {
-        Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from Teacher where id= :id", Teacher.class)
-                .setParameter("id", id)
-                .uniqueResult();
-    }
-
-    @Override
     @Transactional(readOnly = true)
     public List<Teacher> getAllTeachers() {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("from Teacher", Teacher.class)
                 .list();
+    }
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 }

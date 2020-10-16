@@ -2,14 +2,15 @@ package com.education.service;
 
 import com.education.domain.Student;
 import com.education.repository.StudentRepository;
-import lombok.AllArgsConstructor;
 
 import java.util.List;
 
-@AllArgsConstructor
 public class StudentServiceImpl implements StudentService {
-
     private final StudentRepository studentRepository;
+
+    public StudentServiceImpl(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
 
     @Override
     public void save(Student student) {
@@ -17,8 +18,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void update(long id, Student newStudent) {
-        studentRepository.update(id, newStudent);
+    public Student getById(long id) {
+        return studentRepository.getById(id);
     }
 
     @Override
@@ -27,8 +28,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student getById(long id) {
-        return studentRepository.getById(id);
+    public void update(long id, Student newStudent) {
+        studentRepository.update(id, newStudent);
     }
 
     @Override

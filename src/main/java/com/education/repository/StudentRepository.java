@@ -7,11 +7,11 @@ import java.util.List;
 public interface StudentRepository {
     void save(Student student);
 
-    void update(long id, Student newStudent);
+    Student getById(long id);
 
     void delete(long id);
 
-    Student getById(long id);
+    void update(long id,Student newStudent);
 
     List<Student> getAllStudent();
 }

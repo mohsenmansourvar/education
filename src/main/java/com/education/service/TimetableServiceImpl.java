@@ -4,16 +4,19 @@ import com.education.domain.Student;
 import com.education.domain.Timetable;
 import com.education.domain.TimetableStatus;
 import com.education.repository.TimetableRepository;
-import lombok.AllArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-@AllArgsConstructor
 public class TimetableServiceImpl implements TimetableService {
     private final TimetableRepository timeTableRepository;
     private final StudentService studentService;
+
+    public TimetableServiceImpl(TimetableRepository timeTableRepository, StudentService studentService) {
+        this.timeTableRepository = timeTableRepository;
+        this.studentService = studentService;
+    }
 
     @Override
     public void save(Timetable timetable) {
@@ -22,8 +25,8 @@ public class TimetableServiceImpl implements TimetableService {
     }
 
     @Override
-    public void update(long id, Timetable newTimetable) {
-        timeTableRepository.update(id, newTimetable);
+    public Timetable getById(long id) {
+        return timeTableRepository.getById(id);
     }
 
     @Override
@@ -32,8 +35,8 @@ public class TimetableServiceImpl implements TimetableService {
     }
 
     @Override
-    public Timetable getById(long id) {
-        return timeTableRepository.getById(id);
+    public void update(long id, Timetable newTimetable) {
+        timeTableRepository.update(id, newTimetable);
     }
 
     @Override
@@ -139,6 +142,7 @@ public class TimetableServiceImpl implements TimetableService {
         }
     }
 
+
     public void validateTargetTimetableCapacity(Timetable target) {
         boolean isCapacityFull = target.getStudents().size() > target.getMaxStudents();
 
@@ -185,6 +189,7 @@ public class TimetableServiceImpl implements TimetableService {
         }
     }
 
+
     public void checkFillingTeacherField(Timetable timetable) {
         if (timetable.getTeacher() == null) {
             throw new IllegalArgumentException("Cannot activate a timetable without a teacher");
@@ -221,6 +226,9 @@ public class TimetableServiceImpl implements TimetableService {
         }
         if (timetable.getStudents().size() < timetable.getMinStudents()) {
             throw new IllegalArgumentException("The number of students can not be less than the minimum number");
+        }
+        if (timetable.getStudents().size() > timetable.getMaxStudents()) {
+            throw new IllegalArgumentException("The number of students can not be more than the maximum number");
         }
         timetable.setStatus(TimetableStatus.STARTED);
         timeTableRepository.update(timetable.getId(), timetable);

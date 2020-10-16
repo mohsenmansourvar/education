@@ -1,7 +1,6 @@
 package com.education.repository;
 
 import com.education.domain.Student;
-import lombok.AllArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,15 +8,29 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Transactional
-@AllArgsConstructor
 public class StudentRepositoryImpl implements StudentRepository {
-
-    private final SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
     @Override
     public void save(Student student) {
         Session session = sessionFactory.getCurrentSession();
         session.save(student);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Student getById(long id) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Student where id = :id", Student.class)
+                .setParameter("id", id)
+                .uniqueResult();
+    }
+
+    @Override
+    public void delete(long id) {
+        Session session = sessionFactory.getCurrentSession();
+        Student studentById = getById(id);
+        session.delete(studentById);
     }
 
     @Override
@@ -43,25 +56,13 @@ public class StudentRepositoryImpl implements StudentRepository {
     }
 
     @Override
-    public void delete(long id) {
-        Session session = sessionFactory.getCurrentSession();
-        Student studentById = getById(id);
-        session.delete(studentById);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Student getById(long id) {
-        Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from Student where id = :id", Student.class)
-                .setParameter("id", id)
-                .uniqueResult();
-    }
-
-    @Override
     public List<Student> getAllStudent() {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("from Student ", Student.class)
                 .list();
+    }
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 }

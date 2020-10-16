@@ -5,7 +5,6 @@ import com.education.service.*;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -16,11 +15,12 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories
 public class EducationConfiguration {
     @Bean
     public StudentRepositoryImpl studentRepository(SessionFactory sessionFactory) {
-        return new StudentRepositoryImpl(sessionFactory);
+        StudentRepositoryImpl studentRepository = new StudentRepositoryImpl();
+        studentRepository.setSessionFactory(sessionFactory);
+        return studentRepository;
     }
 
     @Bean
@@ -30,7 +30,9 @@ public class EducationConfiguration {
 
     @Bean
     public TeacherRepositoryImpl teacherRepository(SessionFactory sessionFactory) {
-        return new TeacherRepositoryImpl(sessionFactory);
+        TeacherRepositoryImpl teacherRepository = new TeacherRepositoryImpl();
+        teacherRepository.setSessionFactory(sessionFactory);
+        return teacherRepository;
     }
 
     @Bean
@@ -41,7 +43,9 @@ public class EducationConfiguration {
 
     @Bean
     public SubjectRepositoryImpl subjectRepository(SessionFactory sessionFactory) {
-       return new SubjectRepositoryImpl(sessionFactory);
+        SubjectRepositoryImpl subjectRepository = new SubjectRepositoryImpl();
+        subjectRepository.setSessionFactory(sessionFactory);
+        return subjectRepository;
     }
 
     @Bean
@@ -49,12 +53,12 @@ public class EducationConfiguration {
         return new SubjectServiceImpl(subjectRepository);
     }
 
-   /* @Bean
+    @Bean
     public ClassRepositoryImpl classRepository(SessionFactory sessionFactory) {
         ClassRepositoryImpl classRepository = new ClassRepositoryImpl();
         classRepository.setSessionFactory(sessionFactory);
         return classRepository;
-    }*/
+    }
 
     @Bean
     public ClassServiceImpl classService(ClassRepository classRepository) {
@@ -63,7 +67,9 @@ public class EducationConfiguration {
 
     @Bean
     public TimetableRepositoryImpl timeTableRepository(SessionFactory sessionFactory) {
-        return new TimetableRepositoryImpl(sessionFactory);
+        TimetableRepositoryImpl timeTableRepository = new TimetableRepositoryImpl();
+        timeTableRepository.setSessionFactory(sessionFactory);
+        return timeTableRepository;
     }
 
     @Bean
@@ -89,7 +95,7 @@ public class EducationConfiguration {
         return properties;
     }
 
-    @Bean(name="entityManagerFactory")
+    @Bean
     public LocalSessionFactoryBean sessionFactory(DataSource dataSource, Properties properties) {
         LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
         localSessionFactoryBean.setDataSource(dataSource);
