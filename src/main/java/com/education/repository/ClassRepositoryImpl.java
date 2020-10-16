@@ -1,3 +1,4 @@
+/*
 package com.education.repository;
 
 import com.education.domain.Class;
@@ -57,3 +58,4 @@ public class ClassRepositoryImpl implements ClassRepository {
                 .list();
     }
 }
+*/
