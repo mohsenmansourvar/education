@@ -2,15 +2,14 @@ package com.education.service;
 
 import com.education.domain.Teacher;
 import com.education.repository.TeacherRepository;
+import lombok.AllArgsConstructor;
 
 import java.util.List;
 
+@AllArgsConstructor
 public class TeacherServiceImpl implements TeacherService {
-    private final TeacherRepository teacherRepository;
 
-    public TeacherServiceImpl(TeacherRepository teacherRepository) {
-        this.teacherRepository = teacherRepository;
-    }
+    private final TeacherRepository teacherRepository;
 
     @Override
     public void save(Teacher teacher) {
@@ -18,22 +17,43 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public Teacher getById(long id) {
-        return teacherRepository.getById(id);
-    }
-
-    @Override
     public void update(long id, Teacher newTeacher) {
-        teacherRepository.update(id,newTeacher);
+        Teacher teacher = getById(id);
+
+        if (newTeacher.getFirstName() != null) {
+            teacher.setFirstName(newTeacher.getFirstName());
+        }
+        if (newTeacher.getLastName() != null) {
+            teacher.setLastName(newTeacher.getLastName());
+        }
+        if (newTeacher.getNationalCode() != null) {
+            teacher.setNationalCode(newTeacher.getNationalCode());
+        }
+        if (newTeacher.getSpecialty() != null) {
+            teacher.setSpecialty(newTeacher.getSpecialty());
+        }
+        if (newTeacher.getAddress() != null) {
+            teacher.setAddress(newTeacher.getAddress());
+        }
+        if (newTeacher.getTelephone() != null) {
+            teacher.setTelephone(newTeacher.getTelephone());
+        }
+        teacherRepository.save(teacher);
     }
 
     @Override
     public void delete(long id) {
-        teacherRepository.delete(id);
+        teacherRepository.deleteById(id);
+    }
+
+    @Override
+    public Teacher getById(long id) {
+        return teacherRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("No Teacher by id"));
     }
 
     @Override
     public List<Teacher> getAllTeachers() {
-        return teacherRepository.getAllTeachers();
+        return teacherRepository.findAll();
     }
 }

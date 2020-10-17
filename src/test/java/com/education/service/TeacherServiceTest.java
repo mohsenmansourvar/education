@@ -10,9 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 @Transactional
 public class TeacherServiceTest {
+
     @Autowired
     private TeacherService teacherService;
 
@@ -75,13 +77,12 @@ public class TeacherServiceTest {
 
         teacherService.delete(teacher.getId());
 
-        Teacher teacherById = teacherService.getById(teacher.getId());
-
-        assertNull(teacherById);
+        assertThrows(IllegalArgumentException.class, () -> teacherService.getById(teacher.getId()));
     }
+
     @Test
-    public void getAllTeachers(){
-        Teacher teacher1 =new TeacherBuilder()
+    public void getAllTeachers() {
+        Teacher teacher1 = new TeacherBuilder()
                 .firstName("Reza")
                 .lastName("Ebrahimi")
                 .nationalCode("1122334455")
@@ -92,7 +93,7 @@ public class TeacherServiceTest {
 
         teacherService.save(teacher1);
 
-        Teacher teacher2 =new TeacherBuilder() // TeacherBuilder
+        Teacher teacher2 = new TeacherBuilder() // TeacherBuilder
                 .firstName("Mary") //TeacherBuilder
                 .lastName("Ebrahimi") //TeacherBuilder
                 .nationalCode("5544332211") //TeacherBuilder
@@ -105,6 +106,6 @@ public class TeacherServiceTest {
         List<Teacher> allTeachers = teacherService.getAllTeachers();
 
         assertNotNull(allTeachers);
-        assertEquals(2,allTeachers.size());
+        assertEquals(2, allTeachers.size());
     }
 }
