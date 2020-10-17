@@ -42,13 +42,6 @@ public class EducationConfiguration {
     }
 
     @Bean
-    public SubjectRepositoryImpl subjectRepository(SessionFactory sessionFactory) {
-        SubjectRepositoryImpl subjectRepository = new SubjectRepositoryImpl();
-        subjectRepository.setSessionFactory(sessionFactory);
-        return subjectRepository;
-    }
-
-    @Bean
     public SubjectServiceImpl subjectService(SubjectRepository subjectRepository) {
         return new SubjectServiceImpl(subjectRepository);
     }
@@ -95,7 +88,7 @@ public class EducationConfiguration {
         return properties;
     }
 
-    @Bean
+    @Bean(name = "entityManagerFactory")
     public LocalSessionFactoryBean sessionFactory(DataSource dataSource, Properties properties) {
         LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
         localSessionFactoryBean.setDataSource(dataSource);

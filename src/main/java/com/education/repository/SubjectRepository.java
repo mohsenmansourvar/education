@@ -1,17 +1,9 @@
 package com.education.repository;
 
 import com.education.domain.Subject;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface SubjectRepository {
-    void save(Subject subject);
-
-    Subject getById(long id);
-
-    void update(long id, Subject newSubject);
-
-    void delete(long id);
-
-    List<Subject>getAllSubjects();
+public interface SubjectRepository extends JpaRepository<Subject,Long> {
 }

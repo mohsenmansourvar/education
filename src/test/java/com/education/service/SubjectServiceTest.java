@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @Transactional
 public class SubjectServiceTest {
+
     @Autowired
     private SubjectService subjectService;
 
@@ -72,13 +73,10 @@ public class SubjectServiceTest {
         subject.setName("Math");
         subject.setUnitNumber(2);
         subjectService.save(subject);
-        Long subjectId = subject.getId();
 
-        subjectService.delete(subjectId);
+        subjectService.delete(subject.getId());
 
-        Subject subjectById = subjectService.getById(subjectId);
-
-        assertNull(subjectById);
+        assertThrows(IllegalArgumentException.class, () -> subjectService.getById(subject.getId()));
     }
 
     @Test
