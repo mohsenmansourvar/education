@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ClassService {
 
-    void save(Class aClass);
+    Class save(Class aClass);
 
     void update(long id, Class newClass);
 

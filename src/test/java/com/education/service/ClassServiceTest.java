@@ -20,57 +20,53 @@ public class ClassServiceTest {
 
     @Test
     public void save() {
-        Class aClass = new Class();
-        aClass.setClassNumber("125");
-        aClass.setCapacity(45);
-        classService.save(aClass);
+        Class class1 = SampleBuilder.class1();
 
-        Class ClassById = classService.getById(aClass.getId());
+        classService.save(class1);
+
+        Class ClassById = classService.getById(class1.getId());
 
         assertNotNull(ClassById);
-        assertEquals("125", ClassById.getClassNumber());
-        assertEquals(45, ClassById.getCapacity());
+        assertEquals("111", ClassById.getClassNumber());
+        assertEquals(20, ClassById.getCapacity());
     }
 
     @Test
     public void getById() {
-        Class aClass = new Class();
-        aClass.setClassNumber("123");
-        aClass.setCapacity(12);
-        classService.save(aClass);
+        Class class1 = SampleBuilder.class1();
 
-        Class classById = classService.getById(aClass.getId());
+        classService.save(class1);
+
+        Class classById = classService.getById(class1.getId());
 
         assertNotNull(classById);
-        assertEquals("123", classById.getClassNumber());
-        assertEquals(12, classById.getCapacity());
+        assertEquals("111", classById.getClassNumber());
+        assertEquals(20, classById.getCapacity());
     }
 
     @Test
     public void delete() {
-        Class aClass = new Class();
-        aClass.setClassNumber("111");
-        aClass.setCapacity(20);
-        classService.save(aClass);
+        Class class1 = SampleBuilder.class1();
 
-        classService.delete(aClass.getId());
+        classService.save(class1);
 
-        assertThrows(IllegalArgumentException.class, () -> classService.getById(aClass.getId()));
+        classService.delete(class1.getId());
+
+        assertThrows(IllegalArgumentException.class, () -> classService.getById(class1.getId()));
     }
 
     @Test
     public void update() {
-        Class aClass = new Class();
-        aClass.setClassNumber("111");
-        aClass.setCapacity(20);
-        classService.save(aClass);
+        Class class1 = SampleBuilder.class1();
+
+        classService.save(class1);
 
         Class newClass = new Class();
         newClass.setClassNumber("231");
 
-        classService.update(aClass.getId(), newClass);
+        classService.update(class1.getId(), newClass);
 
-        Class classById = classService.getById(aClass.getId());
+        Class classById = classService.getById(class1.getId());
 
         assertNotNull(classById);
         assertEquals("231", classById.getClassNumber());
@@ -79,15 +75,13 @@ public class ClassServiceTest {
 
     @Test
     public void getAllClasses() {
-        Class aClass = new Class();
-        aClass.setClassNumber("111");
-        aClass.setCapacity(20);
-        classService.save(aClass);
+        Class class1 = SampleBuilder.class1();
 
-        Class aClass1 = new Class();
-        aClass1.setClassNumber("222");
-        aClass1.setCapacity(30);
-        classService.save(aClass1);
+        classService.save(class1);
+
+        Class class2 = SampleBuilder.class2();
+
+        classService.save(class2);
 
         List<Class> allClasses = classService.getAllClasses();
 

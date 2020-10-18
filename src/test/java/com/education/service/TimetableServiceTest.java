@@ -779,7 +779,7 @@ timetable.end <= e
         Teacher teacher = SampleBuilder.teacher1();
         teacherService.save(teacher);
 
-        Class room1 = SampleBuilder.room1();
+        Class room1 = SampleBuilder.class1();
         classService.save(room1);
 
         Student student = SampleBuilder.student1();
@@ -815,7 +815,7 @@ timetable.end <= e
         Teacher teacher = SampleBuilder.teacher1();
         teacherService.save(teacher);
 
-        Class room1 = SampleBuilder.room1();
+        Class room1 = SampleBuilder.class1();
         classService.save(room1);
 
         Student student = SampleBuilder.student1();
@@ -839,7 +839,7 @@ timetable.end <= e
         Teacher teacher = SampleBuilder.teacher1();
         teacherService.save(teacher);
 
-        Class room1 = SampleBuilder.room1();
+        Class room1 = SampleBuilder.class1();
         classService.save(room1);
 
         Student student = SampleBuilder.student1();
@@ -869,7 +869,7 @@ timetable.end <= e
         List<Student> allStudents = new ArrayList<>();
         allStudents.add(student1);
 
-        Class room1 = SampleBuilder.room1();
+        Class room1 = SampleBuilder.class1();
         classService.save(room1);
 
         Timetable timetable1 = SampleBuilder.timetable1(teacher1, allStudents, room1);
@@ -881,7 +881,7 @@ timetable.end <= e
         Teacher teacher2 = SampleBuilder.teacher2();
         teacherService.save(teacher2);
 
-        Class room2 = SampleBuilder.room2();
+        Class room2 = SampleBuilder.class2();
         classService.save(room2);
 
         Timetable timetable2 = SampleBuilder.timetable2(teacher2, allStudents, room2);
@@ -893,7 +893,7 @@ timetable.end <= e
         teacherService.save(teacher3);
 
 
-        Class room3 = SampleBuilder.room3();
+        Class room3 = SampleBuilder.class3();
         classService.save(room3);
 
         Student student2 = SampleBuilder.student2();
@@ -923,7 +923,7 @@ timetable.end <= e
         Teacher teacher = SampleBuilder.teacher1();
         teacherService.save(teacher);
 
-        Class room1 = SampleBuilder.room1();
+        Class room1 = SampleBuilder.class1();
         classService.save(room1);
 
         Student student = SampleBuilder.student1();
@@ -973,7 +973,7 @@ timetable.end <= e
         allStudents.add(student2);
         allStudents.add(student3);
 
-        Class room1 = SampleBuilder.room1();
+        Class room1 = SampleBuilder.class1();
         classService.save(room1);
 
         Timetable timetable1 = SampleBuilder.timetable1(teacher1, allStudents, room1);
@@ -1005,7 +1005,7 @@ timetable.end <= e
 
         List<Student> allStudents = studentService.getAllStudents();
 
-        Class room1 = SampleBuilder.room1();
+        Class room1 = SampleBuilder.class1();
         classService.save(room1);
 
         Timetable timetable1 = SampleBuilder.timetable1(teacher1, allStudents, room1);
@@ -1038,7 +1038,7 @@ timetable.end <= e
 
         List<Student> allStudents = studentService.getAllStudents();
 
-        Class room1 = SampleBuilder.room1();
+        Class room1 = SampleBuilder.class1();
         classService.save(room1);
 
         Timetable timetable1 = SampleBuilder.timetable1(teacher1, allStudents, room1);
