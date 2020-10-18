@@ -17,4 +17,3 @@ public interface StudentService {
     List<Student> getAllStudents();
 
 }
-

@@ -39,7 +39,7 @@ public class StudentServiceTest {
         studentService.save(student);
         studentService.delete(student.getId());
 
-        assertThrows(IllegalArgumentException.class,()->studentService.getById(student.getId()));
+        assertThrows(IllegalArgumentException.class, () -> studentService.getById(student.getId()));
     }
 
     @Test
