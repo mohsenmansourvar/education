@@ -491,23 +491,23 @@ public class SampleBuilder {
     }
 
     public static Class class1() {
-        Class class1 = new Class();
-        class1.setClassNumber("111");
-        class1.setCapacity(20);
-        return class1;
+        return Class.builder()
+                .classNumber("111")
+                .capacity(20)
+                .build();
     }
 
     public static Class class2() {
-        Class class2 = new Class();
-        class2.setClassNumber("222");
-        class2.setCapacity(20);
-        return class2;
+        return Class.builder()
+                .classNumber("222")
+                .capacity(20)
+                .build();
     }
 
     public static Class class3() {
-        Class class3 = new Class();
-        class3.setClassNumber("333");
-        class3.setCapacity(20);
-        return class3;
+        return Class.builder()
+                .classNumber("333")
+                .capacity(20)
+                .build();
     }
 }
