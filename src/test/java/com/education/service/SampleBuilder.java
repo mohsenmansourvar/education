@@ -1,11 +1,10 @@
 package com.education.service;
 
-import com.education.domain.*;
 import com.education.domain.Class;
+import com.education.domain.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Arrays;
 import java.util.List;
 
 public class SampleBuilder {
@@ -32,36 +31,36 @@ public class SampleBuilder {
     }
 
     public static Student student1() {
-        Student student1 = new Student();
-        student1.setFirstName("Mohsen");
-        student1.setLastName("Mansourvar");
-        student1.setNationalCode("3322114455");
-        student1.setStudentNumber("123");
-        student1.setAddress("Adelaide");
-        student1.setTelephone("0041");
-        return student1;
+        return Student.builder()
+                .firstName("Mohsen")
+                .lastName("Mansourvar")
+                .nationalCode("3322114455")
+                .studentNumber("123")
+                .address("Adelaide")
+                .telephone("0041")
+                .build();
     }
 
     public static Student student2() {
-        Student student2 = new Student();
-        student2.setFirstName("Mary");
-        student2.setLastName("Ebrahimi");
-        student2.setNationalCode("5544332211");
-        student2.setStudentNumber("231");
-        student2.setAddress("Adelaide");
-        student2.setTelephone("0041");
-        return student2;
+        return Student.builder()
+                .firstName("Mary")
+                .lastName("Ebrahimi")
+                .nationalCode("5544332211")
+                .studentNumber("231")
+                .address("Adelaide")
+                .telephone("0041")
+                .build();
     }
 
     public static Student student3() {
-        Student student3 = new Student();
-        student3.setFirstName("Liam");
-        student3.setLastName("Mansourvar");
-        student3.setNationalCode("0000000000");
-        student3.setStudentNumber("321");
-        student3.setAddress("Adelaide");
-        student3.setTelephone("0041");
-        return student3;
+        return Student.builder()
+                .firstName("Liam")
+                .lastName("Mansourvar")
+                .nationalCode("0000000000")
+                .studentNumber("321")
+                .address("Adelaide")
+                .telephone("0041")
+                .build();
     }
 
     public static Timetable timetable1() {
