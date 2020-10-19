@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableJpaRepositories
 @SpringBootApplication(exclude = HibernateJpaAutoConfiguration.class)
+@EnableJpaRepositories
+@EnableTransactionManagement
 public class EducationApplication {
     public static void main(String[] args) {
         SpringApplication.run(EducationApplication.class);

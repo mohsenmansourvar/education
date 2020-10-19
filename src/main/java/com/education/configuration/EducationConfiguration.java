@@ -16,12 +16,6 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 public class EducationConfiguration {
-    @Bean
-    public StudentRepositoryImpl studentRepository(SessionFactory sessionFactory) {
-        StudentRepositoryImpl studentRepository = new StudentRepositoryImpl();
-        studentRepository.setSessionFactory(sessionFactory);
-        return studentRepository;
-    }
 
     @Bean
     public StudentServiceImpl studentService(StudentRepository studentRepository) {

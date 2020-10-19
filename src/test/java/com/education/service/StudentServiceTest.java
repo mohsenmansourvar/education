@@ -1,7 +1,6 @@
 package com.education.service;
 
 import com.education.domain.Student;
-import com.education.domain.StudentBuilder;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @Transactional
 public class StudentServiceTest {
+
     @Autowired
     private StudentService studentService;
 
@@ -37,9 +37,8 @@ public class StudentServiceTest {
         Student student = SampleBuilder.student3();
         studentService.save(student);
         studentService.delete(student.getId());
-        Student studentById = studentService.getById(student.getId());
 
-        assertNull(studentById);
+        assertThrows(IllegalArgumentException.class, () -> studentService.getById(student.getId()));
     }
 
     @Test
@@ -60,19 +59,11 @@ public class StudentServiceTest {
         assertEquals("Adelaide", studentById.getAddress());
         assertEquals("0041", studentById.getTelephone());
         assertEquals("0000000000", studentById.getNationalCode());
-        assertEquals("321", studentById.getStudentNumber());
     }
 
     @Test
     public void getById() {
-        Student student = new StudentBuilder()
-                .firstName("Mary")
-                .lastName("Ebrahimi")
-                .nationalCode("5544332211")
-                .studentNumber("231")
-                .address("Adelaide")
-                .telephone("0041")
-                .build();
+        Student student = SampleBuilder.student1();
 
         studentService.save(student);
 
@@ -89,24 +80,11 @@ public class StudentServiceTest {
 
     @Test
     public void getAllStudents() {
-        Student student1 = new StudentBuilder()
-                .firstName("Mary")
-                .lastName("Ebrahimi")
-                .nationalCode("5544332211")
-                .studentNumber("231")
-                .address("Adelaide")
-                .telephone("0041")
-                .build();
+        Student student1 = SampleBuilder.student1();
+
         studentService.save(student1);
 
-        Student student2 = new StudentBuilder()
-                .firstName("Laim")
-                .lastName("Mansourvar")
-                .nationalCode("0000000000")
-                .studentNumber("111")
-                .address("Adelaide")
-                .telephone("0049")
-                .build();
+        Student student2 = SampleBuilder.student2();
 
         studentService.save(student2);
 
