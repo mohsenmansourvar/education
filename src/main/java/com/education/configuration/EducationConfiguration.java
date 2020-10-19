@@ -29,13 +29,6 @@ public class EducationConfiguration {
     }
 
     @Bean
-    public SubjectRepositoryImpl subjectRepository(SessionFactory sessionFactory) {
-        SubjectRepositoryImpl subjectRepository = new SubjectRepositoryImpl();
-        subjectRepository.setSessionFactory(sessionFactory);
-        return subjectRepository;
-    }
-
-    @Bean
     public SubjectServiceImpl subjectService(SubjectRepository subjectRepository) {
         return new SubjectServiceImpl(subjectRepository);
     }
