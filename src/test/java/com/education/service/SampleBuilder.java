@@ -1,34 +1,35 @@
 package com.education.service;
 
-import com.education.domain.*;
 import com.education.domain.Class;
+import com.education.domain.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Arrays;
 import java.util.List;
 
 public class SampleBuilder {
+
     public static Teacher teacher1() {
-        Teacher teacher1 = new Teacher();
-        teacher1.setFirstName("Reza");
-        teacher1.setLastName("Ebrahimi");
-        teacher1.setNationalCode("1122334455");
-        teacher1.setSpecialty("IT");
-        teacher1.setAddress("Berlin");
-        teacher1.setTelephone("0049");
-        return teacher1;
+        return Teacher.builder()
+                .firstName("Reza")
+                .lastName("Ebrahimi")
+                .nationalCode("1122334455")
+                .specialty("IT")
+                .address("Berlin")
+                .telephone("0049")
+                .build();
+
     }
 
     public static Teacher teacher2() {
-        Teacher teacher2 = new Teacher();
-        teacher2.setFirstName("MAry");
-        teacher2.setLastName("Ebrahimi");
-        teacher2.setNationalCode("5544332211");
-        teacher2.setSpecialty("English Language");
-        teacher2.setAddress("Adelaide");
-        teacher2.setTelephone("0041");
-        return teacher2;
+        return Teacher.builder()
+                .firstName("MAry")
+                .lastName("Ebrahimi")
+                .nationalCode("5544332211")
+                .specialty("English Language")
+                .address("Adelaide")
+                .telephone("0041")
+                .build();
     }
 
     public static Student student1() {

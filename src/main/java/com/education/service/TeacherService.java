@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface TeacherService {
 
-    void save(Teacher teacher);
+    Teacher save(Teacher teacher);
 
     void update(long id, Teacher newTeacher);
 

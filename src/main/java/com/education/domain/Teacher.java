@@ -1,6 +1,8 @@
 package com.education.domain;
 
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.Entity;
@@ -8,7 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
+@Builder
 @ToString
+@NoArgsConstructor
 @EqualsAndHashCode
 public class Teacher {
 
