@@ -1,11 +1,10 @@
 package com.education.service;
 
-import com.education.domain.*;
 import com.education.domain.Class;
+import com.education.domain.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Arrays;
 import java.util.List;
 
 public class SampleBuilder {
@@ -491,24 +490,24 @@ public class SampleBuilder {
                 .build();
     }
 
-    public static Class room1() {
-        Class room1 = new Class();
-        room1.setClassNumber("111");
-        room1.setCapacity(20);
-        return room1;
+    public static Class class1() {
+        return Class.builder()
+                .classNumber("111")
+                .capacity(20)
+                .build();
     }
 
-    public static Class room2() {
-        Class room2 = new Class();
-        room2.setClassNumber("222");
-        room2.setCapacity(20);
-        return room2;
+    public static Class class2() {
+        return Class.builder()
+                .classNumber("222")
+                .capacity(20)
+                .build();
     }
 
-    public static Class room3() {
-        Class room3 = new Class();
-        room3.setClassNumber("222");
-        room3.setCapacity(20);
-        return room3;
+    public static Class class3() {
+        return Class.builder()
+                .classNumber("333")
+                .capacity(20)
+                .build();
     }
 }
