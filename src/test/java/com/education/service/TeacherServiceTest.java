@@ -1,7 +1,6 @@
 package com.education.service;
 
 import com.education.domain.Teacher;
-import com.education.domain.TeacherBuilder;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,9 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 @Transactional
 public class TeacherServiceTest {
+
     @Autowired
     private TeacherService teacherService;
 
@@ -75,36 +76,22 @@ public class TeacherServiceTest {
 
         teacherService.delete(teacher.getId());
 
-        Teacher teacherById = teacherService.getById(teacher.getId());
-
-        assertNull(teacherById);
+        assertThrows(IllegalArgumentException.class, () -> teacherService.getById(teacher.getId()));
     }
+
     @Test
-    public void getAllTeachers(){
-        Teacher teacher1 =new TeacherBuilder()
-                .firstName("Reza")
-                .lastName("Ebrahimi")
-                .nationalCode("1122334455")
-                .specialty("IT")
-                .address("Berlin")
-                .telephone("0049")
-                .build();
+    public void getAllTeachers() {
+        Teacher teacher1 = SampleBuilder.teacher1();
 
         teacherService.save(teacher1);
 
-        Teacher teacher2 =new TeacherBuilder() // TeacherBuilder
-                .firstName("Mary") //TeacherBuilder
-                .lastName("Ebrahimi") //TeacherBuilder
-                .nationalCode("5544332211") //TeacherBuilder
-                .specialty("English language") //TeacherBuilder
-                .address("Adelaide")  //TeacherBuilder
-                .telephone("0041")  //TeacherBuilder
-                .build(); // Teacher
+        Teacher teacher2 = SampleBuilder.teacher2(); // TeacherBuilder
+
         teacherService.save(teacher2);
 
         List<Teacher> allTeachers = teacherService.getAllTeachers();
 
         assertNotNull(allTeachers);
-        assertEquals(2,allTeachers.size());
+        assertEquals(2, allTeachers.size());
     }
 }

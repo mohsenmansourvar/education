@@ -23,13 +23,6 @@ public class EducationConfiguration {
     }
 
     @Bean
-    public TeacherRepositoryImpl teacherRepository(SessionFactory sessionFactory) {
-        TeacherRepositoryImpl teacherRepository = new TeacherRepositoryImpl();
-        teacherRepository.setSessionFactory(sessionFactory);
-        return teacherRepository;
-    }
-
-    @Bean
     public TeacherServiceImpl teacherService(TeacherRepository teacherRepository) {
         return new TeacherServiceImpl(teacherRepository);
 

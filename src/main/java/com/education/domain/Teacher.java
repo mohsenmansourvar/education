@@ -1,19 +1,21 @@
 package com.education.domain;
 
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import java.util.ArrayList;
-import java.util.List;
 
-@EqualsAndHashCode
-@ToString
 @Entity
+@Builder
+@ToString
+@NoArgsConstructor
+@EqualsAndHashCode
 public class Teacher {
+
     @Id
     @GeneratedValue
     private Long id;
@@ -79,5 +81,4 @@ public class Teacher {
     public void setSpecialty(String specialty) {
         this.specialty = specialty;
     }
-
 }
