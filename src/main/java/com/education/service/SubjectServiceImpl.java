@@ -12,8 +12,8 @@ public class SubjectServiceImpl implements SubjectService {
     private final SubjectRepository subjectRepository;
 
     @Override
-    public void save(Subject subject) {
-        subjectRepository.save(subject);
+    public Subject save(Subject subject) {
+        return subjectRepository.save(subject);
     }
 
     @Override

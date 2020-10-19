@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface SubjectService {
 
-    void save(Subject subject);
+    Subject save(Subject subject);
 
     void update(long id, Subject newSubject);
 
