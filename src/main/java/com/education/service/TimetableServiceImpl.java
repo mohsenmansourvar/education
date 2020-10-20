@@ -77,7 +77,7 @@ public class TimetableServiceImpl implements TimetableService {
 
     @Override
     public List<Timetable> getTimetablesByStudentId(long studentId) {
-        return timeTableRepository.findByStudentId(studentId);
+        return timeTableRepository.findTimetablesByStudentId(studentId);
     }
 
     @Override
@@ -85,7 +85,7 @@ public class TimetableServiceImpl implements TimetableService {
         if (ids == null) {
             throw new IllegalArgumentException("Ids cannot be null");
         }
-        return timeTableRepository.findByTeacherIds(ids);
+        return timeTableRepository.findTimetablesByTeacherIds(ids);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.education.repository;
 
 import com.education.domain.Student;
+import com.education.domain.Teacher;
 import com.education.domain.Timetable;
 import com.education.domain.TimetableStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,10 +17,10 @@ public interface TimetableRepository extends JpaRepository<Timetable, Long> {
     List<Timetable> findByTeacherId(long teacherId);
 
     @Query("select ti from Timetable ti join ti.students s where s.id = :studentId")
-    List<Timetable> findByStudentId(@Param("studentId") long studentId);
+    List<Timetable> findTimetablesByStudentId(@Param("studentId") long studentId);
 
     @Query("from Timetable ti where ti.teacher.id in (:ids)")
-    List<Timetable> findByTeacherIds(@Param("ids") List<Long> ids);
+    List<Timetable> findTimetablesByTeacherIds(@Param("ids") List<Long> ids);
 
     @Query("from Timetable ti where ti.start >= :start And ti.end<= :end And ti.date = :date ")
     List<Timetable> findTimetablesByTimeAndDate(@Param("start") LocalTime start, @Param("end") LocalTime end, @Param("date") LocalDate date);
