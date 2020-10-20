@@ -14,7 +14,6 @@ import javax.persistence.Id;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Class {
     @Id
     @GeneratedValue
