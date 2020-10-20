@@ -14,8 +14,8 @@ public class ClassController {
     private final ClassService classService;
 
     @PutMapping(value = "/class")
-    public void save(@RequestBody Class aClass) {
-        classService.save(aClass);
+    public Class save(@RequestBody Class aClass) {
+        return classService.save(aClass);
     }
 
     @PostMapping(value = "/class/{id}")
