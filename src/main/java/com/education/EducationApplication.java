@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@EnableJpaRepositories
 @SpringBootApplication(exclude = HibernateJpaAutoConfiguration.class)
 @EnableTransactionManagement
+@EnableJpaRepositories
 public class EducationApplication {
     public static void main(String[] args) {
         SpringApplication.run(EducationApplication.class);

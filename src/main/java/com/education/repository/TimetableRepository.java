@@ -1,40 +1,40 @@
 package com.education.repository;
 
 import com.education.domain.Student;
+import com.education.domain.Teacher;
 import com.education.domain.Timetable;
 import com.education.domain.TimetableStatus;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-public interface TimetableRepository {
-    void save(Timetable timeTable);
+public interface TimetableRepository extends JpaRepository<Timetable, Long> {
 
-    Timetable getById(long id);
+    List<Timetable> findByTeacherId(long teacherId);
 
-    void delete(long id);
+    @Query("select ti from Timetable ti join ti.students s where s.id = :studentId")
+    List<Timetable> findTimetablesByStudentId(@Param("studentId") long studentId);
 
-    void update(long id, Timetable newTimetable);
+    @Query("from Timetable ti where ti.teacher.id in (:ids)")
+    List<Timetable> findTimetablesByTeacherIds(@Param("ids") List<Long> ids);
 
-    List<Timetable> getAllTimetables();
+    @Query("from Timetable ti where ti.start >= :start And ti.end<= :end And ti.date = :date ")
+    List<Timetable> findTimetablesByTimeAndDate(@Param("start") LocalTime start, @Param("end") LocalTime end, @Param("date") LocalDate date);
 
-    List<Timetable> getTimetablesByTeacherId(long teacherId);
+    List<Timetable> findTimetablesByDate(LocalDate date);
 
-    List<Timetable> getTimetablesByStudentId(long studentId);
+    @Query("from Timetable where teacher is null")
+    List<Timetable> findTimetablesWithoutTeacher();
 
-    List<Timetable> getTimetablesByTeacherIds(List<Long> ids);
+    @Query("select ti from Timetable ti  left join ti.students st where st.id is null")
+    List<Timetable> findTimetableWithoutStudent();
 
-    List<Timetable> getTimetablesByTimeAndDate(LocalTime start, LocalTime end, LocalDate date);
+    List<Timetable> findTimetablesByStatus(TimetableStatus status);
 
-    List<Timetable> getTimetablesByDate(LocalDate date);
-
-    List<Timetable> getTimetablesWithoutTeacher();
-
-    List<Timetable> getTimetableWithoutStudent();
-
-    List<Student> getAllStudentsTimetable(long id);
-
-    List<Timetable> getTimetablesByStatus(TimetableStatus status);
-
+    @Query("select st from Timetable ti join ti.students st where ti.id = :id")
+    List<Student> findAllStudentsTimetable(@Param("id") long id);
 }

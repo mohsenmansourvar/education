@@ -4,54 +4,80 @@ import com.education.domain.Student;
 import com.education.domain.Timetable;
 import com.education.domain.TimetableStatus;
 import com.education.repository.TimetableRepository;
+import lombok.AllArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+@AllArgsConstructor
 public class TimetableServiceImpl implements TimetableService {
+
     private final TimetableRepository timeTableRepository;
+
     private final StudentService studentService;
 
-    public TimetableServiceImpl(TimetableRepository timeTableRepository, StudentService studentService) {
-        this.timeTableRepository = timeTableRepository;
-        this.studentService = studentService;
-    }
-
     @Override
-    public void save(Timetable timetable) {
+    public Timetable save(Timetable timetable) {
         isTimetableCapacityNegative(timetable);
-        timeTableRepository.save(timetable);
-    }
-
-    @Override
-    public Timetable getById(long id) {
-        return timeTableRepository.getById(id);
-    }
-
-    @Override
-    public void delete(long id) {
-        timeTableRepository.delete(id);
+        return timeTableRepository.save(timetable);
     }
 
     @Override
     public void update(long id, Timetable newTimetable) {
-        timeTableRepository.update(id, newTimetable);
+        Timetable timetable = getById(id);
+
+        if (newTimetable.getStart() != null) {
+            timetable.setStart(newTimetable.getStart());
+        }
+        if (newTimetable.getEnd() != null) {
+            timetable.setEnd(newTimetable.getEnd());
+        }
+        if (newTimetable.getDate() != null) {
+            timetable.setDate(newTimetable.getDate());
+        }
+        if (newTimetable.getStudents() != null) {
+            timetable.setStudents(newTimetable.getStudents());
+        }
+        if (newTimetable.getMaxStudents() != 0) {
+            timetable.setMaxStudents(newTimetable.getMaxStudents());
+        }
+        if (newTimetable.getSubject() != null) {
+            timetable.setSubject(newTimetable.getSubject());
+        }
+        if (newTimetable.getTeacher() != null) {
+            timetable.setTeacher(newTimetable.getTeacher());
+        }
+        if (newTimetable.getStatus() != null) {
+            timetable.setStatus(newTimetable.getStatus());
+        }
+        timeTableRepository.save(timetable);
+    }
+
+    @Override
+    public void delete(long id) {
+        timeTableRepository.deleteById(id);
+    }
+
+    @Override
+    public Timetable getById(long id) {
+        return timeTableRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("No Timetable by id"));
     }
 
     @Override
     public List<Timetable> getAllTimetables() {
-        return timeTableRepository.getAllTimetables();
+        return timeTableRepository.findAll();
     }
 
     @Override
     public List<Timetable> getTimetablesByTeacherId(long teacherId) {
-        return timeTableRepository.getTimetablesByTeacherId(teacherId);
+        return timeTableRepository.findByTeacherId(teacherId);
     }
 
     @Override
     public List<Timetable> getTimetablesByStudentId(long studentId) {
-        return timeTableRepository.getTimetablesByStudentId(studentId);
+        return timeTableRepository.findTimetablesByStudentId(studentId);
     }
 
     @Override
@@ -59,17 +85,17 @@ public class TimetableServiceImpl implements TimetableService {
         if (ids == null) {
             throw new IllegalArgumentException("Ids cannot be null");
         }
-        return timeTableRepository.getTimetablesByTeacherIds(ids);
+        return timeTableRepository.findTimetablesByTeacherIds(ids);
     }
 
     @Override
     public List<Timetable> getTimetablesByTimeAndDate(LocalTime start, LocalTime end, LocalDate date) {
-        return timeTableRepository.getTimetablesByTimeAndDate(start, end, date);
+        return timeTableRepository.findTimetablesByTimeAndDate(start, end, date);
     }
 
     @Override
     public List<Timetable> getTimetablesByDate(LocalDate date) {
-        return timeTableRepository.getTimetablesByDate(date);
+        return timeTableRepository.findTimetablesByDate(date);
     }
 
     /*
@@ -85,12 +111,12 @@ public class TimetableServiceImpl implements TimetableService {
     */
     @Override
     public List<Timetable> getTimetablesWithoutTeacher() {
-        return timeTableRepository.getTimetablesWithoutTeacher();
+        return timeTableRepository.findTimetablesWithoutTeacher();
     }
 
     @Override
     public List<Timetable> getTimetableWithoutStudent() {
-        return timeTableRepository.getTimetableWithoutStudent();
+        return timeTableRepository.findTimetableWithoutStudent();
     }
 
     /*
@@ -163,12 +189,12 @@ public class TimetableServiceImpl implements TimetableService {
 
     @Override
     public List<Student> getAllStudentsTimetable(long id) {
-        return timeTableRepository.getAllStudentsTimetable(id);
+        return timeTableRepository.findAllStudentsTimetable(id);
     }
 
     @Override
     public List<Timetable> getTimetablesByStatus(TimetableStatus status) {
-        return timeTableRepository.getTimetablesByStatus(status);
+        return timeTableRepository.findTimetablesByStatus(status);
     }
 
     @Override
@@ -179,7 +205,7 @@ public class TimetableServiceImpl implements TimetableService {
         checkFillingClassField(timetable);
         checkFillingStudentField(timetable);
         timetable.setStatus(TimetableStatus.ACTIVE);
-        timeTableRepository.update(timetable.getId(), timetable);
+        timeTableRepository.save(timetable);
     }
 
     public void validateStatusTimetableNotToBeActivateBefore(Timetable timetable) {
@@ -215,7 +241,7 @@ public class TimetableServiceImpl implements TimetableService {
             throw new IllegalArgumentException("An inactive timetable cannot be deactivated again");
         }
         timetable.setStatus(TimetableStatus.INACTIVE);
-        timeTableRepository.update(timetable.getId(), timetable);
+        timeTableRepository.save(timetable);
     }
 
     @Override
@@ -231,7 +257,7 @@ public class TimetableServiceImpl implements TimetableService {
             throw new IllegalArgumentException("The number of students can not be more than the maximum number");
         }
         timetable.setStatus(TimetableStatus.STARTED);
-        timeTableRepository.update(timetable.getId(), timetable);
+        timeTableRepository.save(timetable);
     }
 
     public void isTimetableCapacityNegative(Timetable timetable) {
