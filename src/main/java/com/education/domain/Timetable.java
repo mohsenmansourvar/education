@@ -16,7 +16,6 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Timetable {
     @Id
     @GeneratedValue
@@ -33,8 +32,6 @@ public class Timetable {
     private Teacher teacher;
     @ManyToMany
     private List<Student> students = new ArrayList<>();
-
     @OneToOne
     private Class room;
-
 }
