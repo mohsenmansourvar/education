@@ -19,17 +19,17 @@ public class StudentController {
     }
 
     @PostMapping(value = "/student/{id}")
-    public void update(@PathVariable long id, @RequestBody Student newStudent) {
+    public void update(@PathVariable("id") long id, @RequestBody Student newStudent) {
         studentService.update(id, newStudent);
     }
 
     @DeleteMapping(value = "/student/{id}")
-    public void delete(@PathVariable long id) {
+    public void delete(@PathVariable("id") long id) {
         studentService.delete(id);
     }
 
     @GetMapping(value = "/student/{id}")
-    public Student getById(@PathVariable long id) {
+    public Student getById(@PathVariable("id") long id) {
         return studentService.getById(id);
     }
 
