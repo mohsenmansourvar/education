@@ -12,8 +12,8 @@ public class StudentServiceImpl implements StudentService {
     private final StudentRepository studentRepository;
 
     @Override
-    public void save(Student student) {
-        studentRepository.save(student);
+    public Student save(Student student) {
+        return studentRepository.save(student);
     }
 
     @Override

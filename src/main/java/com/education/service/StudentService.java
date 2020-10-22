@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface StudentService {
 
-    void save(Student student);
+    Student save(Student student);
 
     void update(long id, Student newStudent);
 
